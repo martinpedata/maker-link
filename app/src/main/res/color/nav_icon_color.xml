@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This new folder and file are created because we want a selector functionality that allows the icon to change color based on an action. -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/teal_500" android:state_checked="true" />
+    <item android:color="@color/brown" android:state_checked="false" />
+<!--    Catch all case below -->
+    <item android:color="@color/brown" />
+</selector>
