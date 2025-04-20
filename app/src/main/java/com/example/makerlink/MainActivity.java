@@ -1,5 +1,6 @@
 package com.example.makerlink;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,12 +12,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.makerlink.databinding.ActivityMainBinding;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +38,28 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_exchange, R.id.navigation_chats, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        /**
+         * Dependance on the action bar (line below) was removed for lack of relevance and for runtime error (action bar was removed from "themes" xml).
+         */
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // Retrieve username
 
+        SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        userName = sharedPref.getString("UserName", null);
+
+        TextView welcText = findViewById(R.id.welcomeText);
+        welcText.setText("Welcome, " + userName);
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (userName != null) {
+            outState.putString("name", userName);
+        }
     }
 
 }

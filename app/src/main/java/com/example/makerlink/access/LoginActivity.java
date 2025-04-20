@@ -1,6 +1,7 @@
 package com.example.makerlink.access;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -26,7 +27,10 @@ import com.example.makerlink.R;
 
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
-    private CredentialsVerification cv;
+    private LoginCredentialsVerification cv;
+    private  SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,20 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        sharedPref.edit().clear().apply();
+
+        String savedName = sharedPref.getString("UserName", null);//this
+
+        if (savedName != null) {
+            // Name already exists, skip welcome page
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
 
         /**
          * Sign up if no account logic.
@@ -80,16 +98,37 @@ public class LoginActivity extends AppCompatActivity {
         EditText pw = findViewById(R.id.password);
         String passwordInput = pw.getText().toString();
         EditText un = findViewById(R.id.username);
-        String usernameInput = pw.getText().toString();
+        String usernameInput = un.getText().toString();
 
-        cv = new CredentialsVerification( usernameInput , passwordInput );
+        cv = new LoginCredentialsVerification( usernameInput , passwordInput );
 
         if (cv.checkValidityOfLogin() == 1) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
+                // Save the name in SharedPreferences
+                editor.putString("UserName", usernameInput).apply();
+
+                // Go to NavigationTemplate
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                finish(); // Prevent going back to the welcome screen
+            }
         }
         else {
-            // ... create a Text View pop up "invalid username or password"
+            pw.setText("");
+            un.setText("");
+
+            pw.setHint("Invalid Credentials!");
+            pw.setHintTextColor(Color.RED);
+
+            un.setHint("Invalid Credentials!");
+            un.setHintTextColor(Color.RED);
+
+            // Remove focus to show hints
+            pw.clearFocus();
+            un.clearFocus();
+            pw.setError("");
+            un.setError("");
         }
+
     }
 }

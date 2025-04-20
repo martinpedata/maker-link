@@ -58,7 +58,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Age"
+                android:hint="Age: DD-MM-YYY"
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500" />
@@ -103,6 +103,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/brown"
+                android:onClick="goToHome"
                 android:text="Sign Up"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
