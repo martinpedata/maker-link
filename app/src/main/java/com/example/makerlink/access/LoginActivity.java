@@ -28,7 +28,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.makerlink.DataBase;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
 
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     private String nameOfUser;
     private RequestQueue requestQueue;
     private LoginCredentialsVerification cv;
-    private DataBase db = new DataBase(this);
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
@@ -56,16 +54,16 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        //Creating the sharedPref to store the Name of the user.
+        ///Creating the sharedPref to store the Name of the user.
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        sharedPref.edit().clear().apply();
+        //sharedPref.edit().clear().apply();
 
         String savedName = sharedPref.getString("Name", null);//this
 
-        // If name already exists => user already logged in => skip welcome page
+        /// If name already exists => user already logged in => skip welcome page
 
         if (savedName != null) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -73,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-        //Logic for the "create account" sentence
+        ///Logic for the "create account" sentence
 
         signUpText = findViewById(R.id.signUpText);
         SpannableString spannableString = new SpannableString("Don't have an account? Sign Up");
@@ -98,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
         spannableString.setSpan(
                 clickableSpan,
-                spannableString.length() - 7,  // "Sign Up" starts at length-7
+                spannableString.length() - 7,  /// "Sign Up" starts at length-7
                 spannableString.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
@@ -108,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    ///  OnClick method
     public void goToHome(View view) {
 
         EditText pw = findViewById(R.id.password);
@@ -121,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
             if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
                 // Save the name in SharedPreferences
                 retrieveName("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
-                System.out.println(nameOfUser + "in Login");
             }
         }
         else {
@@ -141,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
             un.setError("");
         }
     }
+
+    /// Retrieve database info
     public void retrieveName(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            //Add the name to the welcome screen on the sharedPref.editor
+                            ///Add the name to the welcome screen on the sharedPref.editor
 
                             /// YOU HAVE TO PUT THE RELEVANT CODE YOU WANT TO EXECUTE AFTER THE DATABASE IS QUERIED INSIDE HE ONRESPONSE !!!
 
@@ -157,11 +157,11 @@ public class LoginActivity extends AppCompatActivity {
                             nameOfUser = o.getString("name");
                             editor.putString("Name", nameOfUser).apply();
 
-                            // Go to NavigationTemplate
+                            /// Go to NavigationTemplate
 
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
-                            finish(); // Prevent going back to the welcome screen
+                            finish(); /// Prevent going back to the welcome screen
                         } catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);
                         }

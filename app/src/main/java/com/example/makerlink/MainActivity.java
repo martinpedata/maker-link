@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_exchange, R.id.navigation_chats, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        /**
-         * Dependance on the action bar (line below) was removed for lack of relevance and for runtime error (action bar was removed from "themes" xml).
-         */
+
+        /// Dependance on the action bar (line below) was removed for lack of relevance and for runtime error (action bar was removed from "themes" xml).
+
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Retrieve username
+        /// Retrieve username
 
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userName = sharedPref.getString("Name", null);
