@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Retrieve username
 
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
-        userName = sharedPref.getString("UserName", null);
+        userName = sharedPref.getString("Name", null);
 
         TextView welcText = findViewById(R.id.welcomeText);
         welcText.setText("Welcome, " + userName);

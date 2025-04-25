@@ -22,13 +22,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.makerlink.DataBase;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
 
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
     private LoginCredentialsVerification cv;
-    private  SharedPreferences sharedPref;
+    private DataBase db = new DataBase(this);
+    private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -45,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        sharedPref.edit().clear().apply();
+        //sharedPref.edit().clear().apply();
 
-        String savedName = sharedPref.getString("UserName", null);//this
+        String savedName = sharedPref.getString("Name", null);//this
 
         if (savedName != null) {
             // Name already exists, skip welcome page
@@ -105,7 +107,8 @@ public class LoginActivity extends AppCompatActivity {
         if (cv.checkValidityOfLogin() == 1) {
             if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
                 // Save the name in SharedPreferences
-                editor.putString("UserName", usernameInput).apply();
+                String name = db.getName(usernameInput);
+                editor.putString("Name", name).apply();
 
                 // Go to NavigationTemplate
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);

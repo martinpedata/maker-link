@@ -2,6 +2,17 @@ package com.example.makerlink;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +33,8 @@ public class DataBase {
     private String email;
 
     private Context context;
-
+    private RequestQueue requestQueue;
+    private TextView txtResponse;
     public DataBase(Context context) {
         this.context = context;
     }
@@ -30,100 +42,46 @@ public class DataBase {
         this.context = null;
     }
 
-    private String makeGETRequest(String urlName) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            URL url = new URL(urlName);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+    public void retrieveName(String requestURL) {
+        requestQueue = Volley.newRequestQueue(context);
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
-            int responseCode = conn.getResponseCode();
-            if (responseCode != 200) {
-                System.out.println("Error: HTTP Response Code " + responseCode);
-                return "";
-            }
+            new Response.Listener<JSONArray>()
+            {
+                @Override
+                public void onResponse(JSONArray response)
+                {
+                    name = "";
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject o = response.getJSONObject(i);
+                            name = o.getString("name");
+                        }
+                    }
+                    catch (JSONException e) {
+                    Log.e("Database", e.getMessage(), e);
+                    }
+                }
+            },
 
-            try (BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-                String line;
-                while ((line = rd.readLine()) != null) {
-                    sb.append(line);
+            new Response.ErrorListener()
+            {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    txtResponse.setText(error.getLocalizedMessage());
                 }
             }
-            conn.disconnect();
-            return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    private String getCurrentString(String str) {
-        String jsonResponse = makeGETRequest(str);
-        if (jsonResponse.isEmpty()) {
-            System.out.println("Error: Empty response from API");
-            return ""; // Error case
-        }
-
-        try {
-            JSONArray jsonArray = new JSONArray(jsonResponse);
-            if (jsonArray.length() > 0) {
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                String status = jsonObject.getString("Sensor_stat");  // Adjust key name based on actual JSON response
-                return status;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    private String getCurrentDate (String url) {
-        String jsonResponse = makeGETRequest(url);
-        if (jsonResponse.isEmpty()) {
-            System.out.println("Error: Empty response from API");
-            return ""; // Error case
-        }
-        try {
-            JSONArray jsonArray = new JSONArray(jsonResponse);
-            if (jsonArray.length() > 0) {
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                String status = jsonObject.getString("recorded_at");  // Adjust key name based on actual JSON response
-                return status;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-    public void clearHistoryDB() {
-        Log.d("HistoryFragment", "Attempting to clear history DB");
-        try {
-            URL url = new URL("https://studev.groept.be/api/a24ib2team406/ClearTable");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            int responseCode = conn.getResponseCode();
-            Log.d("HistoryFragment", "API response code: " + responseCode);
-
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                Log.d("HistoryFragment", "Table cleared successfully");
-            } else {
-                Log.e("HistoryFragment", "Failed to clear table. Response code: " + responseCode);
-            }
-
-            conn.disconnect();
-        } catch (Exception e) {
-            Log.e("HistoryFragment", "Error clearing table: " + e.getMessage(), e);
-        }
-    }
-    public String getName() {
-        return name;
+        );
+        requestQueue.add(submitRequest);
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
+    public String getName(String usernameInput) {
+        retrieveName( "https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
+        return name;
+    }
     public String getAge() {
         return age;
     }
