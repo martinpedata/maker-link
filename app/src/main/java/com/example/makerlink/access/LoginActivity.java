@@ -22,12 +22,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.makerlink.DataBase;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
+    private String nameOfUser;
+    private RequestQueue requestQueue;
     private LoginCredentialsVerification cv;
     private DataBase db = new DataBase(this);
     private SharedPreferences sharedPref;
@@ -44,23 +56,24 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Creating the sharedPref to store the Name of the user.
+
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        //sharedPref.edit().clear().apply();
+        sharedPref.edit().clear().apply();
 
         String savedName = sharedPref.getString("Name", null);//this
 
+        // If name already exists => user already logged in => skip welcome page
+
         if (savedName != null) {
-            // Name already exists, skip welcome page
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
             finish();
         }
 
-        /**
-         * Sign up if no account logic.
-         * */
+        //Logic for the "create account" sentence
 
         signUpText = findViewById(R.id.signUpText);
         SpannableString spannableString = new SpannableString("Don't have an account? Sign Up");
@@ -107,13 +120,8 @@ public class LoginActivity extends AppCompatActivity {
         if (cv.checkValidityOfLogin() == 1) {
             if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
                 // Save the name in SharedPreferences
-                String name = db.getName(usernameInput);
-                editor.putString("Name", name).apply();
-
-                // Go to NavigationTemplate
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-                finish(); // Prevent going back to the welcome screen
+                retrieveName("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
+                System.out.println(nameOfUser + "in Login");
             }
         }
         else {
@@ -132,6 +140,40 @@ public class LoginActivity extends AppCompatActivity {
             pw.setError("");
             un.setError("");
         }
+    }
+    public void retrieveName(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            //Add the name to the welcome screen on the sharedPref.editor
+
+                            /// YOU HAVE TO PUT THE RELEVANT CODE YOU WANT TO EXECUTE AFTER THE DATABASE IS QUERIED INSIDE HE ONRESPONSE !!!
+
+                            JSONObject o = response.getJSONObject(0);
+                            nameOfUser = o.getString("name");
+                            editor.putString("Name", nameOfUser).apply();
+
+                            // Go to NavigationTemplate
+
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                            finish(); // Prevent going back to the welcome screen
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
     }
 }

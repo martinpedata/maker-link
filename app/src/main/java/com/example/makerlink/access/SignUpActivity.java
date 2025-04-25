@@ -49,10 +49,17 @@ public class SignUpActivity extends AppCompatActivity {
         EditText name = findViewById(R.id.name);
         String nameInput = name.getText().toString();
 
+        ///  CHANGE THIS BELOW:
+
+        String address = "MariaTheresiastraat 82";
+        String lender = "yes";
+        int locationID = 0;
+
         SignUpValidity validity = new SignUpValidity(ageInput,nameInput,emailInput,passwordInput,usernameInput);
         switch (validity.checkValidity()) {
             case 0:
                 if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
+                    db.signUpUser(nameInput,usernameInput,emailInput, ageInput, 0, address, lender, locationID,passwordInput);
                     // Go to NavigationTemplate
                     Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(i);

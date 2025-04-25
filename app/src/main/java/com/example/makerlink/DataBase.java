@@ -1,11 +1,9 @@
 package com.example.makerlink;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,17 +16,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 
 public class DataBase {
     private String name;
     private String age;
     private String username;
+    private String temporaryName;
     private String password;
     private String email;
 
@@ -37,50 +30,48 @@ public class DataBase {
     private TextView txtResponse;
     public DataBase(Context context) {
         this.context = context;
+        name = "";
     }
     public DataBase(){
         this.context = null;
     }
 
-    public void retrieveName(String requestURL) {
+    public void insertUser(String requestURL) {
         requestQueue = Volley.newRequestQueue(context);
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.POST, requestURL, null,
 
-            new Response.Listener<JSONArray>()
-            {
-                @Override
-                public void onResponse(JSONArray response)
+                new Response.Listener<JSONArray>()
                 {
-                    name = "";
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject o = response.getJSONObject(i);
-                            name = o.getString("name");
-                        }
+                    @Override
+                    public void onResponse(JSONArray response)
+                    {
+                        System.out.println("success");
                     }
-                    catch (JSONException e) {
-                    Log.e("Database", e.getMessage(), e);
-                    }
-                }
-            },
+                },
 
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    txtResponse.setText(error.getLocalizedMessage());
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        txtResponse.setText(error.getLocalizedMessage());
+                    }
                 }
-            }
         );
         requestQueue.add(submitRequest);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName(String usernameInput) {
-        retrieveName( "https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
-        return name;
+    public void signUpUser(String nameInput, String usernameInput, String email, String dateOfBirth, int points, String address, String lender, int locationID, String password) {
+        @SuppressLint("DefaultLocale") String url = String.format("https://studev.groept.be/api/a24pt215/InsertNewUser/%s/%s/%s/%s/%d/%s/%s/%d/%s",
+                usernameInput,
+                nameInput,
+                email,
+                dateOfBirth,
+                points,
+                address,
+                lender,
+                locationID,
+                password);
+        insertUser(url);
     }
     public String getAge() {
         return age;
