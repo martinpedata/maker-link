@@ -21,7 +21,7 @@
         android:layout_margin="20dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
-        android:background="@drawable/custom_edittext"
+        android:background="@drawable/custom_background_login"
         android:backgroundTint="@color/darkCream">
 
         <LinearLayout
@@ -29,7 +29,7 @@
             android:layout_height="618dp"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="7dp">
 
             <TextView
                 android:id="@+id/signUpText"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
+                android:background="@drawable/custom_background_login"
                 android:hint="First Name"
                 android:padding="15dp"
                 android:textColor="@color/black"
@@ -57,19 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
-                android:hint="Age: DD-MM-YYY"
-                android:padding="15dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/teal_500" />
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
-                android:hint="E-mail"
+                android:background="@drawable/custom_background_login"
+                android:hint="Birth Date: DD-MM-YYY"
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500" />
@@ -79,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
+                android:background="@drawable/custom_background_login"
                 android:hint="Username"
                 android:padding="15dp"
                 android:textColor="@color/black"
@@ -90,13 +79,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
+                android:background="@drawable/custom_background_login"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500" />
 
+            <EditText
+                android:id="@+id/lender"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_background_login"
+                android:hint="Lender? Y / N"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/teal_500" />
+
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_background_login"
+                android:hint="Address"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/teal_500" />
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
