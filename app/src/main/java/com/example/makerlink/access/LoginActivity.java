@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -38,8 +39,14 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
     private String nameOfUser;
+    private EditText pw;
+    private EditText un;
+    private String usernameInput;
+    private String passwordInput;
+    private String usernameDB;
+    private String passwordDB;
+
     private RequestQueue requestQueue;
-    private LoginCredentialsVerification cv;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
@@ -59,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        //sharedPref.edit().clear().apply();
+        sharedPref.edit().clear().apply();
 
         String savedName = sharedPref.getString("Name", null);//this
 
@@ -109,39 +116,24 @@ public class LoginActivity extends AppCompatActivity {
     ///  OnClick method
     public void goToHome(View view) {
 
-        EditText pw = findViewById(R.id.password);
-        String passwordInput = pw.getText().toString();
-        EditText un = findViewById(R.id.username);
-        String usernameInput = un.getText().toString();
-
-        cv = new LoginCredentialsVerification( usernameInput , passwordInput );
-
-        if (cv.checkValidityOfLogin() == 1) {
-            if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
-                // Save the name in SharedPreferences
-                retrieveName("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
-            }
-        }
-        else {
-            pw.setText("");
-            un.setText("");
-
-            pw.setHint("Invalid Credentials!");
-            pw.setHintTextColor(Color.RED);
-
-            un.setHint("Invalid Credentials!");
-            un.setHintTextColor(Color.RED);
-
-            // Remove focus to show hints
-            pw.clearFocus();
-            un.clearFocus();
-            pw.setError("");
-            un.setError("");
-        }
+        pw = findViewById(R.id.password);
+        passwordInput = pw.getText().toString();
+        un = findViewById(R.id.username);
+        usernameInput = un.getText().toString();
+//
+//        cv = new LoginCredentialsVerification( usernameInput , passwordInput, this);
+//
+//        if (cv.checkValidityOfLogin() == 1) {
+//            if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
+//                // Save the name in SharedPreferences
+//                retrieveName("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
+//            }
+//        }
+        checkValidityOfLogin("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
     }
 
     /// Retrieve database info
-    public void retrieveName(String requestURL) {
+    public void checkValidityOfLogin(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
@@ -152,17 +144,43 @@ public class LoginActivity extends AppCompatActivity {
                             ///Add the name to the welcome screen on the sharedPref.editor
 
                             /// YOU HAVE TO PUT THE RELEVANT CODE YOU WANT TO EXECUTE AFTER THE DATABASE IS QUERIED INSIDE HE ONRESPONSE !!!
-
                             JSONObject o = response.getJSONObject(0);
-                            nameOfUser = o.getString("name");
-                            editor.putString("Name", nameOfUser).apply();
+                            passwordDB = o.getString("password");
+                            System.out.println("about to read pw");
+                            if (passwordInput.equals(passwordDB)) {
+                                nameOfUser = o.getString("name");
+                                editor.putString("Name", nameOfUser).apply();
 
-                            /// Go to NavigationTemplate
+                                /// Go to NavigationTemplate
 
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(i);
-                            finish(); /// Prevent going back to the welcome screen
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(i);
+                                finish(); /// Prevent going back to the welcome screen
+                            }
+                            else {
+                                pw.setText("");
+                                pw.setHint("Invalid Password!");
+                                pw.setHintTextColor(Color.RED);
+
+                                // Remove focus to show hints
+                                pw.clearFocus();
+                                un.clearFocus();
+                                pw.setError("");
+                                un.setError("");
+                            }
                         } catch (JSONException e) {
+                            un.setText("");
+                            pw.setText("");
+                            pw.setHint("Invalid Credentials!");
+                            un.setHint("Invalid Credentials!");
+
+                            un.setHintTextColor(Color.RED);
+
+                            // Remove focus to show hints
+                            pw.clearFocus();
+                            un.clearFocus();
+                            pw.setError("");
+                            un.setError("");
                             Log.e("Database", e.getMessage(), e);
                         }
                     }
@@ -171,6 +189,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this, "Network error! Please try again.", Toast.LENGTH_SHORT).show();
+                        Log.e("DatabaseError", error.toString());
                     }
                 }
         );
