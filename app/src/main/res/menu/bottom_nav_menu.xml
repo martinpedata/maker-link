@@ -7,6 +7,11 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_discovery"
+        android:icon="@drawable/discovery_icon"
+        android:title="@string/title_discovery" />
+
+    <item
         android:id="@+id/navigation_exchange"
         android:icon="@drawable/map"
         android:title="@string/title_exchange" />
@@ -19,5 +24,6 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"
         android:title="@string/title_profile" />
+
 
 </menu>

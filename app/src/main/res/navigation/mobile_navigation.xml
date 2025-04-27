@@ -25,8 +25,14 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.makerlink.ui.chats.ChatsFragment"
+        android:name="com.example.makerlink.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_chats" />
+
+    <fragment
+        android:id="@+id/navigation_discovery"
+        android:name="com.example.makerlink.ui.discovery.DiscoveryFragment"
+        android:label="Discovery"
+        tools:layout="@layout/fragment_discovery" />
 
 </navigation>

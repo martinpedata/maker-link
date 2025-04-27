@@ -6,47 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/search_view"
-        android:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038"
-        app:queryHint="Search Here">
-
-    </androidx.appcompat.widget.SearchView>
-
-    <ListView
-        android:id="@+id/searchList"
-        android:layout_width="409dp"
-        android:layout_height="623dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar">
-
-    </ListView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-
-    <!-- Top constraint -->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    android:orientation="vertical"
+    tools:context=".ui.profile.ProfileFragment"
+    android:background="@color/cream">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="300dp"
+        android:padding="20dp"
+        android:background="@color/better_blue">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/makerlink_logo" />
+
+        <TextView
+            android:textColor="@color/cream"
+            android:id="@+id/username_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profile_image"
+            android:padding="10dp"
+            android:text="username"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/profile_text"
+            android:textColor="@color/darkCream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profile_image"
+            android:layout_marginLeft="10dp"
+            android:text="Profile Section"
+            android:layout_below="@+id/username_profile"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="-100dp">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/better_blue"
+            app:cardElevation="15dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/discovery_icon"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/order_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:layout_centerInParent="true" />
+                <TextView
+                    android:id="@+id/order_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orders"
+                    android:layout_below="@+id/order_amount"
+                    android:includeFontPadding="false"
+                    android:textSize="14sp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="@color/better_blue"
+            app:cardElevation="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/discovery_icon"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/points_scored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:layout_centerInParent="true" />
+                <TextView
+                    android:id="@+id/points_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Points"
+                    android:textSize="14sp"
+                    android:includeFontPadding="false"
+                    android:layout_below="@+id/points_scored"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/profile"
+                android:drawablePadding="13dp"
+                android:text="User" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/map"
+                android:drawablePadding="13dp"
+                android:text="Andrea Vesaliustraat" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lender"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lender_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/profile"
+                android:drawablePadding="13dp"
+                android:text="Yes" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+        
+
+</LinearLayout>
