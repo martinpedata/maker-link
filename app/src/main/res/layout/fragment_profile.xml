@@ -67,13 +67,15 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/discovery_icon"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    app:tint="@color/cream" />
                 <TextView
                     android:id="@+id/order_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:text="0"
+                    android:textColor="@color/cream"
                     android:textSize="20sp"
                     android:layout_centerInParent="true" />
                 <TextView
@@ -81,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Orders"
+                    android:textColor="@color/cream"
                     android:layout_below="@+id/order_amount"
                     android:includeFontPadding="false"
                     android:textSize="14sp"
@@ -104,13 +107,15 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/discovery_icon"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    app:tint="@color/cream" />
                 <TextView
                     android:id="@+id/points_scored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:text="0"
+                    android:textColor="@color/cream"
                     android:textSize="20sp"
                     android:layout_centerInParent="true" />
                 <TextView
@@ -118,6 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Points"
+                    android:textColor="@color/cream"
                     android:textSize="14sp"
                     android:includeFontPadding="false"
                     android:layout_below="@+id/points_scored"
