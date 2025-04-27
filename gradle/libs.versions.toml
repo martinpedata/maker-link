@@ -14,7 +14,6 @@ activity = "1.8.0"
 annotation = "1.6.0"
 volley = "1.2.1"
 legacySupportV4 = "1.0.0"
-blurview = "2.0.3"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -31,7 +30,6 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 volley = { module = "com.android.volley:volley", version.ref = "volley"}
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
-blurview = { group = "com.github.Dimezis", name = "BlurView", version.ref = "blurview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
