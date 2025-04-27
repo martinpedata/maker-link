@@ -1,19 +1,26 @@
 package com.example.makerlink.ui.exchange;
 
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import com.example.makerlink.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.databinding.FragmentExchangeBinding;
+import com.example.makerlink.ui.discovery.DiscoveryViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -36,6 +44,7 @@ import android.location.Location;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -44,9 +53,18 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private RecyclerView recyclerView;
     private UserAdapter adapter;
     private List<User> userList;
-    private final int FINE_PERMISSION_CODE = 1;
-    Location currentLocation;
+    private List<User> newUser;
+
+    private SearchView searchView;
+    private ListView listView;
+    private ArrayAdapter<String> adapterlist;
+    private List<String> items;
+    private List<String> filteredItems;
+
+    private DiscoveryViewModel mViewModel;
     private FusedLocationProviderClient fusedLocationClient;
+
+    private String selectedSearchItem = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +99,117 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
     }
 
+
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+        searchView = binding.searchBar;
+        listView = binding.searchList;
+        mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
+        items = new ArrayList<>();
+        items.add("Basic Tools");
+        items.add("Electronics");
+        items.add("Mechanics");
+        items.add("Carpentry");
+        items.add("Cooking");
+        items.add("Pluming");
+        filteredItems = new ArrayList<>();
+//        To refer to a Fragment's Activity, use requireActivity() or getContext()
+        adapterlist = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems);
+        listView.setAdapter(adapterlist);
+        listView.setVisibility(View.GONE);
+
+//        To make sure the entire search bar is touchable and not just icon. Also to make the keyboard appear upon touch
+
+        searchView.setOnClickListener(v -> {
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(searchView.findFocus(), InputMethodManager.SHOW_IMPLICIT);
+                }
+            }, 100);
+        });
+
+//        Search through the list
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false; // We handle everything on text change
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                selectedSearchItem = newText.trim(); // Update the selected search item
+                filteredItems.clear(); // Clear previous filters
+
+                // Check if the search text is empty
+                if (newText.isEmpty()) {
+                    listView.setVisibility(View.GONE); // Hide ListView if the search is empty
+                } else {
+                    // Filter items and add matching items to filteredItems
+                    for (String item : items) {
+                        if (item.toLowerCase().contains(newText.toLowerCase())) {
+                            filteredItems.add(item);
+                        }
+                    }
+                    // Show the ListView when there are items to display
+                    if (!filteredItems.isEmpty()) {
+                        listView.setVisibility(View.VISIBLE);
+                    } else {
+                        listView.setVisibility(View.GONE); // Hide if no items match
+                    }
+                    adapterlist.notifyDataSetChanged();
+                }
+
+                updateMapMarkers(); // Update map markers when the search changes
+                return true;
+            }
+        });
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            selectedSearchItem = filteredItems.get(position);
+            searchView.setQuery(selectedSearchItem, false);
+            listView.setVisibility(View.GONE);
+            updateMapMarkers(); // Update map when a search item is selected
+        });
+
+    }
+    private void clearExistingMarkers() {
+        mMap.clear(); // This will remove all markers from the map
+    }
+    private void updateMapMarkers() {
+        clearExistingMarkers();
+        Geocoder geocoder = new Geocoder(requireContext());
+
+        // Filter users based on selectedSearchItem (tool type)
+        for (User user : userList) {
+            if (user.getTool().equalsIgnoreCase(selectedSearchItem)) {
+                try {
+                    List<Address> addresses = geocoder.getFromLocationName(user.getAddress(), 1);
+                    if (!addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+                        LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
+
+                        // Add a marker with user name as title
+                        mMap.addMarker(new MarkerOptions()
+                                        .position(location)
+                                        .title(user.getName()))
+                                .setTag(user); // Save the user object for later
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+        newUser = new ArrayList<>();
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(),
@@ -101,27 +227,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f));
                     }
                 });
-        Geocoder geocoder = new Geocoder(requireContext());
 
-        // Add a marker and move the camera to the default location
-
-        for (User user : userList) {
-            try {
-                List<Address> addresses = geocoder.getFromLocationName(user.getAddress(), 1);
-                if (!addresses.isEmpty()) {
-                    Address address = addresses.get(0);
-                    LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
-
-                    // Add a marker with user name as title
-                    mMap.addMarker(new MarkerOptions()
-                                    .position(location)
-                                    .title(user.getName()))
-                            .setTag(user); // Save the user object for later
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        updateMapMarkers();
 
         mMap.setOnMarkerClickListener(marker -> {
             User user = (User) marker.getTag();
@@ -133,7 +240,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
             return false; // allow default behavior too (camera move)
         });
         mMap.setOnMapClickListener(latLng -> {
-            adapter.updateList(new ArrayList<>(userList)); // Click on map -> show all users again
+            updateMapMarkers();
+            adapter.updateList(new ArrayList<>(userList));
         });
 
         // Enable map controls
@@ -143,12 +251,12 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private List<User> loadUsers() {
         // Dummy users for example
         List<User> list = new ArrayList<>();
-        list.add(new User("Ergi Durro", "Paul van Ostaijenlaan, 21", "+32460946315", 100));
-        list.add(new User("Group T", "Andreas Vesaliusstraat 13, 3000", "+12345678", 50));
-        list.add(new User("Martin Pedata", "Maria Theresiastraat 84, 3000 Leuven", "+238576943", 30));
-        list.add(new User("John", "Edward van Evenstraat 4, 3000 Leuven", "+4985745", 60));
-        list.add(new User("Jack", "Alfons Smetsplein 7, 3000 Leuven", "+48769556", 45));
-        list.add(new User("Mary", "Bondgenotenlaan 20, 3000 Leuven", "23456789", 120));
+        list.add(new User("Ergi Durro", "Paul van Ostaijenlaan, 21", "+32460946315", 100,"Basic Tools"));
+        list.add(new User("Group T", "Andreas Vesaliusstraat 13, 3000", "+12345678", 50, "Electronics"));
+        list.add(new User("Martin Pedata", "Maria Theresiastraat 84, 3000 Leuven", "+238576943", 30,"Basic Tools"));
+        list.add(new User("John", "Edward van Evenstraat 4, 3000 Leuven", "+4985745", 60, "Pluming"));
+        list.add(new User("Jack", "Alfons Smetsplein 7, 3000 Leuven", "+48769556", 45,"Cooking"));
+        list.add(new User("Mary", "Bondgenotenlaan 20, 3000 Leuven", "23456789", 120, "Carpentry"));
         return list;
     }
     @Override
@@ -163,7 +271,6 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
