@@ -1,8 +1,10 @@
 package com.example.makerlink.ui.exchange;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +18,11 @@ import com.example.makerlink.R;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> userList;
 
+
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textName, textAddress, textRent;
+        Button goButton;
 
         public UserViewHolder(View itemView) {
             super(itemView);
@@ -26,6 +30,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             textName = itemView.findViewById(R.id.textName);
             textAddress = itemView.findViewById(R.id.textAddress);
             textRent = itemView.findViewById(R.id.textRent);
+            goButton = itemView.findViewById(R.id.button);
         }
     }
 
@@ -46,7 +51,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.textName.setText(user.getName());
         holder.textAddress.setText(user.getAddress());
         holder.textRent.setText("Rent: " + user.getRent() + "€/hour");
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground); // Placeholder image for now
+        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.goButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), InfoPage.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

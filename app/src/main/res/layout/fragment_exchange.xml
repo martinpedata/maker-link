@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:background="@drawable/listview_border"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -45,7 +46,8 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_container"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/recycle_view_map_border"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
@@ -47,7 +48,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
-
     private FragmentExchangeBinding binding;
     private GoogleMap mMap;
     private RecyclerView recyclerView;
