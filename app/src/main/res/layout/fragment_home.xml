@@ -1,9 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="3dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/darkCream"
+            app:cardElevation="15dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/brown">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/pointsPic"
+                    android:layout_width="19dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/points_logo"
+                    app:tint="@color/brown" />
+
+                <TextView
+                    android:id="@+id/pointsTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_toRightOf="@+id/pointsPic"
+                    android:layout_centerVertical="true"
+                    android:text="Ranking"
+                    android:textColor="@color/brown"
+                    android:textSize="10sp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/darkCream"
+            app:cardElevation="15dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/brown">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/orderPic"
+                    android:layout_width="19dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/orders_profile_fragment"
+                    app:tint="@color/brown" />
+
+                <TextView
+                    android:id="@+id/orderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_toRightOf="@+id/orderPic"
+                    android:layout_centerVertical="true"
+                    android:text="Orders"
+                    android:textColor="@color/brown"
+                    android:textSize="10sp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/darkCream"
+            app:cardElevation="15dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/brown">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/favoritesPic"
+                    android:layout_width="19dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_favorite_24"
+                    app:tint="@color/brown" />
+
+                <TextView
+                    android:id="@+id/favorites_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_toRightOf="@+id/favoritesPic"
+                    android:layout_centerVertical="true"
+                    android:text="Favorites"
+                    android:textColor="@color/brown"
+                    android:textSize="10sp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
