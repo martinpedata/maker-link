@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="brown">#3F2D20</color>
+    <color name="lightBrown">#7B5A40</color>
     <color name="cream">#FAF3E0</color>
     <color name="teal_500">#3D5A80</color>
     <color name="darkCream">#E8DCC5</color>

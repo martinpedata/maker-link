@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.volley)
     implementation(libs.legacy.support.v4)
+    implementation(libs.blurview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
