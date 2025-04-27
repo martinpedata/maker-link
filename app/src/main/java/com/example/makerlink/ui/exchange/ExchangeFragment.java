@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.databinding.FragmentExchangeBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,7 +41,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentExchangeBinding binding;
     private GoogleMap mMap;
-    private TextView userInfoTextView;
+    private RecyclerView recyclerView;
+    private UserAdapter adapter;
     private List<User> userList;
     private final int FINE_PERMISSION_CODE = 1;
     Location currentLocation;
@@ -52,15 +55,17 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
         // Use ViewBinding to inflate the fragment layout
         binding = FragmentExchangeBinding.inflate(inflater, container, false);
-        userInfoTextView = binding.userInfoTextView;
-        // Manually access the SupportMapFragment from the layout
+        recyclerView = binding.getRoot().findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        userList = loadUsers();
+        adapter = new UserAdapter(new ArrayList<>(userList));
+        recyclerView.setAdapter(adapter);
         initMapFragment();
 
         return binding.getRoot();
     }
 
     private void initMapFragment() {
-        // Manually retrieve the SupportMapFragment from the layout by ID
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag("MAP_FRAGMENT");
 
         if (mapFragment == null) {
@@ -72,7 +77,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
         // Set the callback to notify when the map is ready
         mapFragment.getMapAsync(this);
-        userList = loadUsers();
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
     }
 
@@ -121,13 +126,14 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(marker -> {
             User user = (User) marker.getTag();
             if (user != null) {
-                userInfoTextView.setText(
-                        "Name: " + user.getName() + "\n" +
-                        "Address: " + user.getAddress() + "\n" +
-                        "Phone Nr:" + user.getPhone()
-                );
+                List<User> singleUser = new ArrayList<>();
+                singleUser.add(user);
+                adapter.updateList(singleUser);
             }
             return false; // allow default behavior too (camera move)
+        });
+        mMap.setOnMapClickListener(latLng -> {
+            adapter.updateList(new ArrayList<>(userList)); // Click on map -> show all users again
         });
 
         // Enable map controls
@@ -137,8 +143,12 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private List<User> loadUsers() {
         // Dummy users for example
         List<User> list = new ArrayList<>();
-        list.add(new User("Ergi Durro", "Paul van Ostaijenlaan, 21", "+32460946315"));
-        list.add(new User("Group T", "Andreas Vesaliusstraat 13, 3000", "12345678"));
+        list.add(new User("Ergi Durro", "Paul van Ostaijenlaan, 21", "+32460946315", 100));
+        list.add(new User("Group T", "Andreas Vesaliusstraat 13, 3000", "+12345678", 50));
+        list.add(new User("Martin Pedata", "Maria Theresiastraat 84, 3000 Leuven", "+238576943", 30));
+        list.add(new User("John", "Edward van Evenstraat 4, 3000 Leuven", "+4985745", 60));
+        list.add(new User("Jack", "Alfons Smetsplein 7, 3000 Leuven", "+48769556", 45));
+        list.add(new User("Mary", "Bondgenotenlaan 20, 3000 Leuven", "23456789", 120));
         return list;
     }
     @Override
