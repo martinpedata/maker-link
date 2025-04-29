@@ -179,9 +179,12 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
     }
     private void clearExistingMarkers() {
-        mMap.clear(); // This will remove all markers from the map
+            if (mMap != null) {
+                mMap.clear();
+            }
     }
     private void updateMapMarkers() {
+        if (mMap == null) return;
         clearExistingMarkers();
         Geocoder geocoder = new Geocoder(requireContext());
 
