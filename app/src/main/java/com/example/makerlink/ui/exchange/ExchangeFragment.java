@@ -3,6 +3,7 @@ package com.example.makerlink.ui.exchange;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
@@ -105,6 +106,15 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
         super.onViewCreated(view, savedInstanceState);
         searchView = binding.searchBar;
+        int id_id = searchView.getContext().getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+
+        TextView searchText = searchView.findViewById(id_id);
+
+        if (searchText != null) {
+            searchText.setTextColor(Color.BLACK);
+            searchText.setHintTextColor(Color.GRAY); // Optional
+        }
         listView = binding.searchList;
         mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
         items = new ArrayList<>();
@@ -116,7 +126,15 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         items.add("Pluming");
         filteredItems = new ArrayList<>();
 //        To refer to a Fragment's Activity, use requireActivity() or getContext()
-        adapterlist = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems);
+        adapterlist = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView textView = view.findViewById(android.R.id.text1);
+                textView.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
         listView.setAdapter(adapterlist);
         listView.setVisibility(View.GONE);
 
