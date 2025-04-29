@@ -214,7 +214,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void signUpUser(String requestURL) {
         System.out.println("Inside signUpUser");
         requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.POST, requestURL, null,
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -233,6 +233,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(SignUpActivity.this, "Network error! Please try again.", Toast.LENGTH_SHORT).show();
+                        Log.e("ErrorWithLudo", error.getLocalizedMessage());
                     }
                 }
         );
