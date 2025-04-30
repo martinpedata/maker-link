@@ -19,7 +19,7 @@
         android:theme="@style/Theme.MakerLink"
         tools:targetApi="31">
         <activity
-            android:name=".threads.RecyclerViewThreads"
+            android:name=".threads.ThreadListActivity"
             android:exported="false" />
         <activity
             android:name=".threads.ThreadActivity"
