@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="15dp"
+        android:backgroundTint="@color/darkCream">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="379dp"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/hashtagPic"
+                android:layout_width="27dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/hashtagItem"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/noun_hashtag_7722547"
+                app:tint="@color/lightBrown" />
+
+            <ImageView
+                android:id="@+id/imageItem"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBaseline_toBottomOf="parent"
+                app:layout_constraintBaseline_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/letter_b"
+                app:tint="@color/brown" />
+
+            <TextView
+                android:id="@+id/nameItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="Name Of Thread"
+                android:textColor="@color/brown"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageItem"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hashtagItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Hashtag"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15"
+                android:textColor="@color/lightBrown"/>
+
+            <TextView
+                android:id="@+id/authorThread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:text="Author"
+                android:textColor="@color/brown"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@+id/imageItem"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dateItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="Date"
+                app:layout_constraintStart_toStartOf="@+id/hashtagItem"
+                app:layout_constraintTop_toBottomOf="@+id/hashtagItem"
+                android:textColor="@color/lightBrown"/>
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/info"
+                app:layout_constraintStart_toStartOf="@+id/hashtagPic"
+                app:layout_constraintTop_toBottomOf="@+id/hashtagPic"
+                app:tint="@color/lightBrown" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
