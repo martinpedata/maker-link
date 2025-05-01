@@ -1,15 +1,13 @@
 package com.example.makerlink.threads;
 
-import android.widget.ImageView;
-
-public class ThreadModel {
+public class ThreadRecyclerModel {
     private String nameThread;
     private int imageThread;
     private String authorThread;
     private String hashtagThread;
     private String dateThread;
 
-    public ThreadModel(String nameThread, int imageThread, String authorThread, String dateThread, String hashtagThread) {
+    public ThreadRecyclerModel(String nameThread, int imageThread, String authorThread, String dateThread, String hashtagThread) {
         this.nameThread = nameThread;
         this.imageThread = imageThread;
         this.authorThread = authorThread;

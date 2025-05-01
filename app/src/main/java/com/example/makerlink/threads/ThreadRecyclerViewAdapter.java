@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.MyViewHolder> {
 
     public Context context;
-    public ArrayList<ThreadModel> threads;
+    public ArrayList<ThreadRecyclerModel> threads;
 
-    public ThreadRecyclerViewAdapter(Context context, ArrayList<ThreadModel> threads) {
+    public ThreadRecyclerViewAdapter(Context context, ArrayList<ThreadRecyclerModel> threads) {
         this.context = context;
         this.threads = threads;
     }

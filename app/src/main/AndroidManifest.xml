@@ -22,7 +22,7 @@
             android:name=".ui.chats.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".threads.ThreadListActivity"
+            android:name=".threads.ThreadRecyclerActivity"
             android:exported="false" />
         <activity
             android:name=".threads.ThreadActivity"
