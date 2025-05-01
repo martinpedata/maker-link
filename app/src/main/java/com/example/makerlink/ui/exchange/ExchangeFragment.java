@@ -197,9 +197,9 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
     }
     private void clearExistingMarkers() {
-            if (mMap != null) {
-                mMap.clear();
-            }
+        if (mMap != null) {
+            mMap.clear();
+        }
     }
     private void updateMapMarkers() {
         if (mMap == null) return;
