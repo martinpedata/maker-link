@@ -4,23 +4,23 @@ package com.example.makerlink.ui.exchange;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.Manifest;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+
 import com.example.makerlink.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
@@ -41,12 +41,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import android.location.Location;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private FragmentExchangeBinding binding;
@@ -106,14 +104,20 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
         super.onViewCreated(view, savedInstanceState);
         searchView = binding.searchBar;
-        int id_id = searchView.getContext().getResources()
-                .getIdentifier("android:id/search_src_text", null, null);
+        EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(Color.BLACK);
+        searchEditText.setHintTextColor(Color.GRAY);
 
-        TextView searchText = searchView.findViewById(id_id);
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
 
-        if (searchText != null) {
-            searchText.setTextColor(Color.BLACK);
-            searchText.setHintTextColor(Color.GRAY); // Optional
+        if (searchIcon != null) {
+            searchIcon.setImageResource(R.drawable.icon_search);
+            searchIcon.setImageTintList(null);
+            searchIcon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+        }
+        ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        if (closeIcon != null) {
+            closeIcon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
         }
         listView = binding.searchList;
         mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);

@@ -12,7 +12,8 @@
         android:layout_height="45dp"
         android:id="@+id/searchBar"
         android:queryHint="What are you renting today?"
-        android:background="@drawable/search_view"/>
+        android:background="@drawable/search_view"
+        app:searchIcon="@drawable/icon_search"/>
 
     <ListView
         android:id="@+id/searchList"

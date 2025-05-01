@@ -1,11 +1,19 @@
 package com.example.makerlink.ui.chats;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +35,7 @@ public class ChatsFragment extends Fragment {
     private RecyclerView recyclerView;
     private Community_Adapter chatadaptor;
     private List<Chat> chatList;
+    private androidx.appcompat.widget.SearchView searchView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +58,38 @@ public class ChatsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SearchView searchView = view.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView = binding.searchBar;
+        EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        if (searchEditText != null) {
+            searchEditText.setTextColor(Color.BLACK);  // Set the text color to black
+            searchEditText.setHintTextColor(Color.BLACK);  // Set the hint color to black
+        }
+
+        // Change color of the magnifying glass icon to black
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+        if (searchIcon != null) {
+            searchIcon.setImageResource(R.drawable.icon_search);
+            searchIcon.setImageTintList(null);
+            searchIcon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);  // Change icon color to black
+        }
+
+        // Change color of the close button to black
+        ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        if (closeIcon != null) {
+            closeIcon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);  // Change icon color to black
+        }
+        searchView.setOnClickListener(v -> {
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(searchView.findFocus(), InputMethodManager.SHOW_IMPLICIT);
+                }
+            }, 100);
+        });
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 chatadaptor.getFilter().filter(query);
