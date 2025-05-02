@@ -23,7 +23,7 @@
                 android:id="@+id/nameThread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DIY Thread"
+                android:text="Loading..."
                 android:textColor="@color/brown"
                 android:textSize="35dp"
                 android:layout_marginHorizontal="20dp"
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:text="Author"
+                android:text="Loading..."
                 android:textColor="#757575"
                 android:textSize="16dp"
                 android:textStyle="italic"/>
@@ -57,25 +57,25 @@
                         android:layout_height="match_parent"
                         android:padding="5dp">
 
-                        <ImageView
+                        <TextView
                             android:id="@+id/pointsPic"
-                            android:layout_width="19dp"
-                            android:layout_height="18dp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/noun_hashtag_7722547"
+                            android:layout_width="18dp"
+                            android:layout_height="9dp"
+                            android:text="Posted: "
+                            android:textSize="10sp"
                             app:tint="#757575" />
 
                         <TextView
-                            android:id="@+id/hashtag"
+                            android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:includeFontPadding="false"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="31dp"
                             android:layout_toRightOf="@+id/pointsPic"
-                            android:layout_centerVertical="true"
-                            android:text="Hashtag"
+                            android:includeFontPadding="false"
+                            android:text="Loading..."
                             android:textColor="#757575"
-                            android:textSize="10sp"
-                            android:layout_centerInParent="true" />
+                            android:textSize="10sp" />
                     </RelativeLayout>
 
                 </com.google.android.material.card.MaterialCardView>
@@ -112,7 +112,7 @@
                             android:layout_toRightOf="@+id/nameDomain"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="30dp"
-                            android:text="insert"
+                            android:text="Loading..."
                             android:textColor="#757575"
                             android:textSize="10sp"
                             android:layout_centerInParent="true" />

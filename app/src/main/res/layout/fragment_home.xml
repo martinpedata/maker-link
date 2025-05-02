@@ -237,6 +237,7 @@
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/darkCream">
                     <ImageView
+                        android:id="@+id/mechanicsPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/mechanics_pic"
@@ -266,6 +267,7 @@
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/darkCream">
                     <ImageView
+                        android:id="@+id/electronicsPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/electronics_pic"
@@ -293,6 +295,7 @@
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/darkCream">
                     <ImageView
+                        android:id="@+id/cookingPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/cooking_pic"
@@ -320,6 +323,7 @@
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/darkCream">
                     <ImageView
+                        android:id="@+id/carpentryPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/carpentry_pic"

@@ -1,6 +1,7 @@
 package com.example.makerlink.threads;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.R;
@@ -38,11 +40,21 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nameThread.setText(threads.get(position).getNameThread());
-        holder.authorThread.setText(threads.get(position).getAuthorThread());
+        holder.nameThread.setText(threads.get(position).getNameShortThread());
         holder.dateThread.setText(threads.get(position).getDateThread());
-        holder.hashtagThread.setText(threads.get(position).getHashtagThread());
         holder.imageThread.setImageResource(threads.get(position).getImageThread());
+
+        /// Open ThreadActivity from recycler view. Variable position represents the thread item which is currently being handled.
+        /// USE OF LAMBDA EXPRESSION !!!
+        holder.threadItem.setOnClickListener(e->{
+            System.out.println("click registered");
+            Intent intent = new Intent(context,ThreadActivity.class);
+            intent.putExtra("threadName", threads.get(position).getNameLongThread());
+            intent.putExtra("threadAuthor", threads.get(position).getAuthorID()); //These are not in the myViewHolder, because they are attributes of the Model class, without being defined in a view.
+            intent.putExtra("threadDomain", threads.get(position).getDomainID());
+            intent.putExtra("threadDate", threads.get(position).getDateThread());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -52,14 +64,14 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
 
     /// This class is where you bind the views to respective variables
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public CardView threadItem;
         public ImageView imageThread;
-        public TextView nameThread, authorThread, hashtagThread, dateThread;
+        public TextView nameThread, dateThread;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            threadItem = itemView.findViewById(R.id.threadItem);
             imageThread = itemView.findViewById(R.id.imageItem);
             nameThread = itemView.findViewById(R.id.nameItem);
-            authorThread = itemView.findViewById(R.id.authorItem);
-            hashtagThread = itemView.findViewById(R.id.hashtagItem);
             dateThread = itemView.findViewById(R.id.dateItem);
         }
     }

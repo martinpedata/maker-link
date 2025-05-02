@@ -48,16 +48,61 @@ public class HomeFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("storeFilteredSearch", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        /// To see Threads
+
         ImageView discoveryImage = binding.DIYimage;
+        ImageView mechanicsImage = binding.mechanicsPic;
+        ImageView electronicsImage = binding.electronicsPic;
+        ImageView cookingImage = binding.cookingPic;
+        ImageView carpentryImage = binding.carpentryPic;
+
         discoveryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle click action here
+                System.out.println("clicked image");
+
                 editor.putInt("isFiltered", 0).apply();
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }
         });
+        mechanicsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 1).apply();
+                Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                startActivity(i);
+            }
+        });
+        electronicsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 2).apply();
+                Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                startActivity(i);
+            }
+        });
+        cookingImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 3).apply();
+                Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                startActivity(i);
+            }
+        });
+        carpentryImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 4).apply();
+                Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                startActivity(i);
+            }
+        });
+
+        /// To see communities
+
+        // To be implemented
+
     }
 
 }

@@ -1,26 +1,38 @@
 package com.example.makerlink.threads;
 
 public class ThreadRecyclerModel {
-    private String nameThread;
     private int imageThread;
     private String authorThread;
     private String hashtagThread;
+    private String shortenedName;
+    private String fullName;
     private String dateThread;
+    private int authorID;
+    private int domainID;
 
-    public ThreadRecyclerModel(String nameThread, int imageThread, String authorThread, String dateThread, String hashtagThread) {
-        this.nameThread = nameThread;
+    public int getAuthorID() {
+        return authorID;
+    }
+
+    public int getDomainID() {
+        return domainID;
+    }
+
+    public ThreadRecyclerModel(String nameThreadLong,String nameThreadShort, int imageThread, String dateThread, int author_id, int domain_id) {
+        this.shortenedName = nameThreadShort;
+        this.fullName = nameThreadLong;
         this.imageThread = imageThread;
-        this.authorThread = authorThread;
         this.dateThread = dateThread;
-        this.hashtagThread = hashtagThread;
+        this.authorID = author_id;
+        this.domainID = domain_id;
     }
 
-    public String getNameThread() {
-        return nameThread;
+    public String getNameLongThread() {
+        return fullName;
     }
 
-    public void setNameThread(String nameThread) {
-        this.nameThread = nameThread;
+    public String getNameShortThread() {
+        return shortenedName;
     }
 
     public int getImageThread() {
@@ -31,21 +43,6 @@ public class ThreadRecyclerModel {
         this.imageThread = imageThread;
     }
 
-    public String getAuthorThread() {
-        return authorThread;
-    }
-
-    public void setAuthorThread(String authorThread) {
-        this.authorThread = authorThread;
-    }
-
-    public String getHashtagThread() {
-        return hashtagThread;
-    }
-
-    public void setHashtagThread(String hashtagThread) {
-        this.hashtagThread = hashtagThread;
-    }
 
     public String getDateThread() {
         return dateThread;
