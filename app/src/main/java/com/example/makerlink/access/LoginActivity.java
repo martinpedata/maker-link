@@ -157,30 +157,30 @@ public class LoginActivity extends AppCompatActivity {
                                 finish(); /// Prevent going back to the welcome screen
                             }
                             else {
-//                                pw.setText("");
-//                                pw.setHint("Invalid Password!");
-//                                pw.setHintTextColor(Color.RED);
-//
-//                                // Remove focus to show hints
-//                                pw.clearFocus();
-//                                un.clearFocus();
-//                                pw.setError("");
-//                                un.setError("");
+                                pw.setText("");
+                                pw.setHint("Invalid Password!");
+                                pw.setHintTextColor(Color.RED);
+
+                                // Remove focus to show hints
+                                pw.clearFocus();
+                                un.clearFocus();
+                                pw.setError("");
+                                un.setError("");
                             }
                         } catch (JSONException e) {
-//                            un.setText("");
-//                            pw.setText("");
-//                            pw.setHint("Invalid Credentials!");
-//                            un.setHint("Invalid Credentials!");
-//
-//                            un.setHintTextColor(Color.RED);
-//
-//                            // Remove focus to show hints
-//                            pw.clearFocus();
-//                            un.clearFocus();
-//                            pw.setError("");
-//                            un.setError("");
-//                            Log.e("Database", e.getMessage(), e);
+                            un.setText("");
+                            pw.setText("");
+                            pw.setHint("Invalid Credentials!");
+                            un.setHint("Invalid Credentials!");
+
+                            un.setHintTextColor(Color.RED);
+
+                            // Remove focus to show hints
+                            pw.clearFocus();
+                            un.clearFocus();
+                            pw.setError("");
+                            un.setError("");
+                            Log.e("Database", e.getMessage(), e);
                         }
                     }
                 },

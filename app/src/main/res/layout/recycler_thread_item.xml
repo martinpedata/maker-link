@@ -53,12 +53,12 @@
                 android:id="@+id/dateItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="52dp"
                 android:text="Date"
-                android:layout_gravity="center"
                 android:textColor="@color/lightBrown"
-                app:layout_constraintVertical_bias="0.0"
-                android:textStyle="italic"/>
+                android:textStyle="italic"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </LinearLayout>

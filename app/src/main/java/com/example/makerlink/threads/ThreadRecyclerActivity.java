@@ -1,10 +1,9 @@
 package com.example.makerlink.threads;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -21,9 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
-import com.example.makerlink.access.SignUpActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +32,8 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
     ArrayList<ThreadRecyclerModel> threadItems = new ArrayList<>();
     private RequestQueue requestQueue;
     private RecyclerView recyclerView;
+    private TextView headingActivity;
+    private String heading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
             return insets;
         });
         recyclerView = findViewById(R.id.my_recycler);
+        headingActivity = findViewById(R.id.headingRecycler);
 
         SharedPreferences sharedPref = getSharedPreferences("storeFilteredSearch", MODE_PRIVATE);
-
         int isFiltered = sharedPref.getInt("isFiltered", -1);
 
         System.out.println("isFiltered is: " + isFiltered);
@@ -71,6 +69,8 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveAllThreads"); //ALL THREADS
                 break;
         }
+
+        heading = sharedPref.getString("nameDomain", null);
     }
 
     public void setUpThread(String requestURL) {
@@ -105,6 +105,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                         ThreadRecyclerViewAdapter threadAdapter = new ThreadRecyclerViewAdapter(ThreadRecyclerActivity.this, threadItems);
                         recyclerView.setAdapter(threadAdapter);
                         recyclerView.setLayoutManager(new GridLayoutManager(ThreadRecyclerActivity.this,2));
+                        headingActivity.setText(heading);
                     }
                 },
 

@@ -4,19 +4,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import android.view.View;
-import android.widget.Button;
+
 import android.widget.TextView;
 
 import com.example.makerlink.databinding.ActivityMainBinding;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
