@@ -2,33 +2,20 @@ package com.example.makerlink.ui.home;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.makerlink.MainActivity;
 import com.example.makerlink.databinding.FragmentHomeBinding;
 import com.example.makerlink.threads.ThreadRecyclerActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -62,6 +49,7 @@ public class HomeFragment extends Fragment {
                 System.out.println("clicked image");
 
                 editor.putInt("isFiltered", 0).apply();
+                editor.putString("nameDomain", "See What’s General");
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }
@@ -70,6 +58,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor.putInt("isFiltered", 1).apply();
+                editor.putString("nameDomain", "Mechanics \uD83D\uDD27").apply();
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }
@@ -78,6 +67,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor.putInt("isFiltered", 2).apply();
+                editor.putString("nameDomain", "Electronics \uD83E\uDD16").apply();
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }
@@ -86,6 +76,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor.putInt("isFiltered", 3).apply();
+                editor.putString("nameDomain", "Cooking \uD83C\uDF73").apply();
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }
@@ -94,6 +85,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor.putInt("isFiltered", 4).apply();
+                editor.putString("nameDomain", "Carpentry \uD83E\uDE9A").apply();
                 Intent i = new Intent(getActivity(), ThreadRecyclerActivity.class);
                 startActivity(i);
             }

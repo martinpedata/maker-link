@@ -17,4 +17,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="my_map_api_key">AIzaSyDPbNdxO7fkvc4YMR7SrzqqZK59Ea6uLj4</string>
+    <string name="image">Image</string>
+    <string name="submittedImage">Image</string>
+    <string name="pick_image">Pick image</string>
+    <string name="post_image">Post image</string>
+    <string name="retrieveimage">retrieveImage</string>
+    <string name="retrieved_image">retrieved Image</string>
+    <string name="selected_image">selected image</string>
 </resources>
