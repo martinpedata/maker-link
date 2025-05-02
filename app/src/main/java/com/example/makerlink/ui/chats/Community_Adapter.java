@@ -1,5 +1,7 @@
 package com.example.makerlink.ui.chats;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.R;
+import com.example.makerlink.threads.ThreadActivity;
 
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
     private List<Chat> chatList;
     private OnClickChat listener;
     private List<Chat> chatListFull;
+    public Context context;
 
     public Community_Adapter(List<Chat> chatList, OnClickChat listener) {
         this.chatList = chatList != null ? chatList : new ArrayList<>();
@@ -42,6 +46,7 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
     @NonNull
     @Override
     public CommunityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.communities, parent, false);
         return new CommunityViewHolder(v);
     }
@@ -51,7 +56,12 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
         Chat chat = chatList.get(position);
         holder.textName.setText(chat.getName());
         holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(chat));
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("chatName", chat.getName());
+            intent.putExtra("chat_id", chat.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

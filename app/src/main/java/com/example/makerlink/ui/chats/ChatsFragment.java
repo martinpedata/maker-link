@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 import com.example.makerlink.databinding.FragmentChatsBinding;
+import com.example.makerlink.threads.ThreadRecyclerActivity;
+import com.example.makerlink.threads.ThreadRecyclerModel;
+import com.example.makerlink.threads.ThreadRecyclerViewAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +51,7 @@ public class ChatsFragment extends Fragment {
     private Community_Adapter chatadaptor;
     private List<Chat> chatList;
     private androidx.appcompat.widget.SearchView searchView;
+    private RequestQueue requestQueue;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,14 +60,9 @@ public class ChatsFragment extends Fragment {
 
         binding = FragmentChatsBinding.inflate(inflater, container, false);
         recyclerView = binding.getRoot().findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        chatList = loadChats();
-        chatadaptor = new Community_Adapter(chatList, chat -> {
-            Intent intent = new Intent(getContext(), ChatActivity.class);
-            intent.putExtra("chat_name", chat.getName());
-            startActivity(intent);
-        });
-        recyclerView.setAdapter(chatadaptor);
+        setUpCommunity("https://studev.groept.be/api/a24pt215/RetrieveCommunity");
+
+
         return binding.getRoot();
     }
 
@@ -103,39 +114,45 @@ public class ChatsFragment extends Fragment {
             }
         });
     }
-    private List<Chat> loadChats() {
-        List<Chat> list = new ArrayList<>();
-        list.add(new Chat("Ergi Durro"));
-        list.add(new Chat("Group T"));
-        list.add(new Chat("Martin Pedata"));
-        list.add(new Chat("John"));
-        list.add(new Chat("Jack"));
-        list.add(new Chat("Mary"));
-        list.add(new Chat("Ergi Durro"));
-        list.add(new Chat("Group T"));
-        list.add(new Chat("Martin Pedata"));
-        list.add(new Chat("John"));
-        list.add(new Chat("Jack"));
-        list.add(new Chat("Mary"));
-        list.add(new Chat("Ergi Durro"));
-        list.add(new Chat("Group T"));
-        list.add(new Chat("Martin Pedata"));
-        list.add(new Chat("John"));
-        list.add(new Chat("Jack"));
-        list.add(new Chat("Mary"));
-        list.add(new Chat("Ergi Durro"));
-        list.add(new Chat("Group T"));
-        list.add(new Chat("Martin Pedata"));
-        list.add(new Chat("John"));
-        list.add(new Chat("Jack"));
-        list.add(new Chat("Mary"));
-        list.add(new Chat("Ergi Durro"));
-        list.add(new Chat("Group T"));
-        list.add(new Chat("Martin Pedata"));
-        list.add(new Chat("John"));
-        list.add(new Chat("Jack"));
-        list.add(new Chat("Mary"));
-        return list;
+    public void setUpCommunity(String requestURL) {
+        chatList = new ArrayList<Chat>();
+        requestQueue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                System.out.println("inside json array");
+                                JSONObject o = response.getJSONObject(i);
+
+                                String namechat = o.getString("name");
+                                int chat_id = o.getInt("id");
+                                chatList.add(new Chat(namechat, chat_id));
+                            }
+                            catch (JSONException e) {
+                                System.out.println("error iterating json array");
+                            }
+
+                        }
+                        chatadaptor = new Community_Adapter(chatList, chat -> {
+                            Intent intent = new Intent(getContext(), ChatActivity.class);
+                            intent.putExtra("chat_name", chat.getName());
+                            startActivity(intent);
+                        });
+                        recyclerView.setAdapter(chatadaptor);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
     }
     @Override
     public void onDestroyView() {

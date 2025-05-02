@@ -51,7 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/line1"
-        android:layout_above="@id/editTextMessage" />
+        android:layout_above="@id/editTextMessage"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/cream"/>
 
     <EditText
         android:id="@+id/editTextMessage"

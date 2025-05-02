@@ -1,5 +1,6 @@
 package com.example.makerlink.ui.chats;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         holder.textMessage.setText(messages.get(position).getMessage());
         holder.textSender.setText(messages.get(position).getSender());
+
     }
 
     @Override
