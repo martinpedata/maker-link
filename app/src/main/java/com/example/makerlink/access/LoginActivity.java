@@ -146,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                             /// YOU HAVE TO PUT THE RELEVANT CODE YOU WANT TO EXECUTE AFTER THE DATABASE IS QUERIED INSIDE HE ONRESPONSE !!!
                             JSONObject o = response.getJSONObject(0);
                             passwordDB = o.getString("password");
-                            System.out.println("about to read pw");
                             if (passwordInput.equals(passwordDB)) {
                                 nameOfUser = o.getString("name");
                                 editor.putString("Name", nameOfUser).apply();
@@ -158,30 +157,30 @@ public class LoginActivity extends AppCompatActivity {
                                 finish(); /// Prevent going back to the welcome screen
                             }
                             else {
-                                pw.setText("");
-                                pw.setHint("Invalid Password!");
-                                pw.setHintTextColor(Color.RED);
-
-                                // Remove focus to show hints
-                                pw.clearFocus();
-                                un.clearFocus();
-                                pw.setError("");
-                                un.setError("");
+//                                pw.setText("");
+//                                pw.setHint("Invalid Password!");
+//                                pw.setHintTextColor(Color.RED);
+//
+//                                // Remove focus to show hints
+//                                pw.clearFocus();
+//                                un.clearFocus();
+//                                pw.setError("");
+//                                un.setError("");
                             }
                         } catch (JSONException e) {
-                            un.setText("");
-                            pw.setText("");
-                            pw.setHint("Invalid Credentials!");
-                            un.setHint("Invalid Credentials!");
-
-                            un.setHintTextColor(Color.RED);
-
-                            // Remove focus to show hints
-                            pw.clearFocus();
-                            un.clearFocus();
-                            pw.setError("");
-                            un.setError("");
-                            Log.e("Database", e.getMessage(), e);
+//                            un.setText("");
+//                            pw.setText("");
+//                            pw.setHint("Invalid Credentials!");
+//                            un.setHint("Invalid Credentials!");
+//
+//                            un.setHintTextColor(Color.RED);
+//
+//                            // Remove focus to show hints
+//                            pw.clearFocus();
+//                            un.clearFocus();
+//                            pw.setError("");
+//                            un.setError("");
+//                            Log.e("Database", e.getMessage(), e);
                         }
                     }
                 },
@@ -190,7 +189,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(LoginActivity.this, "Network error! Please try again.", Toast.LENGTH_SHORT).show();
-                        Log.e("DatabaseError", error.toString());
+                        Log.e("Errorrrrr", error.toString());
                     }
                 }
         );

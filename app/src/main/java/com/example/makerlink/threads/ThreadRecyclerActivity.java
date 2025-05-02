@@ -79,11 +79,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("inside onResponse of signUpThread");
+                        System.out.println("inside onResponse of setUpThread");
                         for (int i = 0; i < response.length(); i++) {
-                            try {
-                                System.out.println("inside json array");
-                                JSONObject o = response.getJSONObject(i);
+                            try {JSONObject o = response.getJSONObject(i);
 
                                 String nameThread = o.getString("name");
                                 String nameThreadShort = "";
