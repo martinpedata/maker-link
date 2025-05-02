@@ -1,493 +1,498 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
-    android:orientation="vertical"
-    android:padding="4dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="3dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/darkCream"
-            app:cardElevation="15dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/brown">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <ImageView
-                    android:id="@+id/pointsPic"
-                    android:layout_width="19dp"
-                    android:layout_height="18dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/points_logo"
-                    app:tint="@color/brown" />
-
-                <TextView
-                    android:id="@+id/pointsTab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:layout_toRightOf="@+id/pointsPic"
-                    android:layout_centerVertical="true"
-                    android:text="Ranking"
-                    android:textColor="@color/brown"
-                    android:textSize="10sp"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/darkCream"
-            app:cardElevation="15dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/brown">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <ImageView
-                    android:id="@+id/orderPic"
-                    android:layout_width="19dp"
-                    android:layout_height="18dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/orders_profile_fragment"
-                    app:tint="@color/brown" />
-
-                <TextView
-                    android:id="@+id/orderText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:layout_toRightOf="@+id/orderPic"
-                    android:layout_centerVertical="true"
-                    android:text="Orders"
-                    android:textColor="@color/brown"
-                    android:textSize="10sp"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/darkCream"
-            app:cardElevation="15dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/brown">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <ImageView
-                    android:id="@+id/favoritesPic"
-                    android:layout_width="19dp"
-                    android:layout_height="18dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/baseline_favorite_24"
-                    app:tint="@color/brown" />
-
-                <TextView
-                    android:id="@+id/favorites_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:layout_toRightOf="@+id/favoritesPic"
-                    android:layout_centerVertical="true"
-                    android:text="Favorites"
-                    android:textColor="@color/brown"
-                    android:textSize="10sp"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="15dp">
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="15dp"
-            app:cardCornerRadius="20dp">
+            android:layout_marginTop="10dp"
+            android:padding="3dp"
+            android:orientation="horizontal">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/DIYimage"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/darkCream"
+                app:cardElevation="15dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brown">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="303dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/diy_pic_home"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackground" />/>
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/textViewTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginTop="72dp"
-                    android:text="Maker Link"
-                    android:textColor="@color/cream"
-                    android:textSize="32sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/pointsPic"
+                        android:layout_width="19dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/points_logo"
+                        app:tint="@color/brown" />
 
-                <TextView
-                    android:id="@+id/textViewSubtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Discover your passions"
-                    android:textColor="@color/cream"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+                    <TextView
+                        android:id="@+id/pointsTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:layout_toRightOf="@+id/pointsPic"
+                        android:layout_centerVertical="true"
+                        android:text="Ranking"
+                        android:textColor="@color/brown"
+                        android:textSize="10sp"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/darkCream"
+                app:cardElevation="15dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brown">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
-        </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/orderPic"
+                        android:layout_width="19dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/orders_profile_fragment"
+                        app:tint="@color/brown" />
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/orderText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:layout_toRightOf="@+id/orderPic"
+                        android:layout_centerVertical="true"
+                        android:text="Orders"
+                        android:textColor="@color/brown"
+                        android:textSize="10sp"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="0dp"
-        android:orientation="vertical">
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/darkCream"
+                app:cardElevation="15dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brown">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/favoritesPic"
+                        android:layout_width="19dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/baseline_favorite_24"
+                        app:tint="@color/brown" />
+
+                    <TextView
+                        android:id="@+id/favorites_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:layout_toRightOf="@+id/favoritesPic"
+                        android:layout_centerVertical="true"
+                        android:text="Favorites"
+                        android:textColor="@color/brown"
+                        android:textSize="10sp"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="15dp"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/DIYimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="303dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/diy_pic_home"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground" />/>
+
+                    <TextView
+                        android:id="@+id/textViewTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="44dp"
+                        android:layout_marginTop="72dp"
+                        android:text="Maker Link"
+                        android:textColor="@color/cream"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="44dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Discover your passions"
+                        android:textColor="@color/cream"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:padding="0dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Common Domains"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_marginHorizontal="20dp"/>
+                android:padding="0dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Common Domains"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginHorizontal="20dp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                android:layout_marginVertical="7dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    android:layout_marginVertical="7dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="17dp">
+                    <androidx.cardview.widget.CardView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:id="@+id/mechanicsPic"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/mechanics_pic"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mechanics"
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <androidx.cardview.widget.CardView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:id="@+id/electronicsPic"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/electronics_pic"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Electronics"
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft = "10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:id="@+id/cookingPic"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/cooking_pic"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cooking"
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft = "10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:id="@+id/carpentryPic"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/carpentry_pic"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Carpentry"
+                        android:textColor="@color/lightBrown" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="0dp"
-                android:layout_marginLeft="17dp">
-                <androidx.cardview.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:id="@+id/mechanicsPic"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/mechanics_pic"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mechanics"
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-                <androidx.cardview.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:id="@+id/electronicsPic"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/electronics_pic"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Electronics"
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft = "10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:id="@+id/cookingPic"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/cooking_pic"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cooking"
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="15dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft = "10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:id="@+id/carpentryPic"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/carpentry_pic"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Carpentry"
-                    android:textColor="@color/lightBrown" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="0dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:padding="0dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Communities"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_marginHorizontal="20dp"/>
+                android:padding="0dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Communities"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginHorizontal="20dp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                android:layout_marginVertical="7dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    android:layout_marginVertical="7dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="17dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/bike_community"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bike Repair"
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="7dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/gardening_community"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gardening"
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft = "10dp">
+                    <androidx.cardview.widget.CardView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/software_community"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="App Devel."
+                        android:textColor="@color/lightBrown"
+                        android:layout_marginHorizontal="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft = "10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="8dp"
+                        app:cardElevation="15dp"
+                        app:cardCornerRadius="15dp"
+                        android:layout_weight="1"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/darkCream">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/music_community"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:text="Music"
+                        android:textColor="@color/lightBrown" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="0dp"
-                android:layout_marginLeft="17dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/bike_community"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bike Repair"
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="7dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/gardening_community"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gardening"
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft = "10dp">
-                <androidx.cardview.widget.CardView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/software_community"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="App Devel."
-                    android:textColor="@color/lightBrown"
-                    android:layout_marginHorizontal="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft = "10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="8dp"
-                    app:cardElevation="15dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_weight="1"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/darkCream">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/music_community"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="Music"
-                    android:textColor="@color/lightBrown" />
-            </LinearLayout>
-        </LinearLayout>
 
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
