@@ -83,7 +83,6 @@ public class ThreadActivity extends AppCompatActivity {
                 authorText.setText(userName);
                 dateText.setText(date);
                 domainText.setText(domainName);
-
             });
         });
     }
