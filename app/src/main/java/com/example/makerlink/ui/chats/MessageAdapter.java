@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private List<Message> messages;
-
+    private String currentUser;
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView textSender;
         public TextView textMessage;
@@ -25,13 +25,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
-    public MessageAdapter(List<Message> messages) {
+    public MessageAdapter(List<Message> messages,String currentUserId) {
         this.messages = messages;
+        this.currentUser = currentUserId;
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        if (messages.get(position).getSender().equals(currentUser)) {
+            return 1; // right (me)
+        } else {
+            return 0; // left (other)
+        }
+    }
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item , parent, false);
+        View v;
+        if (viewType == 1) {
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.message_item_other, parent, false);
+        } else {
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.message_item, parent, false);
+        }
         return new MessageViewHolder(v);
     }
 

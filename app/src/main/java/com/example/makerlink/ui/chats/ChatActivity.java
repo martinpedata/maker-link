@@ -1,6 +1,8 @@
 package com.example.makerlink.ui.chats;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -47,12 +49,17 @@ public class ChatActivity extends AppCompatActivity {
     private String User = "user"; // Replace with actual user if needed
     private int chatId;
     private RequestQueue requestQueue;
+    private static final long POLL_INTERVAL = 5000;
+
+    // Handler for periodic updates
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
+        startPollingForMessages();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -75,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> finish());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageAdapter(messages);
+        adapter = new MessageAdapter(messages, User);
         recyclerView.setAdapter(adapter);
 
         // Fetch messages when the activity starts
@@ -90,7 +97,26 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+    private void startPollingForMessages() {
+        // This will periodically fetch new messages from the server
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Fetch new messages from the server using the chatId
+                setUpMessages("https://studev.groept.be/api/a24pt215/getMessage/" + chatId);
 
+                // Re-run the polling after the specified interval (POLL_INTERVAL)
+                handler.postDelayed(this, POLL_INTERVAL);
+            }
+        }, POLL_INTERVAL);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove any pending callbacks to prevent memory leaks
+        handler.removeCallbacksAndMessages(null);
+    }
     // Function to fetch messages using Volley
     public void setUpMessages(String requestURL) {
         // Create a new request queue
@@ -126,12 +152,8 @@ public class ChatActivity extends AppCompatActivity {
                         }
 
                         // Update the RecyclerView with the list of messages
-                        MessageAdapter messageAdapter = new MessageAdapter(messages);
-                        recyclerView.setAdapter(messageAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
-
-                        // Notify the adapter that the data set has changed
-                        messageAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
+                        recyclerView.scrollToPosition(messages.size() - 1);
 
                         // Scroll to the latest message
                         recyclerView.scrollToPosition(messages.size() - 1);
