@@ -1,5 +1,6 @@
 package com.example.makerlink.ui.chats;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,7 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     private MessageAdapter adapter;
     private TextView nameofcommunity;
     private String chatName;
-    private String User = "user"; // Replace with actual user if needed
+    private String User; // Replace with actual user if needed
     private int chatId;
     private RequestQueue requestQueue;
     private static final long POLL_INTERVAL = 5000;
@@ -68,6 +69,8 @@ public class ChatActivity extends AppCompatActivity {
 
         chatName = getIntent().getStringExtra("chatName");
         chatId = getIntent().getIntExtra("chat_id", -1);
+        SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        User = sharedPref.getString("Name", null);
 
         imageButton = findViewById(R.id.backButton);
         recyclerView = findViewById(R.id.recyclerViewMessages);

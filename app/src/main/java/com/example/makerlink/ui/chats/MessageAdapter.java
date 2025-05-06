@@ -25,13 +25,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
-    public MessageAdapter(List<Message> messages,String currentUserId) {
+    public MessageAdapter(List<Message> messages,String currentUser) {
         this.messages = messages;
-        this.currentUser = currentUserId;
+        this.currentUser = currentUser;
     }
     @Override
     public int getItemViewType(int position) {
-        if (messages.get(position).getSender().equals(currentUser)) {
+        String sender = messages.get(position).getSender();
+        if (sender != null && currentUser != null && sender.trim().equalsIgnoreCase(currentUser.trim())) {
             return 1; // right (me)
         } else {
             return 0; // left (other)

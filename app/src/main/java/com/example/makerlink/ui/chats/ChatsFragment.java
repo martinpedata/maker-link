@@ -103,13 +103,17 @@ public class ChatsFragment extends Fragment {
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                chatadaptor.getFilter().filter(query);
+                if (chatadaptor != null) {
+                    chatadaptor.getFilter().filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                chatadaptor.getFilter().filter(newText);
+                if (chatadaptor != null) {
+                    chatadaptor.getFilter().filter(newText);
+                }
                 return false;
             }
         });
