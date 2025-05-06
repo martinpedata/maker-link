@@ -56,6 +56,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
 
         System.out.println("isFiltered is: " + isFiltered);
         switch (isFiltered) {
+            case 5:
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrievePlaylistThreads/" + 5); //INSERT PLAYLIST ID
+                break;
             case 4:
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 5); //INSERT DOMAIN ID
                 break;

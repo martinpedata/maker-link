@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.makerlink.databinding.FragmentHomeBinding;
@@ -45,7 +46,25 @@ public class HomeFragment extends Fragment {
         ImageView electronicsImage = binding.electronicsPic;
         ImageView cookingImage = binding.cookingPic;
         ImageView carpentryImage = binding.carpentryPic;
+        CardView playlistFolder = binding.playlistFolder;
 
+        playlistFolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 5).apply();
+                editor.putString("nameDomain", "Your Playlists");
+                ProgressDialog progressDialog = new ProgressDialog(getActivity()); // or requireActivity()
+                progressDialog.setMessage("Opening page, please wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    Intent intent = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                    startActivity(intent);
+                    progressDialog.dismiss();
+                }, 300);
+            }
+        });
         discoveryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
