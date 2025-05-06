@@ -2,6 +2,7 @@ package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 import com.example.makerlink.databinding.FragmentChatsBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,8 @@ public class ChatsFragment extends Fragment {
     private List<Chat> chatList;
     private androidx.appcompat.widget.SearchView searchView;
     private RequestQueue requestQueue;
+    private FloatingActionButton addbutton;
+    private int UserID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,9 +58,14 @@ public class ChatsFragment extends Fragment {
 
         binding = FragmentChatsBinding.inflate(inflater, container, false);
         recyclerView = binding.getRoot().findViewById(R.id.recyclerView);
-        setUpCommunity("https://studev.groept.be/api/a24pt215/RetrieveCommunity");
-
-
+        SharedPreferences sharedPref = requireContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        UserID = sharedPref.getInt("user_ID", -1);
+        setUpCommunity("https://studev.groept.be/api/a24pt215/GetCommunityName/"+ UserID);
+        addbutton = binding.getRoot().findViewById(R.id.fab);
+        addbutton.setOnClickListener(v -> {
+            Intent i = new Intent(getContext(), AddCommunity.class);
+            startActivity(i);
+        });
         return binding.getRoot();
     }
 
@@ -113,43 +122,62 @@ public class ChatsFragment extends Fragment {
         });
     }
     public void setUpCommunity(String requestURL) {
-        chatList = new ArrayList<Chat>();
+        chatList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(getContext());
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+
+        // Make the GET request to retrieve community names the user is part of
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                System.out.println("inside json array");
-                                JSONObject o = response.getJSONObject(i);
+                        try {
+                            // Clear the list to ensure no duplicate entries
+                            chatList.clear();
 
-                                String namechat = o.getString("name");
-                                int chat_id = o.getInt("id");
-                                chatList.add(new Chat(namechat, chat_id));
-                            }
-                            catch (JSONException e) {
-                                System.out.println("error iterating json array");
+                            // Iterate over the response array to get each community's data
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject communityObject = response.getJSONObject(i);
+
+                                // Get the community name and community_id from the response
+                                String name = communityObject.getString("name");
+                                int communityId = communityObject.getInt("community");
+
+                                // Add the community to the chatList
+                                chatList.add(new Chat(name, communityId));
                             }
 
+                            // Now, set the adapter with the list of communities
+                            if (chatadaptor == null) {
+                                // First-time setup of the adapter
+                                chatadaptor = new Community_Adapter(chatList, chat -> {
+                                    // Pass the community name and ID to the next screen
+                                    Intent intent = new Intent(getContext(), ChatActivity.class);
+                                    intent.putExtra("chat_name", chat.getName());
+                                    intent.putExtra("community_id", chat.getId()); // Pass the community ID as well
+                                    startActivity(intent);
+                                });
+
+                                // Set up RecyclerView with the adapter and layout manager
+                                recyclerView.setAdapter(chatadaptor);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            } else {
+                                // If the adapter already exists, notify it of the data change
+                                chatadaptor.notifyDataSetChanged(); // Update the RecyclerView
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("Error", "Error processing JSON response", e);
                         }
-                        chatadaptor = new Community_Adapter(chatList, chat -> {
-                            Intent intent = new Intent(getContext(), ChatActivity.class);
-                            intent.putExtra("chat_name", chat.getName());
-                            startActivity(intent);
-                        });
-                        recyclerView.setAdapter(chatadaptor);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                        Log.e("Error", "Error fetching communities", error);
                     }
-                }
-        );
+                });
+
+        // Add the request to the request queue
         requestQueue.add(submitRequest);
     }
     @Override

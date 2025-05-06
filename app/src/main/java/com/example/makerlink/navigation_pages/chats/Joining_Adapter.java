@@ -2,6 +2,7 @@ package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,24 +14,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.CommunityViewHolder> implements Filterable {
+public class Joining_Adapter extends RecyclerView.Adapter<Joining_Adapter.CommunityViewHolder> implements Filterable {
     private List<Chat> chatList;
     private OnClickChat listener;
     private List<Chat> chatListFull;
-    public Context context;
+    private Context context;
+    private RequestQueue requestQueue;
 
-    public Community_Adapter(List<Chat> chatList, OnClickChat listener) {
+    public Joining_Adapter(List<Chat> chatList, OnClickChat listener) {
         this.chatList = chatList != null ? chatList : new ArrayList<>();
         this.listener = listener;
-        this.chatListFull = new ArrayList<>(chatList); // To support filtering
+        this.chatListFull = new ArrayList<>(chatList);
     }
 
-    // ViewHolder class to hold reference to views for each item
     public static class CommunityViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textName;
@@ -47,6 +57,7 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
     public CommunityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.communities, parent, false);
+        requestQueue = Volley.newRequestQueue(context);
         return new CommunityViewHolder(v);
     }
 
@@ -54,12 +65,12 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
     public void onBindViewHolder(@NonNull CommunityViewHolder holder, int position) {
         Chat chat = chatList.get(position);
         holder.textName.setText(chat.getName());
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);  // Or set an actual image
+        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ChatActivity.class);
-            intent.putExtra("chatName", chat.getName());
-            intent.putExtra("chat_id", chat.getId());
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onItemClick(chat);
+            }
         });
     }
 
@@ -68,23 +79,6 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
         return chatList.size();
     }
 
-    // Method to add a new community to the list and notify the adapter
-    public void addCommunity(Chat newChat) {
-        chatList.add(newChat);
-        chatListFull.add(newChat);  // Add to the full list for filtering
-        notifyItemInserted(chatList.size() - 1);  // Notify that an item was inserted
-    }
-
-    // Method to clear the list and add new data (if needed)
-    public void setCommunityList(List<Chat> newChatList) {
-        chatList.clear();
-        chatList.addAll(newChatList);
-        chatListFull.clear();
-        chatListFull.addAll(newChatList); // Update full list for filtering
-        notifyDataSetChanged(); // Notify that the data has changed
-    }
-
-    // Filter implementation for search functionality
     @Override
     public Filter getFilter() {
         return chatFilter;
@@ -117,4 +111,34 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
             notifyDataSetChanged();
         }
     };
+
+    // Method to handle joining a community and saving the user-community relationship
+    private void joinCommunity(int userId, int communityId) {
+        String url = "https://your-api-url.com/saveUserCommunity";  // Replace with your actual API endpoint
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("userId", userId);
+            jsonBody.put("communityId", communityId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle success (e.g., show a success message or update UI)
+                        Log.d("JoinCommunity", "Successfully joined community");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("JoinCommunity", "Error joining community: " + error.getLocalizedMessage());
+                    }
+                });
+
+        requestQueue.add(request);
+    }
 }

@@ -55,6 +55,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".navigation_pages.chats.AddCommunity"/>
+        <activity android:name=".navigation_pages.chats.JoinActivity"/>
+        <activity android:name=".navigation_pages.chats.CreateActivity"/>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
