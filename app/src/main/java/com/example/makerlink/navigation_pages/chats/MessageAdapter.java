@@ -1,6 +1,5 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.chats;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

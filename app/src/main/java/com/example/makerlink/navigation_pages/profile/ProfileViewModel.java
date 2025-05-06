@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.profile;
+package com.example.makerlink.navigation_pages.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

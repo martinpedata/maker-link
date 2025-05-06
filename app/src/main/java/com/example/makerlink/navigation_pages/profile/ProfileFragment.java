@@ -1,15 +1,12 @@
-package com.example.makerlink.ui.profile;
+package com.example.makerlink.navigation_pages.profile;
 
-import android.os.Bundle;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.makerlink.databinding.FragmentProfileBinding;
 

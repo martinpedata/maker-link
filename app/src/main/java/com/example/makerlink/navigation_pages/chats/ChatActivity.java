@@ -1,11 +1,10 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.chats;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;

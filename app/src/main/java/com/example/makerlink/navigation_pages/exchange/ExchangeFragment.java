@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.exchange;
+package com.example.makerlink.navigation_pages.exchange;
 
 
 import android.content.Context;
@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.databinding.FragmentExchangeBinding;
-import com.example.makerlink.ui.discovery.DiscoveryViewModel;
+import com.example.makerlink.navigation_pages.discovery.DiscoveryViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

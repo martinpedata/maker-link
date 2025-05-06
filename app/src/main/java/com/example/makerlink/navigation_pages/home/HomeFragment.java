@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.home;
+package com.example.makerlink.navigation_pages.home;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.makerlink.databinding.FragmentHomeBinding;
+import com.example.makerlink.playlists.PlaylistRecyclerActivity;
 import com.example.makerlink.threads.ThreadRecyclerActivity;
 
 public class HomeFragment extends Fragment {
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("storeFilteredSearch", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        /// To see Threads
+        /// To display Threads
 
         ImageView discoveryImage = binding.DIYimage;
         ImageView mechanicsImage = binding.mechanicsPic;
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
                 progressDialog.show();
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                    Intent intent = new Intent(getActivity(), PlaylistRecyclerActivity.class);
                     startActivity(intent);
                     progressDialog.dismiss();
                 }, 300);

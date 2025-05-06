@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.discovery;
+package com.example.makerlink.navigation_pages.discovery;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.makerlink.R;
 import com.example.makerlink.databinding.FragmentDiscoveryBinding;
 
 import java.util.ArrayList;

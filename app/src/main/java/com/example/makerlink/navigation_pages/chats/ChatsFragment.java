@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,16 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,9 +30,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 import com.example.makerlink.databinding.FragmentChatsBinding;
-import com.example.makerlink.threads.ThreadRecyclerActivity;
-import com.example.makerlink.threads.ThreadRecyclerModel;
-import com.example.makerlink.threads.ThreadRecyclerViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

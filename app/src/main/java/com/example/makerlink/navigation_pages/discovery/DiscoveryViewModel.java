@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.discovery;
+package com.example.makerlink.navigation_pages.discovery;
 
 import androidx.lifecycle.ViewModel;
 

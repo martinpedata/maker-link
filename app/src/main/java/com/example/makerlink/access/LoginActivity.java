@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText pw;
     private EditText un;
     private String usernameInput;
+    private int user_ID;
     private String passwordInput;
     private String usernameDB;
     private String passwordDB;
@@ -132,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
         checkValidityOfLogin("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
     }
 
+
     /// Retrieve database info
     public void checkValidityOfLogin(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
@@ -148,7 +150,10 @@ public class LoginActivity extends AppCompatActivity {
                             passwordDB = o.getString("password");
                             if (passwordInput.equals(passwordDB)) {
                                 nameOfUser = o.getString("name");
+                                user_ID = o.getInt("user_id");
+                                System.out.println("user id before playlist: " + user_ID);
                                 editor.putString("Name", nameOfUser).apply();
+                                editor.putInt("user_ID", user_ID).apply();
 
                                 /// Go to NavigationTemplate
 

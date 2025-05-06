@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.exchange;
+package com.example.makerlink.navigation_pages.exchange;
 
 import android.content.Intent;
 import android.view.LayoutInflater;

@@ -1,16 +1,15 @@
-package com.example.makerlink.ui.exchange;
+package com.example.makerlink.navigation_pages.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ExchangeViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public ExchangeViewModel() {
+    public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
     }
 
     public LiveData<String> getText() {

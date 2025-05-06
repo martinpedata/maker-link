@@ -1,0 +1,98 @@
+package com.example.makerlink.playlists;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.makerlink.R;
+import com.example.makerlink.threads.ThreadRecyclerActivity;
+import com.example.makerlink.threads.ThreadRecyclerViewAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class PlaylistRecyclerActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private int user_ID;
+    private TextView title;
+    private ArrayList<PlaylistRecyclerModel> playlistsItems = new ArrayList<>();
+    private RequestQueue requestQueue;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_playlist_recycler);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainPlaylist), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        recyclerView = findViewById(R.id.my_recycler_playlist);
+        title = findViewById(R.id.headingRecyclerPlaylist);
+
+        SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        user_ID = sharedPref.getInt("user_ID", -1);
+        System.out.println("user ID" + user_ID);
+        setUpPlaylists("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + user_ID);
+    }
+    public void setUpPlaylists(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("inside onResponse of setUpPlaylist");
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                System.out.println("iteration: " + i);
+                                JSONObject o = response.getJSONObject(i);
+
+                                String namePlaylist = o.getString("name_playlist");
+                                int owner_id = o.getInt("author_id");
+                                int privacy = o.getInt("privacy");
+                                System.out.println(owner_id + " "+ namePlaylist);
+                                playlistsItems.add(new PlaylistRecyclerModel(privacy,namePlaylist,owner_id));
+                            }
+                            catch (JSONException e) {
+                                System.out.println("error iterating json array");
+                            }
+
+                        }
+                        PlaylistRecyclerAdapter threadAdapter = new PlaylistRecyclerAdapter(PlaylistRecyclerActivity.this, playlistsItems);
+                        recyclerView.setAdapter(threadAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(PlaylistRecyclerActivity.this));
+                        title.setText("Your Playlists");
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                         Log.e("ErrorPlaylistCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
+    }
+}

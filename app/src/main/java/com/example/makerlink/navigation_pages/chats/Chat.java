@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.chats;
 
 public class Chat {
     private String name;

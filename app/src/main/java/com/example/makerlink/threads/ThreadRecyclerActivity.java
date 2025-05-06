@@ -54,10 +54,14 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("storeFilteredSearch", MODE_PRIVATE);
         int isFiltered = sharedPref.getInt("isFiltered", -1);
 
-        System.out.println("isFiltered is: " + isFiltered);
+        System.out.println("isFiltered: " + isFiltered);
+        int counter = 0; //Checking if we're in a playlist or in a filtered search
         switch (isFiltered) {
             case 5:
-                setUpThread("https://studev.groept.be/api/a24pt215/RetrievePlaylistThreads/" + 5); //INSERT PLAYLIST ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveAllThreads"); //INSERT PLAYLIST ID
+                counter = 1;
+                heading = getIntent().getStringExtra("playlistName");
+                System.out.println("Playlist name: " + heading);
                 break;
             case 4:
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 5); //INSERT DOMAIN ID
@@ -75,8 +79,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveAllThreads"); //ALL THREADS
                 break;
         }
-
-        heading = sharedPref.getString("nameDomain", null);
+        if (counter == 0) {
+            heading = sharedPref.getString("nameDomain", null);
+        }
     }
 
     public void setUpThread(String requestURL) {

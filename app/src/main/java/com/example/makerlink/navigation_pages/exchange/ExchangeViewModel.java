@@ -1,16 +1,16 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.exchange;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ChatsViewModel extends ViewModel {
+public class ExchangeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public ChatsViewModel() {
+    public ExchangeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is dashboard fragment");
     }
 
     public LiveData<String> getText() {

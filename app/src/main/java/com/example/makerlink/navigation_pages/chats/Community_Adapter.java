@@ -1,4 +1,4 @@
-package com.example.makerlink.ui.chats;
+package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.R;
-import com.example.makerlink.threads.ThreadActivity;
 
 
 import java.util.ArrayList;

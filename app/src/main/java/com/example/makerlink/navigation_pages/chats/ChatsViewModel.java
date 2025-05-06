@@ -1,15 +1,16 @@
-package com.example.makerlink.ui.home;
+package com.example.makerlink.navigation_pages.chats;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class ChatsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public ChatsViewModel() {
         mText = new MutableLiveData<>();
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {
