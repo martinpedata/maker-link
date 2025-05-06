@@ -28,7 +28,8 @@
         android:backgroundTint="@color/lightBrown"
         android:text="JOIN"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
     <TextView
         android:layout_width="130dp"
         android:layout_height="40dp"
@@ -36,7 +37,8 @@
         android:text="OR"
         android:textSize="20sp"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
     <Button
         android:layout_width="160dp"
         android:layout_height="60dp"
@@ -46,7 +48,8 @@
         android:text="Create"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:id="@+id/createButton"/>
+        android:id="@+id/createButton"
+        android:textColor="#FFFFFF"/>
 
 
 

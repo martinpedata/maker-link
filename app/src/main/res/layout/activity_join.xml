@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/search_view"
+        android:backgroundTint="@color/cream"
         app:searchIcon="@drawable/icon_search" />
 
     <androidx.recyclerview.widget.RecyclerView
