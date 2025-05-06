@@ -64,13 +64,13 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                System.out.println("iteration: " + i);
                                 JSONObject o = response.getJSONObject(i);
 
+                                int playlist_id = o.getInt("id");
                                 String namePlaylist = o.getString("name_playlist");
                                 int owner_id = o.getInt("author_id");
                                 int privacy = o.getInt("privacy");
-                                playlistsItems.add(new PlaylistRecyclerModel(privacy,namePlaylist,owner_id));
+                                playlistsItems.add(new PlaylistRecyclerModel(playlist_id,privacy,namePlaylist,owner_id));
                             }
                             catch (JSONException e) {
                                 System.out.println("error iterating json array");

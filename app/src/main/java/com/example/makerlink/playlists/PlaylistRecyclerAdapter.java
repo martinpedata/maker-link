@@ -55,6 +55,7 @@ public class PlaylistRecyclerAdapter extends RecyclerView.Adapter<PlaylistRecycl
         holder.playlistItem.setOnClickListener(e->{
             Intent intent = new Intent(context, ThreadRecyclerActivity.class);
             intent.putExtra("playlistName", playlists.get(position).getName());
+            intent.putExtra("playlistID", playlists.get(position).getPlaylistID());
             context.startActivity(intent);
         });
     }
