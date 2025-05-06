@@ -1,7 +1,10 @@
 package com.example.makerlink.threads;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -84,6 +87,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                             try {JSONObject o = response.getJSONObject(i);
 
                                 String nameThread = o.getString("name");
+
                                 String nameThreadShort = "";
                                 //Needed because we want the full name when we open the activity and short name when in scrolling mode.
                                 if (nameThread.length() > 14) {
@@ -92,10 +96,15 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                                 else {
                                     nameThreadShort = nameThread;
                                 }
+
                                 int authorID = o.getInt("author_id");
                                 int domainID = o.getInt("domain_id");
                                 String creationDate = o.getString("creationdate").substring(0,10);
-                                threadItems.add(new ThreadRecyclerModel(nameThread, nameThreadShort, R.drawable.letter_c, creationDate, authorID, domainID));
+                                String b64Image = o.getString("image_resource");
+
+                                Bitmap bitmapImage = base64ToBitMap(b64Image); //The b64 is converted to Bitmap in the helper method below
+
+                                threadItems.add(new ThreadRecyclerModel(nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID));
                             }
                             catch (JSONException e) {
                                 System.out.println("error iterating json array");
@@ -117,5 +126,14 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 }
         );
         requestQueue.add(submitRequest);
+    }
+
+    /// Putting this in the OnBinding of the adapter class made the program slow because not only it continuously converted b64->Bitmap during scrolling,
+    /// but also did this in the UI thread instead of background. In this way, the conversion is only done once (before creation of Model objects) and is done
+    /// on background thread.
+    public Bitmap base64ToBitMap(String b64String){
+        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
+        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
+        return bitmap;
     }
 }

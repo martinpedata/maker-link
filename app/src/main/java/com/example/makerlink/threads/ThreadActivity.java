@@ -70,12 +70,12 @@ public class ThreadActivity extends AppCompatActivity {
         ///  Iterate database Twice with a callback method (Consumer<>)to ensure program waits for response before advancing.
         ///Lambda expression on " name -> " below.
 
-        retrieveFromUrl("https://studev.groept.be/api/a24pt215/RetrieveDomainNameFromID/" + domainID, "name", name -> {
+        retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveDomainNameFromID/" + domainID, "name", name -> {
             domainName = name;
 
             //Program waits for domainName to be updated, thanks to callback method, before advancing to the next database query
 
-            retrieveFromUrl("https://studev.groept.be/api/a24pt215/RetrieveUserNameFromID/" + authorID, "username", username -> {
+            retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveUserNameFromID/" + authorID, "username", username -> {
                 userName = username;
 
                 //Once both names are retrieved, update UI.
@@ -87,7 +87,7 @@ public class ThreadActivity extends AppCompatActivity {
         });
     }
 
-    public void retrieveFromUrl (String requestURL, String key, Consumer<String> callback) {
+    public void retrieveTextFromUrl (String requestURL, String key, Consumer<String> callback) {
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {

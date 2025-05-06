@@ -1,7 +1,9 @@
 package com.example.makerlink.threads;
 
+import android.graphics.Bitmap;
+
 public class ThreadRecyclerModel {
-    private int imageThread;
+    private Bitmap imageThread;
     private String authorThread;
     private String hashtagThread;
     private String shortenedName;
@@ -18,7 +20,7 @@ public class ThreadRecyclerModel {
         return domainID;
     }
 
-    public ThreadRecyclerModel(String nameThreadLong,String nameThreadShort, int imageThread, String dateThread, int author_id, int domain_id) {
+    public ThreadRecyclerModel(String nameThreadLong, String nameThreadShort, Bitmap imageThread, String dateThread, int author_id, int domain_id) {
         this.shortenedName = nameThreadShort;
         this.fullName = nameThreadLong;
         this.imageThread = imageThread;
@@ -35,11 +37,11 @@ public class ThreadRecyclerModel {
         return shortenedName;
     }
 
-    public int getImageThread() {
+    public Bitmap getBitmapImage() {
         return imageThread;
     }
 
-    public void setImageThread(int imageThread) {
+    public void setImageThread(Bitmap imageThread) {
         this.imageThread = imageThread;
     }
 
