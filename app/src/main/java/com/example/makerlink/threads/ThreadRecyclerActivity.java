@@ -61,7 +61,6 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveAllThreads"); //INSERT PLAYLIST ID
                 counter = 1;
                 heading = getIntent().getStringExtra("playlistName");
-                System.out.println("Playlist name: " + heading);
                 break;
             case 4:
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 5); //INSERT DOMAIN ID
@@ -85,6 +84,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
     }
 
     public void setUpThread(String requestURL) {
+        System.out.println("inside setUpThread");
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
@@ -129,6 +129,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        System.out.println("inside onError");
                         Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
                     }
                 }

@@ -62,7 +62,6 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("inside onResponse of setUpPlaylist");
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 System.out.println("iteration: " + i);
@@ -71,7 +70,6 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
                                 String namePlaylist = o.getString("name_playlist");
                                 int owner_id = o.getInt("author_id");
                                 int privacy = o.getInt("privacy");
-                                System.out.println(owner_id + " "+ namePlaylist);
                                 playlistsItems.add(new PlaylistRecyclerModel(privacy,namePlaylist,owner_id));
                             }
                             catch (JSONException e) {

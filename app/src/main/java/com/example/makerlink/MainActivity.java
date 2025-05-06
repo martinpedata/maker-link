@@ -41,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        /// Retrieve username
-
-        SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
-        userName = sharedPref.getString("Name", null);
-
-        TextView welcText = findViewById(R.id.welcomeText);
-        welcText.setText("Welcome, " + userName);
-
     }
 
     @Override

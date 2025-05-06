@@ -155,10 +155,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        /// To see communities
-
-        // To be implemented
-
     }
 
 }
