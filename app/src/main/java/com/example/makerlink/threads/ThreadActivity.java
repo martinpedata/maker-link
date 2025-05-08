@@ -86,13 +86,6 @@ public class ThreadActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userID = sharedPref.getInt("user_ID", -1); // The person currently using the app
 
-        if (isFavorite) {
-            heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
-        }
-        else {
-            heart.setColorFilter(Color.parseColor("#808080"));
-        }
-
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,9 +134,18 @@ public class ThreadActivity extends AppCompatActivity {
             });
         });
 
-        /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite.
-        System.out.println("threadID = " + threadID);
+        /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite and thus the color of the heart.
+
+
+        System.out.println("threadID = " + threadID); //TODO: CHECK WHETHER THE THREAD ID IS GOOD. AND ENSURE YOU CAN REMOVE THREAD FROM PLAYLIST
         isInPlaylist("https://studev.groept.be/api/a24pt215/IsThreadInPlaylist/" + threadID);
+
+        if (isFavorite) {
+            heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
+        }
+        else {
+            heart.setColorFilter(Color.parseColor("#808080"));
+        }
     }
 
     public void retrieveTextFromUrl (String requestURL, String key, Consumer<String> callback) {
@@ -174,7 +176,7 @@ public class ThreadActivity extends AppCompatActivity {
 
     public void isInPlaylist(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
-        System.out.println("inide InPlaylist");
+        System.out.println("inside InPlaylist");
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override

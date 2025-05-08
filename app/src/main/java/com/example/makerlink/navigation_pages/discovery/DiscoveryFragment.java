@@ -4,6 +4,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.makerlink.databinding.FragmentDiscoveryBinding;
+import com.example.makerlink.threads.CreateThreadActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,7 @@ public class DiscoveryFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private List<String> items;
     private List<String> filteredItems;
+    private FloatingActionButton createThreadButton;
 
     private DiscoveryViewModel mViewModel;
 
@@ -48,9 +52,14 @@ public class DiscoveryFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
+        /// Define variables, tools, adapters, views, etc...
+
         super.onViewCreated(view, savedInstanceState);
         searchView = binding.searchBar;
         listView = binding.searchList;
+        createThreadButton = binding.addThread;
+
+
         mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
         items = new ArrayList<>();
         items.add("Apples");
@@ -59,11 +68,26 @@ public class DiscoveryFragment extends Fragment {
         items.add("Donuts");
         items.add("Eggs");
         items.add("Fish");
+
+
         filteredItems = new ArrayList<>();
 //        To refer to a Fragment's Activity, use requireActivity() or getContext()
         adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems);
         listView.setAdapter(adapter);
         listView.setVisibility(View.GONE);
+
+
+        /// CREATE-THREAD LOGIC
+
+        createThreadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), CreateThreadActivity.class);
+                startActivity(i);
+            }
+        });
+
+        /// SEARCH VIEW LOGIC
 
 //        To make sure the entire search bar is touchable and not just icon. Also to make the keyboard appear upon touch
 

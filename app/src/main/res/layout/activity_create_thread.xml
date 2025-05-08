@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    tools:context=".threads.CreateThreadActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Thread"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/brown"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+        <!-- Thread Domain Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thread Domain"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/editTextDomain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. Electronics, Woodwork..."
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:background="@drawable/custom_background_login"
+            android:textColorHint="#BFA088" />
+
+        <!-- Thread Name Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thread Name"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/editTextThreadName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Give your thread a name"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_background_login"
+            android:padding="12dp"
+            android:textColorHint="#BFA088" />
+
+        <!-- Image Upload Placeholder -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImagePicker"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/imagePreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/photo"
+                app:tint="@color/gray" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Video Upload Placeholder -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Video"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardVideoPicker"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/videoPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/photo"
+                app:tint="@color/gray" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitThreadButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Thread"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/lightBrown"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

@@ -94,7 +94,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         System.out.println("inside onResponse of setUpThread");
                         for (int i = 0; i < response.length(); i++) {
-                            try {JSONObject o = response.getJSONObject(i);
+                            try {
+
+                                JSONObject o = response.getJSONObject(i);
 
                                 int id = o.getInt("id");
                                 String nameThread = o.getString("name");
@@ -118,7 +120,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                                 threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID));
                             }
                             catch (JSONException e) {
-                                System.out.println("error iterating json array");
+                                System.out.println("json array empty");
                             }
 
                         }
