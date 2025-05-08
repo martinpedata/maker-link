@@ -86,14 +86,22 @@ public class ThreadActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userID = sharedPref.getInt("user_ID", -1); // The person currently using the app
 
+        if (isFavorite) {
+            heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
+        }
+        else {
+            heart.setColorFilter(Color.parseColor("#808080"));
+        }
+
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("isFavorite: " + isFavorite);
                 if (!isFavorite) {
                     heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
                     isFavorite = true;
 
-                    playlistNames.clear();
+                    playlistNames.clear(); // So that the dropdown menu does not stack up values
                     playlistIDs.clear();
 
                     //show pop up menu
@@ -132,6 +140,10 @@ public class ThreadActivity extends AppCompatActivity {
                 domainText.setText(domainName);
             });
         });
+
+        /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite.
+        System.out.println("threadID = " + threadID);
+        isInPlaylist("https://studev.groept.be/api/a24pt215/IsThreadInPlaylist/" + threadID);
     }
 
     public void retrieveTextFromUrl (String requestURL, String key, Consumer<String> callback) {
@@ -150,6 +162,34 @@ public class ThreadActivity extends AppCompatActivity {
                     }
                 },
 
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
+    }
+
+    public void isInPlaylist(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        System.out.println("inide InPlaylist");
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("inside onResponse");
+                        try {
+                            JSONObject o = response.getJSONObject(0);
+                            System.out.println("getJSONObject successful");
+                            isFavorite = true;
+                        } catch (JSONException e)  /// EXCEPTION RETURNED WHEN EMPTY JSON ARRAY.
+                        {
+                            isFavorite = false;
+                        }
+                    }
+                },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
