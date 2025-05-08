@@ -50,6 +50,8 @@ public class ChatsFragment extends Fragment {
     private RequestQueue requestQueue;
     private FloatingActionButton addbutton;
     private int UserID;
+    private SharedPreferences sharedPrefer;
+    private SharedPreferences.Editor editor;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +62,6 @@ public class ChatsFragment extends Fragment {
         recyclerView = binding.getRoot().findViewById(R.id.recyclerView);
         SharedPreferences sharedPref = requireContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
         UserID = sharedPref.getInt("user_ID", -1);
-        setUpCommunity("https://studev.groept.be/api/a24pt215/GetCommunityName/"+ UserID);
         addbutton = binding.getRoot().findViewById(R.id.fab);
         addbutton.setOnClickListener(v -> {
             Intent i = new Intent(getContext(), AddCommunity.class);
@@ -68,7 +69,11 @@ public class ChatsFragment extends Fragment {
         });
         return binding.getRoot();
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpCommunity("https://studev.groept.be/api/a24pt215/GetCommunityName/" + UserID);
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -122,7 +127,11 @@ public class ChatsFragment extends Fragment {
         });
     }
     public void setUpCommunity(String requestURL) {
-        chatList = new ArrayList<>();
+        if (chatList == null) {
+            chatList = new ArrayList<>();
+        } else {
+            chatList.clear();
+        }
         requestQueue = Volley.newRequestQueue(getContext());
 
         // Make the GET request to retrieve community names the user is part of
@@ -131,8 +140,6 @@ public class ChatsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            // Clear the list to ensure no duplicate entries
-                            chatList.clear();
 
                             // Iterate over the response array to get each community's data
                             for (int i = 0; i < response.length(); i++) {
@@ -161,7 +168,7 @@ public class ChatsFragment extends Fragment {
                                 recyclerView.setAdapter(chatadaptor);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                             } else {
-                                // If the adapter already exists, notify it of the data change
+                                recyclerView.scrollToPosition(0);
                                 chatadaptor.notifyDataSetChanged(); // Update the RecyclerView
                             }
 
