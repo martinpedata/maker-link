@@ -93,6 +93,9 @@ public class ThreadActivity extends AppCompatActivity {
                     heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
                     isFavorite = true;
 
+                    playlistNames.clear();
+                    playlistIDs.clear();
+
                     //show pop up menu
                     popup = new PopupMenu(ThreadActivity.this, heart); // anchor to the heart icon
 
@@ -102,13 +105,11 @@ public class ThreadActivity extends AppCompatActivity {
 
                     // Database connection
                     populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
-
                 }
                 else {
-                    playlistNames.clear();
-                    heart.setColorFilter(Color.parseColor("#808080"));
-                    Toast.makeText(ThreadActivity.this, "Removed from playlist", Toast.LENGTH_SHORT).show();
                     isFavorite = false;
+                    heart.setColorFilter(Color.parseColor("#808080"));
+                    removeFromPlaylist("https://studev.groept.be/api/a24pt215/RemoveThreadFromPlaylist");
                 }
             }
         });
@@ -225,6 +226,31 @@ public class ThreadActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(ThreadActivity.this, "Failed to add thread to " + playlistClickedName, Toast.LENGTH_LONG).show();
+            }
+        }) { //NOTE THIS PART: here we are passing the parameters to the webservice, NOT in the URL!
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idplaylist", String.valueOf(playlistClickedID));
+                params.put("idthread", String.valueOf(threadID)); ///THE NAME KEYS HAVE TO BE THE SAME AS THE ":val" IN THE API, NOT AS THE COLUMNS OF THE TABLE
+                return params;
+            }
+        };
+        requestQueue.add(submitRequest);
+    }
+
+    public void removeFromPlaylist(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        StringRequest submitRequest = new StringRequest (Request.Method.POST, requestURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ThreadActivity.this, "Thread removed from " + playlistClickedName, Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ThreadActivity.this, "Failed to remove thread from " + playlistClickedName, Toast.LENGTH_LONG).show();
             }
         }) { //NOTE THIS PART: here we are passing the parameters to the webservice, NOT in the URL!
             @Override
