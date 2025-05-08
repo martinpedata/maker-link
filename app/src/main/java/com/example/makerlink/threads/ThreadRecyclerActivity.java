@@ -61,7 +61,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
             case 5:
                 heading = getIntent().getStringExtra("playlistName");
                 int playlist_id = getIntent().getIntExtra("playlistID", -1);
-                //findThread("https://studev.groept.be/api/a24pt215/RetrieveContentPlaylists/"+playlist_id); //INSERT PLAYLIST ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveContentPlaylists/"+playlist_id); //INSERT PLAYLIST ID
                 counter = 1;
                 break;
             case 4:
@@ -138,35 +138,6 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
     }
-//    public void findThread(String requestURL) {
-//        requestQueue = Volley.newRequestQueue(this);
-//        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        System.out.println("inside onResponse of setUpThread");
-//                        for (int i = 0; i < response.length(); i++) {
-//                            try {
-//                                JSONObject o = response.getJSONObject(i);
-//                            }
-//                            catch (JSONException e) {
-//                                System.out.println("error iterating json array");
-//                            }
-//
-//                        }
-//                    }
-//                },
-//
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        System.out.println("inside onError");
-//                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
-//                    }
-//                }
-//        );
-//        requestQueue.add(submitRequest);
-//    }
     /// Putting this in the OnBinding of the adapter class made the program slow because not only it continuously converted b64->Bitmap during scrolling,
     /// but also did this in the UI thread instead of background. In this way, the conversion is only done once (before creation of Model objects) and is done
     /// on background thread.
