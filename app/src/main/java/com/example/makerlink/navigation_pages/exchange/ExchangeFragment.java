@@ -2,6 +2,7 @@ package com.example.makerlink.navigation_pages.exchange;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,7 +11,15 @@ import android.Manifest;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +39,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.databinding.FragmentExchangeBinding;
+import com.example.makerlink.navigation_pages.chats.Chat;
+import com.example.makerlink.navigation_pages.chats.ChatActivity;
+import com.example.makerlink.navigation_pages.chats.Community_Adapter;
 import com.example.makerlink.navigation_pages.discovery.DiscoveryViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,8 +54,13 @@ import android.location.Geocoder;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
@@ -64,6 +81,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private FusedLocationProviderClient fusedLocationClient;
 
     private String selectedSearchItem = "";
+    private RequestQueue requestQueue;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,14 +92,15 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         binding = FragmentExchangeBinding.inflate(inflater, container, false);
         recyclerView = binding.getRoot().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        userList = loadUsers();
-        adapter = new UserAdapter(new ArrayList<>(userList));
-        recyclerView.setAdapter(adapter);
         initMapFragment();
 
         return binding.getRoot();
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpLenders("https://studev.groept.be/api/a24pt215/RetrieveLenderInfo");
+    }
     private void initMapFragment() {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag("MAP_FRAGMENT");
 
@@ -121,13 +140,6 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         }
         listView = binding.searchList;
         mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
-        items = new ArrayList<>();
-        items.add("Basic Tools");
-        items.add("Electronics");
-        items.add("Mechanics");
-        items.add("Carpentry");
-        items.add("Cooking");
-        items.add("Pluming");
         filteredItems = new ArrayList<>();
 //        To refer to a Fragment's Activity, use requireActivity() or getContext()
         adapterlist = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems){
@@ -206,11 +218,10 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         }
     }
     private void updateMapMarkers() {
-        if (mMap == null) return;
+        if (mMap == null || userList == null) return; // Prevent crash if userList isn't ready
         clearExistingMarkers();
         Geocoder geocoder = new Geocoder(requireContext());
 
-        // Filter users based on selectedSearchItem (tool type)
         for (User user : userList) {
             if (user.getTool().equalsIgnoreCase(selectedSearchItem)) {
                 try {
@@ -219,11 +230,10 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                         Address address = addresses.get(0);
                         LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
 
-                        // Add a marker with user name as title
                         mMap.addMarker(new MarkerOptions()
                                         .position(location)
                                         .title(user.getName()))
-                                .setTag(user); // Save the user object for later
+                                .setTag(user);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -273,16 +283,65 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setScrollGesturesEnabled(true);
     }
-    private List<User> loadUsers() {
-        // Dummy users for example
-        List<User> list = new ArrayList<>();
-        list.add(new User("Ergi Durro", "Paul van Ostaijenlaan, 21", "+32460946315", 100,"Basic Tools"));
-        list.add(new User("Group T", "Andreas Vesaliusstraat 13, 3000", "+12345678", 50, "Electronics"));
-        list.add(new User("Martin Pedata", "Maria Theresiastraat 84, 3000 Leuven", "+238576943", 30,"Basic Tools"));
-        list.add(new User("John", "Edward van Evenstraat 4, 3000 Leuven", "+4985745", 60, "Pluming"));
-        list.add(new User("Jack", "Alfons Smetsplein 7, 3000 Leuven", "+48769556", 45,"Cooking"));
-        list.add(new User("Mary", "Bondgenotenlaan 20, 3000 Leuven", "23456789", 120, "Carpentry"));
-        return list;
+    public void setUpLenders(String requestURL) {
+        if (userList == null) {
+            userList = new ArrayList<>();
+        } else {
+            userList.clear();
+        }
+        items = new ArrayList<>();
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+
+                            // Iterate over the response array to get each community's data
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject communityObject = response.getJSONObject(i);
+
+                                // Get the community name and community_id from the response
+                                String name = communityObject.getString("name");
+                                String address = communityObject.getString("address");
+                                String tool = communityObject.getString("tooltype");
+                                int rent = communityObject.getInt("rent");
+
+                                // Add the community to the chatList
+                                userList.add(new User(name, address,rent,tool));
+                                items.add(tool);
+                            }
+                            HashSet<String> hset = new HashSet<String>(items);
+                            items = new ArrayList<>(hset);
+                            // Now, set the adapter with the list of communities
+                            if (adapter == null) {
+                                // First-time setup of the adapter
+                                adapter = new UserAdapter(userList);
+
+                                // Set up RecyclerView with the adapter and layout manager
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            } else {
+                                recyclerView.scrollToPosition(0);
+                                adapter.notifyDataSetChanged(); // Update the RecyclerView
+                                updateMapMarkers(); // Update the RecyclerView
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("Error", "Error processing JSON response", e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", "Error fetching communities", error);
+                    }
+                });
+
+        // Add the request to the request queue
+        requestQueue.add(submitRequest);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -290,9 +349,28 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("Permissions", "Location permission granted");
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    mMap.setMyLocationEnabled(true);
+                    if (mMap != null) {
+                        mMap.setMyLocationEnabled(true);
+
+                        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+                        fusedLocationClient.getLastLocation()
+                                .addOnSuccessListener(location -> {
+                                    if (location != null) {
+                                        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f));
+                                        Log.d("Permissions", "Moved to current location: " + currentLatLng);
+                                    } else {
+                                        Log.d("Permissions", "Location is null after granting permission");
+                                    }
+                                });
+                    } else {
+                        Log.d("Permissions", "mMap is null");
+                    }
                 }
+            } else {
+                Log.d("Permissions", "Location permission denied");
             }
         }
     }

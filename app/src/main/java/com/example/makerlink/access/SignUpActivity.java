@@ -71,15 +71,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void goToHome(View view) throws UnsupportedEncodingException {
 
-         pw = findViewById(R.id.password);
-         passwordInput = pw.getText().toString();
-         un = findViewById(R.id.username);
-         usernameInput = un.getText().toString();
-         ld = findViewById(R.id.lender);
-         lenderInput = ld.getText().toString();
-         age = findViewById(R.id.age);
-         ageInput = age.getText().toString();
-         name = findViewById(R.id.name);
+        pw = findViewById(R.id.password);
+        passwordInput = pw.getText().toString();
+        un = findViewById(R.id.username);
+        usernameInput = un.getText().toString();
+        ld = findViewById(R.id.lender);
+        lenderInput = ld.getText().toString();
+        age = findViewById(R.id.age);
+        ageInput = age.getText().toString();
+        name = findViewById(R.id.name);
         nameInput = name.getText().toString();
         addr = findViewById(R.id.address);
         addressInput = addr.getText().toString();
@@ -221,7 +221,6 @@ public class SignUpActivity extends AppCompatActivity {
                         editor.putString("Name", nameInput).apply();
 
                         /// GO to navigation template
-
                         Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
