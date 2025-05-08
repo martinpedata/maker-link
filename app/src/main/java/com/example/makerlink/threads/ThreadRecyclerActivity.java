@@ -96,6 +96,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {JSONObject o = response.getJSONObject(i);
 
+                                int id = o.getInt("id");
                                 String nameThread = o.getString("name");
 
                                 String nameThreadShort = "";
@@ -114,7 +115,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
 
                                 Bitmap bitmapImage = base64ToBitMap(b64Image); //The b64 is converted to Bitmap in the helper method below
 
-                                threadItems.add(new ThreadRecyclerModel(nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID));
+                                threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID));
                             }
                             catch (JSONException e) {
                                 System.out.println("error iterating json array");

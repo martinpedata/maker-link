@@ -33,6 +33,8 @@ import java.util.ArrayList;
 public class PlaylistRecyclerActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
     private int user_ID;
     private TextView title;
     private ArrayList<PlaylistRecyclerModel> playlistsItems = new ArrayList<>();
@@ -51,8 +53,12 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.my_recycler_playlist);
         title = findViewById(R.id.headingRecyclerPlaylist);
 
-        SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        /// Retrieve user_ID from LoginPage sharedpref
         user_ID = sharedPref.getInt("user_ID", -1);
+
         System.out.println("user ID" + user_ID);
         setUpPlaylists("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + user_ID);
     }
@@ -67,7 +73,9 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
                                 JSONObject o = response.getJSONObject(i);
 
                                 int playlist_id = o.getInt("id");
+
                                 String namePlaylist = o.getString("name_playlist");
+
                                 int owner_id = o.getInt("author_id");
                                 int privacy = o.getInt("privacy");
                                 playlistsItems.add(new PlaylistRecyclerModel(playlist_id,privacy,namePlaylist,owner_id));

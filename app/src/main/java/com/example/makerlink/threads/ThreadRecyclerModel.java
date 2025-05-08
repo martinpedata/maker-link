@@ -4,8 +4,7 @@ import android.graphics.Bitmap;
 
 public class ThreadRecyclerModel {
     private Bitmap imageThread;
-    private String authorThread;
-    private String hashtagThread;
+    private int id;
     private String shortenedName;
     private String fullName;
     private String dateThread;
@@ -20,13 +19,18 @@ public class ThreadRecyclerModel {
         return domainID;
     }
 
-    public ThreadRecyclerModel(String nameThreadLong, String nameThreadShort, Bitmap imageThread, String dateThread, int author_id, int domain_id) {
+    public ThreadRecyclerModel(int id, String nameThreadLong, String nameThreadShort, Bitmap imageThread, String dateThread, int author_id, int domain_id) {
+        this.id = id;
         this.shortenedName = nameThreadShort;
         this.fullName = nameThreadLong;
         this.imageThread = imageThread;
         this.dateThread = dateThread;
         this.authorID = author_id;
         this.domainID = domain_id;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getNameLongThread() {

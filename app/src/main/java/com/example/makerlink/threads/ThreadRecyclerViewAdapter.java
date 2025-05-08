@@ -55,6 +55,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             System.out.println("click registered");
             Intent intent = new Intent(context,ThreadActivity.class);
             intent.putExtra("threadName", threads.get(position).getNameLongThread());
+            intent.putExtra("threadID", threads.get(position).getID());
             intent.putExtra("threadAuthor", threads.get(position).getAuthorID()); //These are not in the myViewHolder, because they are attributes of the Model class, without being defined in a view.
             intent.putExtra("threadDomain", threads.get(position).getDomainID());
             intent.putExtra("threadDate", threads.get(position).getDateThread());

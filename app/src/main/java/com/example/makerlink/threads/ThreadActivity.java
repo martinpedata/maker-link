@@ -1,6 +1,6 @@
 package com.example.makerlink.threads;
 
-import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,15 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 
@@ -32,18 +31,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
-import kotlin.jvm.internal.Lambda;
-
 public class ThreadActivity extends AppCompatActivity {
-
+    private SharedPreferences sharedPref;
     private String domainName;
-    private List<String> playlists = new ArrayList<>();
+    private List<String> playlistNames = new ArrayList<>();
+    private List<Integer> playlistIDs = new ArrayList<>();
     private PopupMenu popup;
+    private int threadID;
     private int domainID;
     private int authorID;
+    private int userID;
+    private int playlistClickedID;
+    private String playlistClickedName;
     private ImageButton heart;
     private String userName;
     private RequestQueue requestQueue;
@@ -71,12 +75,16 @@ public class ThreadActivity extends AppCompatActivity {
         authorText = findViewById(R.id.authorItem);
         heart = findViewById(R.id.addToPlaylist);
 
-        /// Retrieve values from RecyclerThread class
+        /// Retrieve info from RecyclerThreadAdapter class (from the extra info on intent)
         threadName = getIntent().getStringExtra("threadName");
-        authorID = getIntent().getIntExtra("threadAuthor", -1);
+        threadID = getIntent().getIntExtra("threadID", -1);
+        authorID = getIntent().getIntExtra("threadAuthor", -1); //THe person who created the thread
         domainID = getIntent().getIntExtra("threadDomain", -1);
         date = getIntent().getStringExtra("threadDate");
 
+        /// Retrive playlist and user info from PlaylistRecyclerActivity class (from shared pref)
+        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        userID = sharedPref.getInt("user_ID", -1); // The person currently using the app
 
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,22 +93,19 @@ public class ThreadActivity extends AppCompatActivity {
                     heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
                     isFavorite = true;
 
-                    // Show popup menu
+                    //show pop up menu
                     popup = new PopupMenu(ThreadActivity.this, heart); // anchor to the heart icon
 
-                    // Dummy playlists
-                    populateDropdownMenu();
+                    // Prevent fast double-clicks
+                    heart.setEnabled(false);
+                    System.out.println("author_ID = " + authorID);
 
-                    // Handle click events
-                    popup.setOnMenuItemClickListener(item -> {
-                        String selectedPlaylist = item.getTitle().toString();
-                        Toast.makeText(ThreadActivity.this, "Added to " + selectedPlaylist, Toast.LENGTH_SHORT).show();
-                        // TODO: Add logic to store post in that playlist
-                        return true;
-                    });
-                    popup.show();
+                    // Database connection
+                    populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
+
                 }
                 else {
+                    playlistNames.clear();
                     heart.setColorFilter(Color.parseColor("#808080"));
                     Toast.makeText(ThreadActivity.this, "Removed from playlist", Toast.LENGTH_SHORT).show();
                     isFavorite = false;
@@ -153,11 +158,83 @@ public class ThreadActivity extends AppCompatActivity {
         );
         requestQueue.add(submitRequest);
     }
-    public void populateDropdownMenu() {
-        playlists.add("DIY");
-        playlists.add("Yo momma");
-        for (int i = 0; i < playlists.size(); i++) {
-            popup.getMenu().add(0, i, i, playlists.get(i));
-        }
+    public void populatePlaylistMenu(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        /// Populate ArrayList playlists (of user)
+                        for (int i = 0; i<response.length();i++) {
+                            try {
+                                JSONObject o = response.getJSONObject(i);
+                                String name = o.getString("name_playlist");
+                                int id = o.getInt("id");
+                                playlistNames.add(name);
+                                playlistIDs.add(id);
+                            }
+                            catch (JSONException e) {
+                                Log.e("Erroreeee", e.getLocalizedMessage());
+                            }
+                        }
+
+                        ///  Add to dropdown menu
+                        for (int i = 0; i < playlistNames.size(); i++) {
+                            popup.getMenu().add(0, i, i, playlistNames.get(i));
+                        }
+                        heart.setEnabled(true);
+                        popup.setOnMenuItemClickListener(item -> {
+                            String selectedPlaylist = item.getTitle().toString();
+                            int index = 0;
+                            for (int i = 0; i<playlistNames.size(); i++) {
+                                if (playlistNames.get(i).equals(selectedPlaylist)) {
+                                    index = i;
+                                }
+                            }
+                            playlistClickedName = selectedPlaylist;
+                            playlistClickedID = playlistIDs.get(index); //Because id of playlist will be found at the same index on the IDs list as the name on the names list.
+                            addThreadToPlaylist("https://studev.groept.be/api/a24pt215/AddThreadToPlaylist"); // POST REQUEST, DO NOT PUT PARAMS HERE BUT RATHER IN MAP OF JSONREQUEST
+                            return true;
+                        });
+                        popup.show();
+
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
+    }
+
+    public void addThreadToPlaylist(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        StringRequest submitRequest = new StringRequest (Request.Method.POST, requestURL,
+                new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(ThreadActivity.this, "Thread added to " + playlistClickedName, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ThreadActivity.this, "Failed to add thread to " + playlistClickedName, Toast.LENGTH_LONG).show();
+            }
+        }) { //NOTE THIS PART: here we are passing the parameters to the webservice, NOT in the URL!
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idplaylist", String.valueOf(playlistClickedID));
+                params.put("idthread", String.valueOf(threadID)); ///THE NAME KEYS HAVE TO BE THE SAME AS THE ":val" IN THE API, NOT AS THE COLUMNS OF THE TABLE
+                return params;
+            }
+        };
+        requestQueue.add(submitRequest);
     }
 }
