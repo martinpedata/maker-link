@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="4dp"
+        android:layout_marginTop="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,9 +26,9 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/darkCream"
-                app:cardElevation="15dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brown">
+                app:cardElevation="12dp"
+                android:clickable="true"
+                android:focusable="true">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -35,8 +36,8 @@
 
                     <ImageView
                         android:id="@+id/pointsPic"
-                        android:layout_width="19dp"
-                        android:layout_height="18dp"
+                        android:layout_width="30dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:src="@drawable/points_logo"
                         app:tint="@color/brown" />
@@ -50,7 +51,7 @@
                         android:layout_centerVertical="true"
                         android:text="Ranking"
                         android:textColor="@color/brown"
-                        android:textSize="10sp"
+                        android:textSize="13sp"
                         android:layout_centerInParent="true" />
                 </RelativeLayout>
 
@@ -61,9 +62,9 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/darkCream"
-                app:cardElevation="15dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brown">
+                app:cardElevation="12dp"
+                android:clickable="true"
+                android:focusable="true">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -86,7 +87,8 @@
                         android:layout_centerVertical="true"
                         android:text="Orders"
                         android:textColor="@color/brown"
-                        android:textSize="10sp"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="7dp"
                         android:layout_centerInParent="true" />
                 </RelativeLayout>
 
@@ -98,9 +100,7 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/darkCream"
-                app:cardElevation="15dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brown"
+                app:cardElevation="12dp"
                 android:clickable="true"
                 android:focusable="true">
                 <RelativeLayout
@@ -123,8 +123,9 @@
                         android:layout_toRightOf="@+id/favoritesPic"
                         android:layout_centerVertical="true"
                         android:text="Playlists"
+                        android:layout_marginLeft="7dp"
                         android:textColor="@color/brown"
-                        android:textSize="10sp"
+                        android:textSize="13sp"
                         android:layout_centerInParent="true" />
                 </RelativeLayout>
 
@@ -168,9 +169,9 @@
                         android:layout_marginStart="44dp"
                         android:layout_marginTop="72dp"
                         android:text="Maker Link"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textColor="@color/cream"
                         android:textSize="32sp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -224,13 +225,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginRight="0dp"
-                    android:layout_marginLeft="17dp">
+                    android:layout_marginLeft="0dp">
                     <androidx.cardview.widget.CardView
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -247,20 +249,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/mechanics_pic"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
                     </androidx.cardview.widget.CardView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mechanics"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="5dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginLeft="8dp">
                     <androidx.cardview.widget.CardView
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -284,13 +286,13 @@
                         android:layout_height="wrap_content"
                         android:text="Electronics"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="5dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft = "10dp">
+                    android:layout_marginLeft = "8dp">
                     <androidx.cardview.widget.CardView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
@@ -318,7 +320,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft = "10dp">
+                    android:layout_marginLeft = "5dp">
                     <androidx.cardview.widget.CardView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
@@ -378,13 +380,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginRight="0dp"
-                    android:layout_marginLeft="17dp">
+                    android:layout_marginLeft="0dp">
                     <androidx.cardview.widget.CardView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
@@ -462,34 +465,6 @@
                         android:text="App Devel."
                         android:textColor="@color/lightBrown"
                         android:layout_marginHorizontal="10dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft = "10dp">
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_margin="8dp"
-                        app:cardElevation="15dp"
-                        app:cardCornerRadius="15dp"
-                        android:layout_weight="1"
-                        app:strokeWidth="2dp"
-                        app:strokeColor="@color/darkCream">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/music_community"
-                            android:scaleType="centerCrop"/>
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:text="Music"
-                        android:textColor="@color/lightBrown" />
                 </LinearLayout>
             </LinearLayout>
 
