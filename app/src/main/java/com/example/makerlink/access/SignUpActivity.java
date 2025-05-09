@@ -218,11 +218,18 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         System.out.println("inside onResponse of signUpUser");
                         editor.putString("Name", nameInput).apply();
-
-                        /// GO to navigation template
-                        Intent i = new Intent(SignUpActivity.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
+                        editor.putString("Address_name", addressInput).apply();
+                        editor.putString("Users_username", usernameInput).apply();
+                        if(lenderInput.toLowerCase().trim().equals("y")){
+                            Intent i = new Intent(SignUpActivity.this, Lender.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else{
+                            Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
                     }
                 },
 

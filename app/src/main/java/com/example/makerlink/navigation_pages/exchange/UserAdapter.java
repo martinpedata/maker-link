@@ -57,6 +57,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), InfoPage.class);
+                intent.putExtra("name_of_user", user.getName());
+                intent.putExtra("address_of_user", user.getAddress());
+                intent.putExtra("rent_of_user", user.getRent());
+                intent.putExtra("tool_of_user", user.getTool());
                 v.getContext().startActivity(intent);
             }
         });
