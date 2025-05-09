@@ -110,7 +110,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload Video"
+            android:text="Upload Document"
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -119,7 +119,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardVideoPicker"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="6dp"
@@ -130,7 +130,6 @@
                 android:id="@+id/videoPreview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/photo"
                 app:tint="@color/lightBrown" />
