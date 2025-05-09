@@ -1,5 +1,6 @@
 package com.example.makerlink.threads;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -23,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+import com.example.makerlink.navigation_pages.chats.ChatActivity;
+import com.example.makerlink.navigation_pages.chats.Community_Adapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +40,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
     ArrayList<Integer> threads_in_pLaylist = new ArrayList<>();
     private RequestQueue requestQueue;
     private RecyclerView recyclerView;
+    private int playlist_id;
     private TextView headingActivity;
+    private ThreadRecyclerViewAdapter threadAdapter;
     private String heading;
 
     @Override
@@ -51,16 +57,28 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
         });
         recyclerView = findViewById(R.id.my_recycler);
         headingActivity = findViewById(R.id.headingRecycler);
+        playlist_id = getIntent().getIntExtra("playlistID", -1);
+
+        threadAdapter = new ThreadRecyclerViewAdapter(this, threadItems);
+        recyclerView.setAdapter(threadAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+    }
+
+    /// NEEDED BECAUSE WHEN CLICKING A THREAD, THIS CLASS IS NOT DESTROYED BUT PAUSED
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         SharedPreferences sharedPref = getSharedPreferences("storeFilteredSearch", MODE_PRIVATE);
         int isFiltered = sharedPref.getInt("isFiltered", -1);
 
-        System.out.println("isFiltered: " + isFiltered);
+        System.out.println("isFiltered in onCreate: " + isFiltered);
         int counter = 0; //Checking if we're in a playlist or in a filtered search
         switch (isFiltered) {
             case 5:
                 heading = getIntent().getStringExtra("playlistName");
-                int playlist_id = getIntent().getIntExtra("playlistID", -1);
+                playlist_id = getIntent().getIntExtra("playlistID", -1);
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveContentPlaylists/"+playlist_id); //INSERT PLAYLIST ID
                 counter = 1;
                 break;
@@ -79,14 +97,15 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
             case 0:
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveAllThreads"); //ALL THREADS
                 break;
-        }
+            }
         if (counter == 0) {
             heading = sharedPref.getString("nameDomain", null);
-        }
+            }
     }
 
     public void setUpThread(String requestURL) {
         System.out.println("inside setUpThread");
+        threadItems.clear();  // <-- THIS IS ESSENTIAL!
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
@@ -122,11 +141,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                             catch (JSONException e) {
                                 System.out.println("json array empty");
                             }
-
                         }
-                        ThreadRecyclerViewAdapter threadAdapter = new ThreadRecyclerViewAdapter(ThreadRecyclerActivity.this, threadItems);
-                        recyclerView.setAdapter(threadAdapter);
-                        recyclerView.setLayoutManager(new GridLayoutManager(ThreadRecyclerActivity.this,2));
+                        recyclerView.scrollToPosition(0);
+                        threadAdapter.notifyDataSetChanged(); // Update the RecyclerView
                         headingActivity.setText(heading);
                     }
                 },

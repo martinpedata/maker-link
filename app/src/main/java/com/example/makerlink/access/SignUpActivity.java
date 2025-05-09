@@ -32,7 +32,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 
-///  DONT FORGET TO DO LOCATION ID
 
 public class SignUpActivity extends AppCompatActivity {
     private TextView signUpText;

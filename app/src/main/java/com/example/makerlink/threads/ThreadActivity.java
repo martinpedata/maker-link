@@ -89,29 +89,26 @@ public class ThreadActivity extends AppCompatActivity {
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("isFavorite: " + isFavorite);
+                playlistNames.clear(); // So that the dropdown menu does not stack up values
+                playlistIDs.clear();
+
+                popup = new PopupMenu(ThreadActivity.this, heart); // anchor to the heart icon, initialize outside of conditional block to make it work.
+
                 if (!isFavorite) {
                     heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
                     isFavorite = true;
 
-                    playlistNames.clear(); // So that the dropdown menu does not stack up values
-                    playlistIDs.clear();
-
-                    //show pop up menu
-                    popup = new PopupMenu(ThreadActivity.this, heart); // anchor to the heart icon
-
                     // Prevent fast double-clicks
                     heart.setEnabled(false);
                     System.out.println("author_ID = " + authorID);
-
                     // Database connection
-                    populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
+
                 }
                 else {
                     isFavorite = false;
                     heart.setColorFilter(Color.parseColor("#808080"));
-                    removeFromPlaylist("https://studev.groept.be/api/a24pt215/RemoveThreadFromPlaylist");
                 }
+                populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
             }
         });
 
@@ -137,15 +134,7 @@ public class ThreadActivity extends AppCompatActivity {
         /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite and thus the color of the heart.
 
 
-        System.out.println("threadID = " + threadID); //TODO: CHECK WHETHER THE THREAD ID IS GOOD. AND ENSURE YOU CAN REMOVE THREAD FROM PLAYLIST
         isInPlaylist("https://studev.groept.be/api/a24pt215/IsThreadInPlaylist/" + threadID);
-
-        if (isFavorite) {
-            heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
-        }
-        else {
-            heart.setColorFilter(Color.parseColor("#808080"));
-        }
     }
 
     public void retrieveTextFromUrl (String requestURL, String key, Consumer<String> callback) {
@@ -176,19 +165,23 @@ public class ThreadActivity extends AppCompatActivity {
 
     public void isInPlaylist(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
-        System.out.println("inside InPlaylist");
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("inside onResponse");
                         try {
                             JSONObject o = response.getJSONObject(0);
-                            System.out.println("getJSONObject successful");
                             isFavorite = true;
                         } catch (JSONException e)  /// EXCEPTION RETURNED WHEN EMPTY JSON ARRAY.
                         {
                             isFavorite = false;
+                        }
+
+                        if (isFavorite) {
+                            heart.setColorFilter(Color.parseColor("#E53935")); // Mark as favorite
+                        }
+                        else {
+                            heart.setColorFilter(Color.parseColor("#808080"));
                         }
                     }
                 },
@@ -222,11 +215,15 @@ public class ThreadActivity extends AppCompatActivity {
                             }
                         }
 
+                        System.out.println("size listNames: " + playlistIDs.size());
+
                         ///  Add to dropdown menu
                         for (int i = 0; i < playlistNames.size(); i++) {
                             popup.getMenu().add(0, i, i, playlistNames.get(i));
                         }
+
                         heart.setEnabled(true);
+
                         popup.setOnMenuItemClickListener(item -> {
                             String selectedPlaylist = item.getTitle().toString();
                             int index = 0;
@@ -237,7 +234,14 @@ public class ThreadActivity extends AppCompatActivity {
                             }
                             playlistClickedName = selectedPlaylist;
                             playlistClickedID = playlistIDs.get(index); //Because id of playlist will be found at the same index on the IDs list as the name on the names list.
-                            addThreadToPlaylist("https://studev.groept.be/api/a24pt215/AddThreadToPlaylist"); // POST REQUEST, DO NOT PUT PARAMS HERE BUT RATHER IN MAP OF JSONREQUEST
+
+                            /// if isFavorite is true and not false because we updated the isFavorite right before this call was executed.
+                            if (isFavorite) {
+                                addThreadToPlaylist("https://studev.groept.be/api/a24pt215/AddThreadToPlaylist"); // POST REQUEST, DO NOT PUT PARAMS HERE BUT RATHER IN MAP OF JSONREQUEST
+                            }
+                            else {
+                                removeFromPlaylist("https://studev.groept.be/api/a24pt215/RemoveThreadFromPlaylist");
+                            }
                             return true;
                         });
                         popup.show();
