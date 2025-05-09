@@ -86,6 +86,31 @@ public class ThreadActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userID = sharedPref.getInt("user_ID", -1); // The person currently using the app
 
+        ///  Iterate database Twice with a callback method (Consumer<>)to ensure program waits for response before advancing.
+        ///Lambda expression on " name -> " below.
+
+        retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveDomainNameFromID/" + domainID, "name", name -> {
+            domainName = name;
+
+            //Program waits for domainName to be updated, thanks to callback method, before advancing to the next database query
+
+            retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveUserNameFromID/" + authorID, "username", username -> {
+                userName = username;
+
+                //Once both names are retrieved, update UI.
+                nameText.setText(threadName);
+                authorText.setText(userName);
+                dateText.setText(date);
+                domainText.setText(domainName);
+            });
+        });
+
+        /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite and thus the color of the heart.
+
+
+        isInPlaylist("https://studev.groept.be/api/a24pt215/IsThreadInPlaylist/" + threadID);
+
+
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,29 +137,6 @@ public class ThreadActivity extends AppCompatActivity {
             }
         });
 
-        ///  Iterate database Twice with a callback method (Consumer<>)to ensure program waits for response before advancing.
-        ///Lambda expression on " name -> " below.
-
-        retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveDomainNameFromID/" + domainID, "name", name -> {
-            domainName = name;
-
-            //Program waits for domainName to be updated, thanks to callback method, before advancing to the next database query
-
-            retrieveTextFromUrl("https://studev.groept.be/api/a24pt215/RetrieveUserNameFromID/" + authorID, "username", username -> {
-                userName = username;
-
-                //Once both names are retrieved, update UI.
-                nameText.setText(threadName);
-                authorText.setText(userName);
-                dateText.setText(date);
-                domainText.setText(domainName);
-            });
-        });
-
-        /// Retrieve state of the post: is it already in a playlist or not? Merely used to Update isFavorite and thus the color of the heart.
-
-
-        isInPlaylist("https://studev.groept.be/api/a24pt215/IsThreadInPlaylist/" + threadID);
     }
 
     public void retrieveTextFromUrl (String requestURL, String key, Consumer<String> callback) {

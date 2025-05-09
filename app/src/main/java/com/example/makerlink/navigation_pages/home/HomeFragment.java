@@ -69,10 +69,8 @@ public class HomeFragment extends Fragment {
         discoveryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("clicked image");
-
                 editor.putInt("isFiltered", 0).apply();
-                editor.putString("nameDomain", "See What’s General");
+                editor.putString("nameDomain", "See What’s General").apply();
                 ProgressDialog progressDialog = new ProgressDialog(getActivity()); // or requireActivity()
                 progressDialog.setMessage("Opening page, please wait...");
                 progressDialog.setCancelable(false);

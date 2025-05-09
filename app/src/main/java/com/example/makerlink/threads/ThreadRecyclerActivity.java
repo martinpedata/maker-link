@@ -101,6 +101,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
         if (counter == 0) {
             heading = sharedPref.getString("nameDomain", null);
             }
+
     }
 
     public void setUpThread(String requestURL) {
@@ -142,9 +143,9 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                                 System.out.println("json array empty");
                             }
                         }
+                        headingActivity.setText(heading);
                         recyclerView.scrollToPosition(0);
                         threadAdapter.notifyDataSetChanged(); // Update the RecyclerView
-                        headingActivity.setText(heading);
                     }
                 },
 
