@@ -34,16 +34,22 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp" />
-
-        <EditText
-            android:id="@+id/editTextDomain"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g. Electronics, Woodwork..."
             android:layout_marginTop="8dp"
-            android:padding="12dp"
-            android:background="@drawable/custom_background_login"
-            android:textColorHint="#BFA088" />
+            app:cardElevation="6dp"
+            app:cardCornerRadius="15dp">
+            <EditText
+                android:id="@+id/editTextDomain"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g. Electronics, Woodwork..."
+                android:padding="12dp"
+                android:textColorHint="#BFA088" />
+        </androidx.cardview.widget.CardView>
+
 
         <!-- Thread Name Input -->
         <TextView
@@ -54,16 +60,21 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp" />
-
-        <EditText
-            android:id="@+id/editTextThreadName"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Give your thread a name"
             android:layout_marginTop="8dp"
-            android:background="@drawable/custom_background_login"
-            android:padding="12dp"
-            android:textColorHint="#BFA088" />
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp">
+            <EditText
+                android:id="@+id/editTextThreadName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Give your thread a name"
+                android:layout_marginHorizontal="10dp"
+                android:padding="12dp"
+                android:textColorHint="#BFA088" />
+        </androidx.cardview.widget.CardView>
 
         <!-- Image Upload Placeholder -->
         <TextView
@@ -92,7 +103,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/photo"
-                app:tint="@color/gray" />
+                app:tint="@color/lightBrown" />
         </androidx.cardview.widget.CardView>
 
         <!-- Video Upload Placeholder -->
@@ -122,7 +133,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/photo"
-                app:tint="@color/gray" />
+                app:tint="@color/lightBrown" />
         </androidx.cardview.widget.CardView>
 
         <!-- Submit Button -->
