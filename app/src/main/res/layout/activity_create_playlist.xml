@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".playlists.CreatePlaylistActivity"
+android:orientation="vertical"
+android:padding="20dp"
+android:gravity="center_horizontal"
+android:background="@color/better_blue">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Your Playlist"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/cream"
+        android:textSize="36sp"
+        android:fontFamily="@font/montserrat_bold"/>
+    <!-- Thread Domain Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Give it a name"
+        android:textColor="@color/darkCream"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="15dp">
+        <EditText
+            android:id="@+id/editTextPlaylist"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. House Craft"
+            android:padding="12dp"
+            android:textColorHint="@color/teal_500" />
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Thread Name Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your privacy"
+        android:textColor="@color/darkCream"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/privacyBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="6dp"
+        android:layout_marginHorizontal="20dp"
+        android:onClick="privacyButtonClicked">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/privacyArrow"
+                android:layout_width="37dp"
+                android:layout_height="38dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/arrow_temu_right"
+                app:tint="@color/teal_500" />
+            <EditText
+                android:id="@+id/privacyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Give your thread a name"
+                android:layout_marginHorizontal="10dp"
+                android:padding="12dp"
+                android:textColorHint="#BFA088"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ready?"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/cream"
+        android:textSize="25dp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CREATE"
+        android:textColor="@color/teal_500"
+        android:height="70dp"
+        android:textSize="20dp"
+        android:onClick="createPlaylist"
+        android:fontFamily="@font/montserrat_medium_italic"
+        android:layout_marginHorizontal="50dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/cream"/>
+</LinearLayout>

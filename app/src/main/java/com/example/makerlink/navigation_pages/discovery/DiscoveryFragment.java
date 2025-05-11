@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: DO SOME IMPLEMENTATION SUCH AS FILTERS. INTEGRATE WITH DATABASE.
 public class DiscoveryFragment extends Fragment {
 
     private FragmentDiscoveryBinding binding;
