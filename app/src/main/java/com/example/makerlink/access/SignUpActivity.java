@@ -210,13 +210,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
     public void signUpUser(String requestURL) {
-        System.out.println("Inside signUpUser");
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("inside onResponse of signUpUser");
                         editor.putString("Name", nameInput).apply();
                         editor.putString("Address_name", addressInput).apply();
                         editor.putString("Users_username", usernameInput).apply();

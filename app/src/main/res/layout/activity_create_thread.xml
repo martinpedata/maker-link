@@ -45,7 +45,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="e.g. Electronics, Woodwork..."
+                android:hint="e.g. Electronics, Carpentry..."
                 android:padding="12dp"
                 android:textColorHint="#BFA088" />
         </androidx.cardview.widget.CardView>
@@ -80,37 +80,57 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload Image"
+            android:text="Upload Thumbnail"
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="30dp" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardImagePicker"
+            android:id="@+id/threadThumbnail"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="6dp"
             android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/imagePreview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/photo"
-                app:tint="@color/lightBrown" />
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="onBtnPickClicked"
+            android:background="@drawable/mechanics_pic">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/thumbnailImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:id="@+id/placeholderThumbnail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/photo"
+                    android:layout_centerInParent="true"
+                    app:tint="@color/lightBrown" />
+                <TextView
+                    android:id="@+id/clickMeThumbnail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imagePreview"
+                    android:text="Click Me"
+                    android:fontFamily="@font/montserrat_medium_italic"
+                    android:textColor="#BFA088"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Video Upload Placeholder -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload Document"
+            android:text="Paste Document URL"
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -126,21 +146,43 @@
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground">
 
-            <ImageView
-                android:id="@+id/videoPreview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/photo"
-                app:tint="@color/lightBrown" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/weblinkImage"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/embed_icon"
+                    app:tint="@color/lightBrown" />
+
+                <EditText
+                    android:id="@+id/weblinkText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/weblinkImage"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:hint="https://example.com/..."
+                    android:textColorHint="#BFA088"/>
+
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
 
         <!-- Submit Button -->
         <Button
             android:id="@+id/submitThreadButton"
+            android:onClick="createThread"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Thread"
+            android:text="Post Thread"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/lightBrown"
             android:textColor="@android:color/white"
