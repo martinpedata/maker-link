@@ -133,11 +133,12 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                                 int authorID = o.getInt("author_id");
                                 int domainID = o.getInt("domain_id");
                                 String creationDate = o.getString("creationdate").substring(0,10);
+                                String threadDocument = o.getString("document");
                                 String b64Image = o.getString("image_resource");
 
                                 Bitmap bitmapImage = base64ToBitMap(b64Image); //The b64 is converted to Bitmap in the helper method below
 
-                                threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID));
+                                threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID, threadDocument));
                             }
                             catch (JSONException e) {
                                 System.out.println("json array empty");

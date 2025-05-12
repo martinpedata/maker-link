@@ -59,6 +59,8 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             intent.putExtra("threadAuthor", threads.get(position).getAuthorID()); //These are not in the myViewHolder, because they are attributes of the Model class, without being defined in a view.
             intent.putExtra("threadDomain", threads.get(position).getDomainID());
             intent.putExtra("threadDate", threads.get(position).getDateThread());
+            intent.putExtra("threadDocument", threads.get(position).getThreadDocument());
+            intent.putExtra("threadThumbnail", threads.get(position).getBitmapImage());
             context.startActivity(intent);
         });
     }

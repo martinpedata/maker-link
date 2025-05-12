@@ -34,7 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//TODO: FIX UI FOR CHOOSING PRIVACY
 public class CreatePlaylistActivity extends AppCompatActivity {
     private TextView privacyInput;
     private int privacy = -1;  ///NOTE: 1 means it is private, 0 that it's public.

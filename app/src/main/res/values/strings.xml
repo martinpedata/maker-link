@@ -5,7 +5,6 @@
     <string name="title_exchange">Exchange</string>
     <string name="title_chats">Chats</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

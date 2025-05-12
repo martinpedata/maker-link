@@ -77,17 +77,6 @@ public class DiscoveryFragment extends Fragment {
         listView.setAdapter(adapter);
         listView.setVisibility(View.GONE);
 
-
-        /// CREATE-THREAD LOGIC
-
-        createThreadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), CreateThreadActivity.class);
-                startActivity(i);
-            }
-        });
-
         /// SEARCH VIEW LOGIC
 
 //        To make sure the entire search bar is touchable and not just icon. Also to make the keyboard appear upon touch
@@ -137,6 +126,11 @@ public class DiscoveryFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void createThreadButtonClicked(View v) {
+        Intent i = new Intent(getActivity(), CreateThreadActivity.class);
+        startActivity(i);
     }
 
 

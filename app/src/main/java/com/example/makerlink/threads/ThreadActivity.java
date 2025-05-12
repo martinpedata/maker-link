@@ -1,10 +1,13 @@
 package com.example.makerlink.threads;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -57,6 +61,8 @@ public class ThreadActivity extends AppCompatActivity {
     private TextView nameText;
     private String threadName;
     private String date;
+    private WebView embeddedLink;
+    private String threadDocument;
     private boolean isFavorite = false;
 
     @Override
@@ -74,6 +80,7 @@ public class ThreadActivity extends AppCompatActivity {
         dateText = findViewById(R.id.date);
         authorText = findViewById(R.id.authorItem);
         heart = findViewById(R.id.addToPlaylist);
+        embeddedLink = findViewById(R.id.threadDocumentPlaceHolder);
 
         /// Retrieve info from RecyclerThreadAdapter class (from the extra info on intent)
         threadName = getIntent().getStringExtra("threadName");
@@ -81,6 +88,8 @@ public class ThreadActivity extends AppCompatActivity {
         authorID = getIntent().getIntExtra("threadAuthor", -1); //THe person who created the thread
         domainID = getIntent().getIntExtra("threadDomain", -1);
         date = getIntent().getStringExtra("threadDate");
+       // threadThumbnail = getIntent().getStringExtra("threadThumbnail");
+        threadDocument = getIntent().getStringExtra("threadDocument");
 
         /// Retrive playlist and user info from PlaylistRecyclerActivity class (from shared pref)
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
@@ -136,6 +145,12 @@ public class ThreadActivity extends AppCompatActivity {
                 populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
             }
         });
+
+        /// Display document in embedded placeholder
+
+        embeddedLink.getSettings().setJavaScriptEnabled(true);
+        embeddedLink.setWebViewClient(new WebViewClient());
+        embeddedLink.loadUrl(threadDocument);
 
     }
 
@@ -310,5 +325,11 @@ public class ThreadActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(submitRequest);
+    }
+
+    public void openThreadDoc(View v) {
+        Intent i = new Intent(ThreadActivity.this, ThreadDocumentActivity.class);
+        i.putExtra("threadDocument", threadDocument);
+        startActivity(i);
     }
 }
