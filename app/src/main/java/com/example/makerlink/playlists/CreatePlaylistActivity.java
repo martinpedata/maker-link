@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,11 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//TODO: CREATE A BUTTON FOR THE PLAYLIST CREATION AND TEST
+//TODO: FIX UI FOR CHOOSING PRIVACY
 public class CreatePlaylistActivity extends AppCompatActivity {
-    private EditText privacyInput;
+    private TextView privacyInput;
     private int privacy = -1;  ///NOTE: 1 means it is private, 0 that it's public.
-    private String playlistName;
+    private String playlistNameURL;
     private int userID;
     private ImageView arrow;
     private CardView privacyBox;
@@ -57,9 +58,6 @@ public class CreatePlaylistActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        EditText nameInput = findViewById(R.id.editTextPlaylist);
-        playlistName = nameInput.getText().toString();
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userID = sharedPref.getInt("user_ID", -1);
@@ -92,6 +90,8 @@ public class CreatePlaylistActivity extends AppCompatActivity {
                 else {
                     privacy = 0;
                 }
+                privacyInput.setText(selectedPlaylist);
+                privacyInput.setVisibility(View.VISIBLE);
                 return true;
             });
             popup.show();
@@ -103,7 +103,11 @@ public class CreatePlaylistActivity extends AppCompatActivity {
     }
 
     public void createPlaylist(View view) {
-        String requestURL = "https://studev.groept.be/api/a24pt215/InsertPlaylist/" + userID + "/" + privacy + "/" + playlistName;
+        EditText nameInput = findViewById(R.id.editTextPlaylist);
+        String playlistName = nameInput.getText().toString();
+        playlistNameURL = playlistName.replace(" ", "+");
+
+        String requestURL = "https://studev.groept.be/api/a24pt215/InsertPlaylist/" + userID + "/" + privacy + "/" + playlistNameURL;
 
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest retrieveRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
