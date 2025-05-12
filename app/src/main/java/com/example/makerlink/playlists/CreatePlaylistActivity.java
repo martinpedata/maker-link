@@ -43,7 +43,6 @@ public class CreatePlaylistActivity extends AppCompatActivity {
     private ImageView arrow;
     private CardView privacyBox;
     private PopupMenu popup;
-    private boolean setClicked = false;
     private String[] privacySetting = new String[2];
     private SharedPreferences sharedPref;
     private RequestQueue requestQueue;
@@ -73,33 +72,26 @@ public class CreatePlaylistActivity extends AppCompatActivity {
     public void privacyButtonClicked(View caller) {
 
         popup = new PopupMenu(CreatePlaylistActivity.this, privacyBox);
-        if (!setClicked) {
+        arrow.setImageResource(R.drawable.arrow_temu_down);
 
-            setClicked = true;
-            arrow.setImageResource(R.drawable.arrow_temu_down);
+        popup.getMenu().add(0, 0, 0, privacySetting[0]);
+        popup.getMenu().add(0, 1, 1, privacySetting[1]);
 
-            popup.getMenu().add(0, 0, 0, privacySetting[0]);
-            popup.getMenu().add(0, 1, 1, privacySetting[1]);
+        popup.setOnMenuItemClickListener(item -> {
+            String selectedPlaylist = item.getTitle().toString();
 
-            popup.setOnMenuItemClickListener(item -> {
-                String selectedPlaylist = item.getTitle().toString();
-
-                if (selectedPlaylist.equals(privacySetting[0])) {
-                    privacy = 1;
-                }
-                else {
-                    privacy = 0;
-                }
-                privacyInput.setText(selectedPlaylist);
-                privacyInput.setVisibility(View.VISIBLE);
-                return true;
-            });
-            popup.show();
-        }
-        else {
-            setClicked = false;
+            if (selectedPlaylist.equals(privacySetting[0])) {
+                privacy = 1;
+            }
+            else {
+                privacy = 0;
+            }
             arrow.setImageResource(R.drawable.arrow_temu_right);
-        }
+            privacyInput.setText(selectedPlaylist);
+            privacyInput.setVisibility(View.VISIBLE);
+            return true;
+        });
+        popup.show();
     }
 
     public void createPlaylist(View view) {
