@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton"
+        app:layout_constraintBottom_toTopOf="@+id/orderButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -28,6 +28,7 @@
 
             <!-- Bubble TextViews -->
             <TextView
+                android:id="@+id/nameLender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
@@ -36,57 +37,46 @@
                 android:padding="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/addressLender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/rentlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rent"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone number"
-                android:background="@drawable/bubble_background"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="E-mail"
-                android:background="@drawable/bubble_background"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
-
-            <TextView
+                android:id="@+id/descriptionlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/orderButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Order"

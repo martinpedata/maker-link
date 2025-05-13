@@ -61,7 +61,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:backgroundTint="@color/brown"
-            android:text="Select"
+            android:text="Order"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/montserrat_semibold"/>
 

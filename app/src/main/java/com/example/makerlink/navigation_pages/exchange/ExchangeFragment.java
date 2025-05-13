@@ -69,6 +69,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private RecyclerView recyclerView;
     private UserAdapter adapter;
     private List<User> userList;
+
+    private List<User> fulluserList;
     private List<User> newUser;
 
     private SearchView searchView;
@@ -307,9 +309,10 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                                 String address = communityObject.getString("address");
                                 String tool = communityObject.getString("tooltype");
                                 int rent = communityObject.getInt("rent");
+                                String description = communityObject.getString("description");
 
                                 // Add the community to the chatList
-                                userList.add(new User(name, address,rent,tool));
+                                userList.add(new User(name, address,rent,tool, description));
                                 items.add(tool);
                             }
                             HashSet<String> hset = new HashSet<String>(items);

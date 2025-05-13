@@ -61,6 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 intent.putExtra("address_of_user", user.getAddress());
                 intent.putExtra("rent_of_user", user.getRent());
                 intent.putExtra("tool_of_user", user.getTool());
+                intent.putExtra("description_of_tool", user.getDescription());
                 v.getContext().startActivity(intent);
             }
         });

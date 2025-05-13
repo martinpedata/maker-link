@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,10 +91,21 @@ public class SignUpActivity extends AppCompatActivity {
         credentials[4] = lenderInput;
         credentials[5] = passwordInput;
 
-        checkForValidity("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+                    String token = task.getResult();
+                    Log.d("FCM", "FCM Token: " + token);
+
+                    // Now that we have the token, check the validity of the username
+                    checkForValidity("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput, token);
+                });
     }
 
-    public void checkForValidity(String requestURL) {
+    public void checkForValidity(String requestURL, String token) {
         System.out.println("inside validity");
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -101,28 +113,20 @@ public class SignUpActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("inside onResponse of validity check");
                         try {
-                            /// IF doesn't fail, then there is already a user with the same username.
                             JSONObject o = response.getJSONObject(0);
                             un.setText("");
                             un.setHint("Username taken");
                             un.setTextColor(Color.RED);
-
                             un.setHintTextColor(Color.RED);
-
-                            // Remove focus to show hints
                             name.setError("");
                             age.setError("");
                             addr.setError("");
                             ld.setError("");
                             pw.setError("");
                             un.setError("");
-                        }
-                        catch (JSONException e) {
-                            ///  Check if valid info.
-
-                            for (String x: credentials) {
+                        } catch (JSONException e) {
+                            for (String x : credentials) {
                                 if (x.isEmpty()) {
                                     result = 1;
                                     break;
@@ -137,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if (!credentials[4].equals("Y") && !credentials[4].equals("N")) {
                                 result = 4;
                             }
-                            System.out.println("about to enter switch");
+
                             switch (result) {
                                 case 1:
                                     name.setText("");
@@ -145,100 +149,82 @@ public class SignUpActivity extends AppCompatActivity {
                                     addr.setText("");
                                     ld.setText("");
                                     pw.setText("");
-
                                     name.setHint("Fill in all fields !");
                                     name.setTextColor(Color.RED);
-
-                                    name.setError("");
-                                    age.setError("");
-                                    addr.setError("");
-                                    ld.setError("");
-                                    pw.setError("");
                                     break;
                                 case 2:
                                     age.setText("");
                                     age.setText("Fill in correct format: DD-MM-YY !");
                                     age.setTextColor(Color.RED);
-                                    age.setError("");
                                     break;
                                 case 3:
                                     name.setText("");
                                     name.setHint("Only first name!");
                                     name.setTextColor(Color.RED);
-                                    name.setError("");
                                     break;
                                 case 4:
                                     ld.setText("");
-                                    ld.setHint("Type 'Y' or 'N' ! ");
+                                    ld.setHint("Type 'Y' or 'N' !");
                                     ld.setTextColor(Color.RED);
-                                    ld.setError("");
                                     break;
                                 case 0:
-                                    /// LocationID still not defined. The URLEncoder is necessary because of certain formatting required for restFul calls to occur.
-                                    System.out.println("inside case 0");
                                     String url = null;
                                     try {
-                                        url = String.format("https://studev.groept.be/api/a24pt215/InsertNewUser/%s/%s/%s/%d/%s/%s/%d/%s",
+                                        url = String.format("https://studev.groept.be/api/a24pt215/InsertNewUser/%s/%s/%s/%d/%s/%s/%s/%s",
                                                 URLEncoder.encode(usernameInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(nameInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(ageInput, StandardCharsets.UTF_8.toString()),
                                                 0,
                                                 URLEncoder.encode(addressInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(lenderInput, StandardCharsets.UTF_8.toString()),
-                                                404,
-                                                URLEncoder.encode(passwordInput, StandardCharsets.UTF_8.toString()));
+                                                URLEncoder.encode(passwordInput, StandardCharsets.UTF_8.toString()),
+                                                URLEncoder.encode(token, StandardCharsets.UTF_8.toString())  // Add token here
+                                        );
                                     } catch (UnsupportedEncodingException ex) {
                                         throw new RuntimeException(ex);
                                     }
-                                    System.out.println("SIGNUP URL: " + url);
                                     signUpUser(url);
                                     break;
                             }
                         }
                     }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(SignUpActivity.this, "Network error! Please try again.", Toast.LENGTH_SHORT).show();
                         Log.e("DatabaseError", error.toString());
                     }
-                }
-        );
+                });
         requestQueue.add(submitRequest);
-
     }
     public void signUpUser(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         editor.putString("Name", nameInput).apply();
                         editor.putString("Address_name", addressInput).apply();
                         editor.putString("Users_username", usernameInput).apply();
-                        if(lenderInput.toLowerCase().trim().equals("y")){
+                        if (lenderInput.toLowerCase().trim().equals("y")) {
                             Intent i = new Intent(SignUpActivity.this, Lender.class);
                             startActivity(i);
                             finish();
-                        }
-                        else{
+                        } else {
                             Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(i);
                             finish();
                         }
                     }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(SignUpActivity.this, "Network error! Please try again.", Toast.LENGTH_SHORT).show();
                         Log.e("ErrorWithLudo", error.getLocalizedMessage());
                     }
-                }
-        );
+                });
         requestQueue.add(submitRequest);
     }
 }

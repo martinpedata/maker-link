@@ -2,6 +2,8 @@ package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +11,20 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.CommunityViewHolder> implements Filterable {
     private List<Chat> chatList;
@@ -56,6 +64,7 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
         holder.textName.setText(chat.getName());
         holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);  // Or set an actual image
         holder.itemView.setOnClickListener(v -> {
+            ispresent(chat.getId());
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("chatName", chat.getName());
             intent.putExtra("chat_id", chat.getId());
@@ -117,4 +126,48 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
             notifyDataSetChanged();
         }
     };
+
+    public void ispresent(int chatId) {
+        // Assuming you have user_id stored in shared preferences or passed to the adapter
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("user_ID", -1); // Fetch user_id from shared preferences
+
+        // Check if user_id is valid
+        if (userId == -1) {
+            Log.e("Community_Adapter", "User ID is missing.");
+            return;
+        }
+
+        // Construct the URL for your backend API
+        String url = "https://studev.groept.be/api/a24pt215/PresentInChat";  // Replace with actual URL
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    Log.d("MessagePost", "Response: " + response);
+                    // Handle successful presence update
+                    Toast.makeText(context, "You are now marked as present in the chat!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                        String errorMsg = new String(error.networkResponse.data);
+                        Log.e("VolleyError", "Error: " + errorMsg);
+                        Toast.makeText(context, "Error: " + errorMsg, Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.e("VolleyError", "Unknown error occurred");
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userval", String.valueOf(userId));  // Send user_id
+                params.put("chatval", String.valueOf(chatId));  // Send chat_id
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(context).add(stringRequest);
+    }
 }

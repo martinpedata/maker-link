@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 import com.example.makerlink.databinding.FragmentChatsBinding;
@@ -38,7 +40,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatsFragment extends Fragment {
 
@@ -73,6 +77,7 @@ public class ChatsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setUpCommunity("https://studev.groept.be/api/a24pt215/GetCommunityName/" + UserID);
+        ispresent();
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -186,6 +191,48 @@ public class ChatsFragment extends Fragment {
 
         // Add the request to the request queue
         requestQueue.add(submitRequest);
+    }
+    public void ispresent() {
+        // Assuming you have user_id stored in shared preferences or passed to the adapter
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("user_ID", -1); // Fetch user_id from shared preferences
+
+        // Check if user_id is valid
+        if (userId == -1) {
+            Log.e("Community_Adapter", "User ID is missing.");
+            return;
+        }
+
+
+        String url = "https://studev.groept.be/api/a24pt215/setInitialUserPresence";  // Replace with actual URL
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    Log.d("MessagePost", "Response: " + response);
+                    // Handle successful presence update
+                    Toast.makeText(getContext(), "You are now marked as not present in any chat!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                        String errorMsg = new String(error.networkResponse.data);
+                        Log.e("VolleyError", "Error: " + errorMsg);
+                        Toast.makeText(getContext(), "Error: " + errorMsg, Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.e("VolleyError", "Unknown error occurred");
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userval", String.valueOf(userId));  // Send user_id
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(getContext()).add(stringRequest);
     }
     @Override
     public void onDestroyView() {

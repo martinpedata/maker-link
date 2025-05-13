@@ -7,8 +7,16 @@ public class User {
     private int rent;
 
     private String tool;
+    private String description;
 
     // Constructor + Getters
+    public User(String name, String address, int rent, String tool, String description) {
+        this.name = name;
+        this.address = address;
+        this.rent = rent;
+        this.tool = tool;
+        this.description = description;
+    }
     public User(String name, String address, int rent, String tool) {
         this.name = name;
         this.address = address;
@@ -20,5 +28,6 @@ public class User {
 
     public int getRent(){ return rent; }
 
-    public String getTool(){return tool;}
+    public String getTool(){ return tool; }
+    public String getDescription(){ return description; }
 }

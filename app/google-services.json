@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074286070734",
+    "project_id": "makerlink-39d19",
+    "storage_bucket": "makerlink-39d19.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074286070734:android:16e0a86b7bc53dcbbd799f",
+        "android_client_info": {
+          "package_name": "com.example.makerlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYxnCnU1mUMGYFuExqb7ncHpJYaT-d3NE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

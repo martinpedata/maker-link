@@ -31,6 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        //sharedPref.edit().clear().apply();
+        sharedPref.edit().clear().apply();
 
         String savedName = sharedPref.getString("Name", null);//this
 
@@ -154,7 +155,6 @@ public class LoginActivity extends AppCompatActivity {
                                 System.out.println("user id before playlist: " + user_ID);
                                 editor.putString("Name", nameOfUser).apply();
                                 editor.putInt("user_ID", user_ID).apply();
-
                                 /// Go to NavigationTemplate
 
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
