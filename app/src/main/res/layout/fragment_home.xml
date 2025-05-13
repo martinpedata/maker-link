@@ -52,7 +52,8 @@
                         android:text="Ranking"
                         android:textColor="@color/brown"
                         android:textSize="13sp"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -89,7 +90,8 @@
                         android:textColor="@color/brown"
                         android:textSize="13sp"
                         android:layout_marginLeft="7dp"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -126,7 +128,8 @@
                         android:layout_marginLeft="7dp"
                         android:textColor="@color/brown"
                         android:textSize="13sp"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -186,7 +189,8 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+                        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+                        android:fontFamily="@font/montserrat_medium"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,7 +216,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20dp"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/montserrat_medium"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -256,7 +261,8 @@
                         android:layout_height="wrap_content"
                         android:text="Mechanics"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="5dp"/>
+                        android:layout_marginHorizontal="5dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -286,7 +292,8 @@
                         android:layout_height="wrap_content"
                         android:text="Electronics"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="5dp"/>
+                        android:layout_marginHorizontal="5dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -314,7 +321,8 @@
                         android:layout_height="wrap_content"
                         android:text="Cooking"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="15dp"/>
+                        android:layout_marginHorizontal="15dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -343,7 +351,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:text="Carpentry"
-                        android:textColor="@color/lightBrown" />
+                        android:textColor="@color/lightBrown"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -367,7 +376,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20dp"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/montserrat_medium"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -408,7 +418,8 @@
                         android:layout_height="wrap_content"
                         android:text="Bike Repair"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="7dp"/>
+                        android:layout_marginHorizontal="7dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -435,7 +446,8 @@
                         android:layout_height="wrap_content"
                         android:text="Gardening"
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -464,7 +476,8 @@
                         android:layout_height="wrap_content"
                         android:text="App Devel."
                         android:textColor="@color/lightBrown"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/montserrat_medium"/>
                 </LinearLayout>
             </LinearLayout>
 

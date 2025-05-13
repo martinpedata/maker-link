@@ -19,7 +19,8 @@
         android:textColor="@color/brown"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_medium"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler"

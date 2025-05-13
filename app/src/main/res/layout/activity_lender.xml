@@ -38,7 +38,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/brown"
                     android:textSize="36sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"/>
 
                 <EditText
                     android:id="@+id/rent"
@@ -50,7 +51,8 @@
                     android:hint="Rent"
                     android:padding="8dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/teal_500" />
+                    android:textColorHighlight="@color/teal_500"
+                    android:fontFamily="@font/montserrat_medium"/>
 
                 <EditText
                     android:id="@+id/tool"
@@ -62,7 +64,8 @@
                     android:hint="Tooltype"
                     android:padding="8dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/teal_500" />
+                    android:textColorHighlight="@color/teal_500"
+                    android:fontFamily="@font/montserrat_medium"/>
 
                 <Button
                     android:id="@+id/homeButton"
@@ -72,7 +75,8 @@
                     android:backgroundTint="@color/brown"
                     android:text="To home"
                     android:textSize="18sp"
-                    app:cornerRadius="20dp" />
+                    app:cornerRadius="20dp"
+                    android:fontFamily="@font/montserrat_medium"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
