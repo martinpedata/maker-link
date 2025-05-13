@@ -18,7 +18,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:src="@drawable/baseline_arrow_back_24_new"
       android:contentDescription="Back"
-      android:padding="8dp" />
+      android:padding="8dp"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="352dp"
+            android:layout_height="380dp"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:padding="24dp">
@@ -49,7 +49,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/brown"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_medium"/>
 
             <EditText
                 android:id="@+id/communityname"
@@ -59,9 +60,10 @@
                 android:background="@drawable/custom_background_login"
                 android:drawablePadding="8dp"
                 android:hint="Community Name"
-                android:padding="8dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/teal_500" />
+                android:textColorHighlight="@color/teal_500"
+                android:fontFamily="@font/montserrat_medium"/>
 
             <EditText
                 android:id="@+id/domainname"
@@ -71,9 +73,10 @@
                 android:background="@drawable/custom_background_login"
                 android:drawablePadding="8dp"
                 android:hint="Domain"
-                android:padding="8dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/teal_500" />
+                android:textColorHighlight="@color/teal_500"
+                android:fontFamily="@font/montserrat_medium"/>
 
             <Button
                 android:id="@+id/creationButton"
@@ -83,7 +86,8 @@
                 android:backgroundTint="@color/brown"
                 android:text="Create"
                 android:textSize="18sp"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="20dp"
+                android:fontFamily="@font/montserrat_medium"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

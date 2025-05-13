@@ -24,7 +24,8 @@
             android:textAlignment="center"
             android:textColor="@color/brown"
             android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_medium"/>
         <!-- Thread Domain Input -->
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_medium"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:hint="e.g. Electronics, Carpentry..."
                 android:padding="12dp"
-                android:textColorHint="#BFA088" />
+                android:textColorHint="#BFA088"
+                android:fontFamily="@font/montserrat_medium"/>
         </androidx.cardview.widget.CardView>
 
 
@@ -59,7 +62,8 @@
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_medium"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +77,8 @@
                 android:hint="Give your thread a name"
                 android:layout_marginHorizontal="10dp"
                 android:padding="12dp"
-                android:textColorHint="#BFA088" />
+                android:textColorHint="#BFA088"
+                android:fontFamily="@font/montserrat_medium"/>
         </androidx.cardview.widget.CardView>
 
         <!-- Image Upload Placeholder -->
@@ -84,7 +89,8 @@
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_medium"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/threadThumbnail"
@@ -134,7 +140,8 @@
             android:textColor="@color/teal_500"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_medium"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardVideoPicker"
@@ -170,7 +177,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="0dp"
                     android:hint="https://example.com/..."
-                    android:textColorHint="#BFA088"/>
+                    android:textColorHint="#BFA088"
+                    android:fontFamily="@font/montserrat_medium"/>
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

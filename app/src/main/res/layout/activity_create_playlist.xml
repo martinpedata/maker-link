@@ -21,7 +21,7 @@ android:background="@color/better_blue">
         android:textAlignment="center"
         android:textColor="@color/cream"
         android:textSize="36sp"
-        android:fontFamily="@font/montserrat_bold"/>
+        android:fontFamily="@font/montserrat_bold" />
     <!-- Thread Domain Input -->
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +30,8 @@ android:background="@color/better_blue">
         android:textColor="@color/darkCream"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_medium"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +46,8 @@ android:background="@color/better_blue">
             android:layout_height="wrap_content"
             android:hint="e.g. House Craft"
             android:padding="12dp"
-            android:textColorHint="#039BE5" />
+            android:textColorHint="#039BE5"
+            android:fontFamily="@font/montserrat_medium"/>
     </androidx.cardview.widget.CardView>
 
 
@@ -57,7 +59,8 @@ android:background="@color/better_blue">
         android:textColor="@color/darkCream"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_medium"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/privacyBox"
@@ -90,7 +93,8 @@ android:background="@color/better_blue">
                 android:padding="12dp"
                 android:textSize="18sp"
                 android:textColorHint="#BFA088"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:fontFamily="@font/montserrat_medium"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

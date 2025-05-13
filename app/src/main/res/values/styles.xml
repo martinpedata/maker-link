@@ -10,4 +10,7 @@
         <item name="android:iconifiedByDefault">false</item>
         <item name="android:searchIcon">@drawable/icon_search</item>
     </style>
+    <style name="TextAppearance.MakerLink.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
 </resources>
