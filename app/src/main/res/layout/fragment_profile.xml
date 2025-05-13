@@ -15,6 +15,7 @@
         android:background="@color/better_blue">
 
         <ImageView
+
             android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="match_parent"
@@ -30,7 +31,8 @@
             android:text="username"
             android:includeFontPadding="false"
             android:layout_centerVertical="true"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:fontFamily="@font/montserrat_semibold"/>
 
         <TextView
             android:id="@+id/profile_text"
@@ -41,7 +43,8 @@
             android:layout_marginLeft="10dp"
             android:text="Profile Section"
             android:layout_below="@+id/username_profile"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_medium"/>
 
     </RelativeLayout>
     
@@ -58,7 +61,8 @@
             android:layout_weight="1"
             android:layout_margin="10dp"
             app:cardBackgroundColor="@color/better_blue"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:layout_gravity="center">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -77,17 +81,20 @@
                     android:text="0"
                     android:textColor="@color/cream"
                     android:textSize="20sp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_semibold"/>
                 <TextView
                     android:id="@+id/order_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Orders"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/cream"
                     android:layout_below="@+id/order_amount"
                     android:includeFontPadding="false"
                     android:textSize="14sp"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_medium"/>
 
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -98,7 +105,8 @@
             android:layout_weight="1"
             android:layout_margin="15dp"
             app:cardBackgroundColor="@color/better_blue"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            android:layout_gravity="center">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -118,17 +126,20 @@
                     android:text="0"
                     android:textColor="@color/cream"
                     android:textSize="20sp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_semibold"/>
                 <TextView
                     android:id="@+id/points_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Points"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/cream"
                     android:textSize="14sp"
                     android:includeFontPadding="false"
                     android:layout_below="@+id/points_scored"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_medium"/>
 
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -153,7 +164,8 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/profile"
                 android:drawablePadding="13dp"
-                android:text="User" />
+                android:text="User"
+                android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -169,7 +181,8 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/map"
                 android:drawablePadding="13dp"
-                android:text="Andrea Vesaliustraat" />
+                android:text="Andrea Vesaliustraat"
+                android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -185,7 +198,8 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/profile"
                 android:drawablePadding="13dp"
-                android:text="Yes" />
+                android:text="Yes"
+                android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
