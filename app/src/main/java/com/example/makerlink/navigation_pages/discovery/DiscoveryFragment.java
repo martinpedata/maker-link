@@ -121,17 +121,19 @@ public class DiscoveryFragment extends Fragment {
             }
         });
 
+        createThreadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), CreateThreadActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
-    public void createThreadButtonClicked(View v) {
-        Intent i = new Intent(getActivity(), CreateThreadActivity.class);
-        startActivity(i);
-    }
-
 
 }

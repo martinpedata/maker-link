@@ -2,8 +2,11 @@ package com.example.makerlink.threads;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -48,6 +51,7 @@ public class ThreadActivity extends AppCompatActivity {
     private PopupMenu popup;
     private int threadID;
     private int domainID;
+    private Bitmap bitmapImageThumbnail;
     private int authorID;
     private int userID;
     private int playlistClickedID;
@@ -88,7 +92,8 @@ public class ThreadActivity extends AppCompatActivity {
         authorID = getIntent().getIntExtra("threadAuthor", -1); //THe person who created the thread
         domainID = getIntent().getIntExtra("threadDomain", -1);
         date = getIntent().getStringExtra("threadDate");
-       // threadThumbnail = getIntent().getStringExtra("threadThumbnail");
+//        String threadThumbnailBase64 = getIntent().getStringExtra("threadThumbnail");
+//        bitmapImageThumbnail = base64ToBitMap(threadThumbnailBase64);
         threadDocument = getIntent().getStringExtra("threadDocument");
 
         /// Retrive playlist and user info from PlaylistRecyclerActivity class (from shared pref)
@@ -331,5 +336,11 @@ public class ThreadActivity extends AppCompatActivity {
         Intent i = new Intent(ThreadActivity.this, ThreadDocumentActivity.class);
         i.putExtra("threadDocument", threadDocument);
         startActivity(i);
+    }
+
+    public Bitmap base64ToBitMap(String b64String){
+        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
+        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
+        return bitmap;
     }
 }

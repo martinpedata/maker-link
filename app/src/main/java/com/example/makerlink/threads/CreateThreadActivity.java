@@ -74,9 +74,6 @@ public class CreateThreadActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        EditText nameInput = findViewById(R.id.editTextThreadName);
-        EditText domainInput = findViewById(R.id.editTextDomain);
-        EditText weblinkInput = findViewById(R.id.weblinkText);
         thumbnailImage = findViewById(R.id.thumbnailImage);
         placeholderThumbnail = findViewById(R.id.placeholderThumbnail);
         clickMe = findViewById(R.id.clickMeThumbnail);
@@ -85,9 +82,6 @@ public class CreateThreadActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
 
         authorID = sharedPref.getInt("user_ID", -1);
-        nameThread = nameInput.getText().toString();
-        domain = domainInput.getText().toString();
-        weblink = weblinkInput.getText().toString();
         domainID = -1;
 
     }
@@ -146,6 +140,14 @@ public class CreateThreadActivity extends AppCompatActivity {
         return resizedBitmap;
     }
     public void createThread(View v) {
+        /// Retrieve content of Edit Texts
+        EditText nameInput = findViewById(R.id.editTextThreadName);
+        EditText domainInput = findViewById(R.id.editTextDomain);
+        EditText weblinkInput = findViewById(R.id.weblinkText);
+
+        nameThread = nameInput.getText().toString();
+        domain = domainInput.getText().toString();
+        weblink = weblinkInput.getText().toString();
         /// Convert bitmap into base64.
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

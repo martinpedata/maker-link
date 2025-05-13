@@ -27,9 +27,9 @@
                     android:id="@+id/nameThread"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loading..."
+                    android:text="Martin Pedata"
                     android:textColor="@color/brown"
-                    android:textSize="35dp"
+                    android:textSize="25dp"
                     android:layout_marginHorizontal="20dp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_medium"/>

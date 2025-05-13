@@ -1,9 +1,12 @@
 package com.example.makerlink.threads;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 public class ThreadRecyclerModel {
-    private Bitmap imageThread;
+    private String imageThread;
+    private Bitmap imageThreadBitmap;
     private String threadDocument;
     private int id;
     private String shortenedName;
@@ -20,7 +23,7 @@ public class ThreadRecyclerModel {
         return domainID;
     }
 
-    public ThreadRecyclerModel(int id, String nameThreadLong, String nameThreadShort, Bitmap imageThread, String dateThread, int author_id, int domain_id, String threadDocument) {
+    public ThreadRecyclerModel(int id, String nameThreadLong, String nameThreadShort, String imageThread, String dateThread, int author_id, int domain_id, String threadDocument) {
         this.id = id;
         this.threadDocument = threadDocument;
         this.shortenedName = nameThreadShort;
@@ -29,6 +32,8 @@ public class ThreadRecyclerModel {
         this.dateThread = dateThread;
         this.authorID = author_id;
         this.domainID = domain_id;
+
+        imageThreadBitmap =  base64ToBitMap(imageThread); //The b64 is converted to Bitmap in the helper method below
     }
 
     public String getThreadDocument() {
@@ -47,12 +52,12 @@ public class ThreadRecyclerModel {
         return shortenedName;
     }
 
-    public Bitmap getBitmapImage() {
+    public String getBase64Image() {
         return imageThread;
     }
 
-    public void setImageThread(Bitmap imageThread) {
-        this.imageThread = imageThread;
+    public Bitmap getBitmapImage() {
+        return imageThreadBitmap;
     }
 
 
@@ -63,4 +68,11 @@ public class ThreadRecyclerModel {
     public void setDateThread(String dateThread) {
         this.dateThread = dateThread;
     }
+
+    public Bitmap base64ToBitMap(String b64String){
+        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
+        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
+        return bitmap;
+    }
 }
+

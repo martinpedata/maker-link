@@ -74,11 +74,13 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
         int isFiltered = sharedPref.getInt("isFiltered", -1);
 
         System.out.println("isFiltered in onCreate: " + isFiltered);
+
         int counter = 0; //Checking if we're in a playlist or in a filtered search
         switch (isFiltered) {
             case 5:
                 heading = getIntent().getStringExtra("playlistName");
                 playlist_id = getIntent().getIntExtra("playlistID", -1);
+                System.out.println("Playlist id: " + playlist_id);
                 setUpThread("https://studev.groept.be/api/a24pt215/RetrieveContentPlaylists/"+playlist_id); //INSERT PLAYLIST ID
                 counter = 1;
                 break;
@@ -117,7 +119,6 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                             try {
 
                                 JSONObject o = response.getJSONObject(i);
-
                                 int id = o.getInt("id");
                                 String nameThread = o.getString("name");
 
@@ -129,19 +130,16 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                                 else {
                                     nameThreadShort = nameThread;
                                 }
-
                                 int authorID = o.getInt("author_id");
                                 int domainID = o.getInt("domain_id");
                                 String creationDate = o.getString("creationdate").substring(0,10);
                                 String threadDocument = o.getString("document");
                                 String b64Image = o.getString("image_resource");
-
-                                Bitmap bitmapImage = base64ToBitMap(b64Image); //The b64 is converted to Bitmap in the helper method below
-
-                                threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, bitmapImage, creationDate, authorID, domainID, threadDocument));
+                                threadItems.add(new ThreadRecyclerModel(id, nameThread, nameThreadShort, b64Image, creationDate, authorID, domainID, threadDocument));
                             }
                             catch (JSONException e) {
-                                System.out.println("json array empty");
+                                e.printStackTrace();
+                                System.out.println("json array problem");
                             }
                         }
                         headingActivity.setText(heading);
@@ -163,9 +161,4 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
     /// Putting this in the OnBinding of the adapter class made the program slow because not only it continuously converted b64->Bitmap during scrolling,
     /// but also did this in the UI thread instead of background. In this way, the conversion is only done once (before creation of Model objects) and is done
     /// on background thread.
-    public Bitmap base64ToBitMap(String b64String){
-        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
-        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
-        return bitmap;
-    }
 }

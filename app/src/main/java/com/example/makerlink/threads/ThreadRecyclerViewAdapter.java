@@ -60,7 +60,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             intent.putExtra("threadDomain", threads.get(position).getDomainID());
             intent.putExtra("threadDate", threads.get(position).getDateThread());
             intent.putExtra("threadDocument", threads.get(position).getThreadDocument());
-            intent.putExtra("threadThumbnail", threads.get(position).getBitmapImage());
+//            intent.putExtra("threadThumbnail", threads.get(position).getBase64Image());
             context.startActivity(intent);
         });
     }
