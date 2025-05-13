@@ -20,7 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.makerlink.databinding.FragmentHomeBinding;
 import com.example.makerlink.playlists.PlaylistRecyclerActivity;
-import com.example.makerlink.threads.ThreadRecyclerActivity;
+import com.example.makerlink.threads.list.FilteredThreadRecyclerActivity;
+import com.example.makerlink.threads.list.ThreadRecyclerActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -69,7 +70,6 @@ public class HomeFragment extends Fragment {
         discoveryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putInt("isFiltered", 0).apply();
                 editor.putString("nameDomain", "See What’s General").apply();
                 ProgressDialog progressDialog = new ProgressDialog(getActivity()); // or requireActivity()
                 progressDialog.setMessage("Opening page, please wait...");
@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
                 progressDialog.show();
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(getActivity(), ThreadRecyclerActivity.class);
+                    Intent intent = new Intent(getActivity(), FilteredThreadRecyclerActivity.class);
                     startActivity(intent);
                     progressDialog.dismiss();
                 }, 300); // slight delay to let dialog show

@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.makerlink.databinding.FragmentDiscoveryBinding;
-import com.example.makerlink.threads.CreateThreadActivity;
+import com.example.makerlink.threads.post.CreateThreadActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -49,91 +49,6 @@ public class DiscoveryFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentDiscoveryBinding.inflate(inflater, container, false);
         return binding.getRoot(); // Return root view
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
-        /// Define variables, tools, adapters, views, etc...
-
-        super.onViewCreated(view, savedInstanceState);
-        searchView = binding.searchBar;
-        listView = binding.searchList;
-        createThreadButton = binding.addThread;
-
-
-        mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
-        items = new ArrayList<>();
-        items.add("Apples");
-        items.add("Bananas");
-        items.add("Carrots");
-        items.add("Donuts");
-        items.add("Eggs");
-        items.add("Fish");
-
-
-        filteredItems = new ArrayList<>();
-//        To refer to a Fragment's Activity, use requireActivity() or getContext()
-        adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems);
-        listView.setAdapter(adapter);
-        listView.setVisibility(View.GONE);
-
-        /// SEARCH VIEW LOGIC
-
-//        To make sure the entire search bar is touchable and not just icon. Also to make the keyboard appear upon touch
-
-        searchView.setOnClickListener(v -> {
-            searchView.setIconified(false);
-            searchView.requestFocusFromTouch();
-
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(searchView.findFocus(), InputMethodManager.SHOW_IMPLICIT);
-                }
-            }, 100);
-        });
-
-//        Search through the list
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false; // We handle everything on text change
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                listView.setVisibility(View.VISIBLE);
-                filteredItems.clear();
-
-                if (newText.isEmpty()) {
-                    listView.setVisibility(View.GONE); // Hide again if search is cleared
-                } else {
-                    for (String item : items) {
-                        if (item.toLowerCase().contains(newText.toLowerCase())) {
-                            filteredItems.add(item);
-                        }
-                    }
-                }
-
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-        });
-
-        createThreadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), CreateThreadActivity.class);
-                startActivity(i);
-            }
-        });
-
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
 }

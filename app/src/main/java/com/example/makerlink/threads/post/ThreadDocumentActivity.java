@@ -1,4 +1,4 @@
-package com.example.makerlink.threads;
+package com.example.makerlink.threads.post;
 
 import android.os.Bundle;
 import android.webkit.WebView;

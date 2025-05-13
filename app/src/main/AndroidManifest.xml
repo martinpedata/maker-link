@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,9 +21,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MakerLink"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".threads.ThreadDocumentActivity"
+            android:name=".threads.list.UserThreadRecyclerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".threads.list.FilteredThreadRecyclerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".threads.post.ThreadDocumentActivity"
             android:exported="false" />
         <activity
             android:name=".playlists.CreatePlaylistActivity"
@@ -33,7 +39,7 @@
             android:name=".access.Lender"
             android:exported="false" />
         <activity
-            android:name=".threads.CreateThreadActivity"
+            android:name=".threads.post.CreateThreadActivity"
             android:exported="false" />
         <activity
             android:name=".playlists.PlaylistRecyclerActivity"
@@ -48,10 +54,10 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".threads.ThreadRecyclerActivity"
+            android:name=".threads.list.ThreadRecyclerActivity"
             android:exported="false" />
         <activity
-            android:name=".threads.ThreadActivity"
+            android:name=".threads.post.ThreadActivity"
             android:exported="false" />
         <activity
             android:name=".navigation_pages.exchange.InfoPage"

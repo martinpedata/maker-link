@@ -1,34 +1,35 @@
-package com.example.makerlink.threads;
+package com.example.makerlink.threads.list;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.makerlink.ImageHandling;
 import com.example.makerlink.R;
+import com.example.makerlink.navigation_pages.chats.Chat;
+import com.example.makerlink.threads.post.ThreadActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.MyViewHolder> {
 
     public Context context;
     public ArrayList<ThreadRecyclerModel> threads;
-
+    public ArrayList<ThreadRecyclerModel> threadsFull;
     public ThreadRecyclerViewAdapter(Context context, ArrayList<ThreadRecyclerModel> threads) {
         this.context = context;
-        this.threads = threads;
+        this.threads = threads != null ? threads : new ArrayList<>();
+        assert threads != null;
+        this.threadsFull = new ArrayList<>(threads);
     }
 
     /// This is what makes the recycler view visible
@@ -53,7 +54,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         /// USE OF LAMBDA EXPRESSION !!!
         holder.threadItem.setOnClickListener(e->{
             System.out.println("click registered");
-            Intent intent = new Intent(context,ThreadActivity.class);
+            Intent intent = new Intent(context, ThreadActivity.class);
             intent.putExtra("threadName", threads.get(position).getNameLongThread());
             intent.putExtra("threadID", threads.get(position).getID());
             intent.putExtra("threadAuthor", threads.get(position).getAuthorID()); //These are not in the myViewHolder, because they are attributes of the Model class, without being defined in a view.
@@ -83,4 +84,40 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             dateThread = itemView.findViewById(R.id.dateItem);
         }
     }
+
+    /// Filter items
+    private final Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ThreadRecyclerModel> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) { /// THIS ENSURES THAT THE FILTERED LIST TAKES UP THE FULL VALUE IN CASE NO SEARCH IS DONE
+                filteredList.addAll(threadsFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (ThreadRecyclerModel thread : threadsFull) {
+                    if (thread.getNameLongThread().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(thread);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            threads.clear();
+            threads.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+    public Filter getFilter() {
+        return filter;
+    }
+    public void updateFullList() {
+        threadsFull.clear();
+        threadsFull.addAll(threads);
+    }
+
 }

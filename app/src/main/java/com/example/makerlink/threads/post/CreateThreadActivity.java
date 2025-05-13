@@ -1,7 +1,7 @@
-package com.example.makerlink.threads;
+package com.example.makerlink.threads.post;
 
 
-//TODO: TEST CREATION OF THREAD
+//TODO: ADD COMMENTS AND POINTS
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,11 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
-import com.example.makerlink.access.Lender;
-import com.example.makerlink.access.SignUpActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
