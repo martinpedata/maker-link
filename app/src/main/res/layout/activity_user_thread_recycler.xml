@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="80dp"
-        android:layout_marginRight="17dp"
+        android:layout_marginRight="40dp"
         android:contentDescription="New Playlist"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/teal_500"
