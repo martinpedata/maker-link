@@ -44,7 +44,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: DO SOME IMPLEMENTATION SUCH AS FILTERS. INTEGRATE WITH DATABASE.
+//TODO: add growing numbers animation to the numbers
 public class DiscoveryFragment extends Fragment {
 
     private FragmentDiscoveryBinding binding;

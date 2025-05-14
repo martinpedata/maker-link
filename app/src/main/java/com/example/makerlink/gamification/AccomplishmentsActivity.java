@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.makerlink.R;
-
+//TODO: fix the gold line
 public class AccomplishmentsActivity extends AppCompatActivity {
 
     private TextView pointsTextView;
