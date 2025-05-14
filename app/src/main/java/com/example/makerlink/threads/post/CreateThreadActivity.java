@@ -104,8 +104,8 @@ public class CreateThreadActivity extends AppCompatActivity {
             try {
                 //getting image from gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                //Rescale the bitmap to 400px wide (avoid storing large images!)
-                bitmap = getResizedBitmap( bitmap, 400 );
+                //Rescale the bitmap to 300px wide (avoid storing large images!)
+                bitmap = getResizedBitmap( bitmap, 450 );
 
                 //Setting background image of thumbnail
                 thumbnailImage.setImageBitmap(bitmap);
@@ -144,6 +144,7 @@ public class CreateThreadActivity extends AppCompatActivity {
         nameThread = nameInput.getText().toString();
         domain = domainInput.getText().toString();
         weblink = weblinkInput.getText().toString();
+
         /// Convert bitmap into base64.
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -189,12 +190,6 @@ public class CreateThreadActivity extends AppCompatActivity {
         ProgressDialog progressDialog = new ProgressDialog(CreateThreadActivity.this);
         progressDialog.setMessage("Uploading, please wait...");
         progressDialog.show();
-
-        //convert image to base64 string
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //Execute the Volley call. Note that we are not appending the image string to the URL, that happens further below
         StringRequest submitRequest = new StringRequest (Request.Method.POST, requestURL,  new Response.Listener<String>() {

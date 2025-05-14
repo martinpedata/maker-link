@@ -2,6 +2,7 @@ package com.example.makerlink.threads.list;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Base64;
 
 public class ThreadRecyclerModel {
@@ -70,9 +71,10 @@ public class ThreadRecyclerModel {
     }
 
     public Bitmap base64ToBitMap(String b64String){
-        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
+        byte[] imageBytes = Base64.decode( b64String, Base64.NO_WRAP );
         Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
         return bitmap;
     }
+
 }
 
