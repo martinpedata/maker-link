@@ -49,6 +49,7 @@ public class Lender extends AppCompatActivity {
     private Button homebutton;
     private EditText description;
     private String description1;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

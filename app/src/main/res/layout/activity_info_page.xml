@@ -61,6 +61,32 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/startlender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start of Renting"
+                android:background="@drawable/bubble_background"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:focusable="false"
+                android:clickable="true"/>
+            <EditText
+                android:id="@+id/endlender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End of Renting"
+                android:background="@drawable/bubble_background"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:focusable="false"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/descriptionlender"
