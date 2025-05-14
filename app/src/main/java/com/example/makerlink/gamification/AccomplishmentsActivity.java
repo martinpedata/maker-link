@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.makerlink.R;
-//TODO: fix the gold line
 public class AccomplishmentsActivity extends AppCompatActivity {
 
     private TextView pointsTextView;
@@ -51,23 +50,25 @@ public class AccomplishmentsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
         actualPoints = sharedPreferences.getInt("points", -1);
+
+        /// Allows for growing numbers animation
         animatePoints(0, actualPoints, 1500); // animate from 0 to 1000 in 2000 ms
 
         if (actualPoints < 3000) {
             level4image.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            level4line.setBackgroundColor(Color.GRAY);
+            level4line.setCardBackgroundColor(Color.GRAY);
             level4text.setTextColor(Color.GRAY);
             if (actualPoints < 2000) {
                 level3image.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-                level3line.setBackgroundColor(Color.GRAY);
+                level3line.setCardBackgroundColor(Color.GRAY);
                 level3text.setTextColor(Color.GRAY);
                 if (actualPoints < 1000) {
                     level2image.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-                    level2line.setBackgroundColor(Color.GRAY);
+                    level2line.setCardBackgroundColor(Color.GRAY);
                     level2text.setTextColor(Color.GRAY);
                     if (actualPoints < 500) {
                         level1image.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-                        level1line.setBackgroundColor(Color.GRAY);
+                        level1line.setCardBackgroundColor(Color.GRAY);
                         level1text.setTextColor(Color.GRAY);
                     }
                 }

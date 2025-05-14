@@ -80,7 +80,7 @@
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="17dp"
-                android:backgroundTint="@color/gold"
+                app:cardBackgroundColor="@color/gold"
                 android:layout_marginLeft="60dp"/>
             <TextView
                 android:id="@+id/level1text"
@@ -108,7 +108,7 @@
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="17dp"
-                android:backgroundTint="@color/gold"
+                app:cardBackgroundColor="@color/gold"
                 android:layout_marginLeft="60dp"/>
             <TextView
                 android:id="@+id/level2text"
@@ -136,7 +136,7 @@
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="17dp"
-                android:backgroundTint="@color/gold"
+                app:cardBackgroundColor="@color/gold"
                 android:layout_marginLeft="60dp"/>
             <TextView
                 android:id="@+id/level3text"
@@ -164,7 +164,7 @@
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="17dp"
-                android:backgroundTint="@color/gold"
+                app:cardBackgroundColor="@color/gold"
                 android:layout_marginLeft="60dp"/>
             <TextView
                 android:id="@+id/level4text"
