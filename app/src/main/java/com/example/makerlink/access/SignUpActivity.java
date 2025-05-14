@@ -212,7 +212,7 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         } else {
-                            Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                            Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(i);
                             finish();
                         }

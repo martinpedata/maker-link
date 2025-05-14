@@ -92,7 +92,7 @@ public class Lender extends AppCompatActivity {
                             Log.e("Error", "Error processing JSON response", e);
                         }
                         insertLender("https://studev.groept.be/api/a24pt215/InsertLender",UserID, address, tool1, rent1, description1);
-                        Intent i = new Intent(Lender.this, MainActivity.class);
+                        Intent i = new Intent(Lender.this, LoginActivity.class);
                         startActivity(i);
                         finish();
                     }

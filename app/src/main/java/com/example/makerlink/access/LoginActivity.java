@@ -28,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.MainActivity;
 import com.example.makerlink.R;
@@ -156,10 +157,39 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("Name", nameOfUser).apply();
                                 editor.putInt("user_ID", user_ID).apply();
                                 /// Go to NavigationTemplate
+                                FirebaseMessaging.getInstance().deleteToken()
+                                        .addOnCompleteListener(deleteTask -> {
+                                            if (deleteTask.isSuccessful()) {
+                                                // Generate new token
+                                                FirebaseMessaging.getInstance().getToken()
+                                                        .addOnCompleteListener(tokenTask -> {
+                                                            if (tokenTask.isSuccessful()) {
+                                                                String newToken = tokenTask.getResult();
+                                                                Log.d("FCM", "New token: " + newToken);
 
-                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(i);
-                                finish(); /// Prevent going back to the welcome screen
+                                                                // Send token to server
+                                                                String updateTokenUrl = "https://studev.groept.be/api/a24pt215/updateFCMToken/" + newToken + "/" + user_ID;
+                                                                StringRequest tokenRequest = new StringRequest(Request.Method.GET, updateTokenUrl,
+                                                                        response1 -> {
+                                                                            Log.d("FCM", "Token updated on server");
+
+                                                                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                                                            startActivity(i);
+                                                                            finish();
+                                                                        },
+                                                                        error -> {
+                                                                            Log.e("FCM", "Failed to update token: " + error.toString());
+                                                                            Toast.makeText(LoginActivity.this, "Error updating token", Toast.LENGTH_SHORT).show();
+                                                                        });
+                                                                requestQueue.add(tokenRequest);
+                                                            } else {
+                                                                Log.w("FCM", "Token generation failed", tokenTask.getException());
+                                                            }
+                                                        });
+                                            } else {
+                                                Log.w("FCM", "Token deletion failed", deleteTask.getException());
+                                            }
+                                        }); /// Prevent going back to the welcome screen
                             }
                             else {
                                 pw.setText("");
