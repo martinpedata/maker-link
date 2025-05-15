@@ -8,14 +8,18 @@ public class User {
 
     private String tool;
     private String description;
+    private int startday;
+    private int endday;
 
     // Constructor + Getters
-    public User(String name, String address, int rent, String tool, String description) {
+    public User(String name, String address, int rent, String tool, String description, int start, int end) {
         this.name = name;
         this.address = address;
         this.rent = rent;
         this.tool = tool;
         this.description = description;
+        this.startday = start;
+        this.endday = end;
     }
     public User(String name, String address, int rent, String tool) {
         this.name = name;
@@ -30,4 +34,8 @@ public class User {
 
     public String getTool(){ return tool; }
     public String getDescription(){ return description; }
+
+    public int getStartday() { return startday; }
+
+    public int getEndday() { return endday; }
 }

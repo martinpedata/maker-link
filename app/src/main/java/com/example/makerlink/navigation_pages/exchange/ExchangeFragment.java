@@ -317,9 +317,11 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                                 String tool = communityObject.getString("tooltype");
                                 int rent = communityObject.getInt("rent");
                                 String description = communityObject.getString("description");
+                                int startofday = communityObject.getInt("start_time");
+                                int endofday = communityObject.getInt("end_time");
 
                                 // Add the community to the chatList
-                                userList.add(new User(name, address,rent,tool, description));
+                                userList.add(new User(name, address,rent,tool, description, startofday, endofday));
                                 items.add(tool);
                             }
                             HashSet<String> hset = new HashSet<String>(items);

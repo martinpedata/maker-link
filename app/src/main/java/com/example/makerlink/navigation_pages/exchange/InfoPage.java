@@ -76,6 +76,8 @@ public class InfoPage extends AppCompatActivity {
     private int lender_id;
     private int lendee_id;
     private SharedPreferences sharedPref;
+    private int start_of_day;
+    private int end_of_day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +107,8 @@ public class InfoPage extends AppCompatActivity {
         int rentofuser = getIntent().getIntExtra("rent_of_user", -1);
         String descriptionoflender = getIntent().getStringExtra("description_of_tool");
         tool = getIntent().getStringExtra("tool_of_user");
+        start_of_day = getIntent().getIntExtra("start_of_user", -1);
+        end_of_day = getIntent().getIntExtra("end_of_user", -1);
         name_of_lender.setText(name);
         address_of_lender.setText(address);
         rent.setText(String.valueOf(rentofuser));
@@ -127,6 +131,7 @@ public class InfoPage extends AppCompatActivity {
             }
 
             insertOrder("https://studev.groept.be/api/a24pt215/InsertOrder",lender_id, lendee_id, tool, Integer.parseInt(rent.getText().toString()), startDateText, endDateText);
+            finish();
         });
     }
     private void showDateTimePicker(EditText targetEditText, List<Reservation> reservations) {
@@ -221,7 +226,7 @@ public class InfoPage extends AppCompatActivity {
         boolean isToday = now.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
                 now.get(Calendar.DAY_OF_YEAR) == selectedDate.get(Calendar.DAY_OF_YEAR);
 
-        for (int hour = 0; hour <= 23; hour++) {
+        for (int hour = start_of_day; hour <= end_of_day; hour++) {
             Calendar hourStart = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
             hourStart.setTimeInMillis(selectedDate.getTimeInMillis());
             hourStart.set(Calendar.HOUR_OF_DAY, hour);
@@ -241,7 +246,7 @@ public class InfoPage extends AppCompatActivity {
         }
 
         List<String> available = new ArrayList<>();
-        for (int i = 0; i <= 23; i++) {
+        for (int i = start_of_day; i <= end_of_day; i++) {
             if (!unavailableHours.contains(i)) {
                 if (isToday) {
                     // Skip past hours for today

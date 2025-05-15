@@ -50,6 +50,11 @@ public class Lender extends AppCompatActivity {
     private EditText description;
     private String description1;
     private SharedPreferences.Editor editor;
+    private EditText startofday;
+    private EditText endofday;
+
+    private String start;
+    private String end;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +71,15 @@ public class Lender extends AppCompatActivity {
         rent = findViewById(R.id.rent);
         tooltype = findViewById(R.id.tool);
         description = findViewById(R.id.description_of_tools);
+        startofday = findViewById(R.id.starttime);
+        endofday = findViewById(R.id.endtime);
         homebutton = findViewById(R.id.homeButton);
         homebutton.setOnClickListener(v -> {
             rent1 = rent.getText().toString();
             tool1 = tooltype.getText().toString();
             description1 = description.getText().toString();
+            start = startofday.getText().toString();
+            end = endofday.getText().toString();
             gotohome("https://studev.groept.be/api/a24pt215/selectUserId/"+username);
         });
 
@@ -92,7 +101,7 @@ public class Lender extends AppCompatActivity {
                         } catch (JSONException e) {
                             Log.e("Error", "Error processing JSON response", e);
                         }
-                        insertLender("https://studev.groept.be/api/a24pt215/InsertLender",UserID, address, tool1, rent1, description1);
+                        insertLender("https://studev.groept.be/api/a24pt215/InsertLender",UserID, address, tool1, rent1, description1, start, end);
                         Intent i = new Intent(Lender.this, LoginActivity.class);
                         startActivity(i);
                         finish();
@@ -108,7 +117,7 @@ public class Lender extends AppCompatActivity {
         // Add the request to the request queue
         requestQueue.add(submitRequest);
     }
-    public void insertLender(String url, int user_id, String address_val, String tooltype, String rent, String description) {
+    public void insertLender(String url, int user_id, String address_val, String tooltype, String rent, String description, String startday, String endday) {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 url,
@@ -136,6 +145,8 @@ public class Lender extends AppCompatActivity {
                 params.put("userval", String.valueOf(user_id));
                 params.put("rentval",rent);
                 params.put("descriptionval", description);
+                params.put("startofday", startday);
+                params.put("endofday", endday);
                 return params;
             }
         };
