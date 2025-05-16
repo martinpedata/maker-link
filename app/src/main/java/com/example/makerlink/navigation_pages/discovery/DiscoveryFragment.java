@@ -45,7 +45,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: add growing numbers animation to the numbers
 public class DiscoveryFragment extends Fragment {
 
     private FragmentDiscoveryBinding binding;

@@ -42,7 +42,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-//TODO: TEST, THEN IMPLEMENT SEARCH FEATURE
 public class FilteredThreadRecyclerActivity extends AppCompatActivity {
 
     private ArrayList<ThreadRecyclerModel> threadItems;

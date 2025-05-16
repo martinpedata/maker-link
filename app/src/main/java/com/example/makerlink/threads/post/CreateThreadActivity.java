@@ -1,7 +1,7 @@
 package com.example.makerlink.threads.post;
 
 
-//TODO: ADD COMMENTS AND POINTS. THEN, ADD LEADERBOARD.
+//TODO: ADD COMMENTS. Add points to orders as well. THEN, ADD LEADERBOARD.
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -165,8 +165,11 @@ public class CreateThreadActivity extends AppCompatActivity {
                             JSONObject o = response.getJSONObject(0);
                             domainID = o.getInt("id");
 
-                            /// Now that all needed data is retrieved, do post request.
+                            /// Now that all needed data is retrieved, do post request...
                             postThread("https://studev.groept.be/api/a24pt215/InsertNewThread");
+                            /// ...And update points of author.
+                            updatePointsUser("https://studev.groept.be/api/a24pt215/AddPoints/" + 500 + "/" + authorID);
+
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -217,6 +220,27 @@ public class CreateThreadActivity extends AppCompatActivity {
             }
         };
 
+        requestQueue.add(submitRequest);
+    }
+
+    public void updatePointsUser(String requestURL) {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("points updated.");
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(CreateThreadActivity.this, "Network error when updating points! Please try again.", Toast.LENGTH_SHORT).show();
+                        Log.e("ErrorWithLudo", error.getLocalizedMessage());
+                    }
+                }
+        );
         requestQueue.add(submitRequest);
     }
 }

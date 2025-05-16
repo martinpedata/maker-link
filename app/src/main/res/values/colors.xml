@@ -18,4 +18,6 @@
     <color name="gray">#808080</color>
     <color name="better_blue">#13263d</color>
     <color name="gold">#D4AF37</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="bronze">#B87333</color>
 </resources>

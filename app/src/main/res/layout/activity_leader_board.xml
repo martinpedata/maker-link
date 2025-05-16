@@ -5,27 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".threads.list.ThreadRecyclerActivity"
+    tools:context=".gamification.LeaderBoardActivity"
     android:orientation="vertical"
-    android:background="@color/cream">
-
-
+    android:background="@color/darkCream">
     <TextView
-        android:layout_marginTop="60dp"
-        android:id="@+id/headingRecycler"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Loading..."
+        android:text="Leader Board"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60dp"
+        android:textAlignment="center"
         android:textColor="@color/brown"
-        android:textSize="40sp"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:fontFamily="@font/montserrat_medium"/>
-
+        android:fontFamily="@font/montserrat_bold"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_recycler"
+        android:id="@+id/recyclerLeaderboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="6dp" />
+        android:layout_marginHorizontal="6dp"/>
+
 </LinearLayout>
