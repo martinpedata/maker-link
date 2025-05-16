@@ -31,7 +31,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -39,9 +40,9 @@ public class SignUpActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private RequestQueue requestQueue;
     private SharedPreferences.Editor editor;
-
     private EditText pw;
     private String passwordInput;
+    private String salt;
     private EditText un;
     private String usernameInput;
     private EditText ld;
@@ -52,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String nameInput;
     private EditText addr;
     private String addressInput;
-    private String[] credentials = new String[6];
+    private String[] credentials = new String[7];
     private int result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +72,23 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void goToHome(View view) throws UnsupportedEncodingException {
 
+        ///MAKE SURE THE PASSWORD IS HASHED.
         pw = findViewById(R.id.password);
-        passwordInput = pw.getText().toString();
+        salt = HashCredentials.generateSalt(); //Random string to put in front of hashed pw (used to keep common passwords safe from rainbow tables).
+        passwordInput = HashCredentials.hashPassWord(pw.getText().toString(), salt);  //Produce a salted hashed pw
+
         un = findViewById(R.id.username);
         usernameInput = un.getText().toString();
+
         ld = findViewById(R.id.lender);
         lenderInput = ld.getText().toString();
+
         age = findViewById(R.id.age);
         ageInput = age.getText().toString();
+
         name = findViewById(R.id.name);
         nameInput = name.getText().toString();
+
         addr = findViewById(R.id.address);
         addressInput = addr.getText().toString();
 
@@ -90,6 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
         credentials[3] = addressInput;
         credentials[4] = lenderInput;
         credentials[5] = passwordInput;
+        credentials[6] = salt;
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(task -> {
@@ -170,7 +179,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 case 0:
                                     String url = null;
                                     try {
-                                        url = String.format("https://studev.groept.be/api/a24pt215/InsertNewUser/%s/%s/%s/%d/%s/%s/%s/%s",
+                                        url = String.format("https://studev.groept.be/api/a24pt215/InsertNewUser/%s/%s/%s/%d/%s/%s/%s/%s/%s",
                                                 URLEncoder.encode(usernameInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(nameInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(ageInput, StandardCharsets.UTF_8.toString()),
@@ -178,6 +187,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 URLEncoder.encode(addressInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(lenderInput, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(passwordInput, StandardCharsets.UTF_8.toString()),
+                                                URLEncoder.encode(salt, StandardCharsets.UTF_8.toString()),
                                                 URLEncoder.encode(token, StandardCharsets.UTF_8.toString())  // Add token here
                                         );
                                     } catch (UnsupportedEncodingException ex) {

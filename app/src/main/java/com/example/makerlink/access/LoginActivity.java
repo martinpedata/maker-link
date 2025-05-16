@@ -38,7 +38,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//TODO: HASH THE PASSWORD.
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
@@ -122,19 +124,30 @@ public class LoginActivity extends AppCompatActivity {
     public void goToHome(View view) {
 
         pw = findViewById(R.id.password);
-        passwordInput = pw.getText().toString();
+
         un = findViewById(R.id.username);
         usernameInput = un.getText().toString();
-//
-//        cv = new LoginCredentialsVerification( usernameInput , passwordInput, this);
-//
-//        if (cv.checkValidityOfLogin() == 1) {
-//            if (!usernameInput.isEmpty() && !passwordInput.isEmpty()) {
-//                // Save the name in SharedPreferences
-//                retrieveName("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
-//            }
-//        }
+
         checkValidityOfLogin("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
+    }
+
+    public String hashPassWord(String password, String salt) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            String saltedPW = password + salt;
+            byte[] hash = digest.digest(saltedPW.getBytes(StandardCharsets.UTF_8));
+
+            // Convert to hex string
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 
@@ -147,19 +160,21 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            ///Add the name to the welcome screen on the sharedPref.editor
-
-                            /// YOU HAVE TO PUT THE RELEVANT CODE YOU WANT TO EXECUTE AFTER THE DATABASE IS QUERIED INSIDE HE ONRESPONSE !!!
+                            ///Always execute in onResponse (because it is running in background thread).
                             JSONObject o = response.getJSONObject(0);
-                            passwordDB = o.getString("password");
+                            passwordDB = o.getString("password"); /// Retrieve salted hashed PW
+
+                            String salt = o.getString("salt");
+                            passwordInput = hashPassWord(pw.getText().toString(), salt); ///RE-HASH INPUTTED PASSWORD WITH THE SALT FROM DATABASE, COMPARE IT TO THE PASSWORD STORED IN THE DATABASE.
+
                             if (passwordInput.equals(passwordDB)) {
                                 nameOfUser = o.getString("name");
                                 user_ID = o.getInt("user_id");
                                 System.out.println("user id before playlist: " + user_ID);
                                 editor.putString("Name", nameOfUser).apply();
                                 editor.putInt("user_ID", user_ID).apply();
-                                /// Go to NavigationTemplate
-                                FirebaseMessaging.getInstance().deleteToken()
+
+                                FirebaseMessaging.getInstance().deleteToken() /// Go to NavigationTemplate
                                         .addOnCompleteListener(deleteTask -> {
                                             if (deleteTask.isSuccessful()) {
                                                 // Generate new token

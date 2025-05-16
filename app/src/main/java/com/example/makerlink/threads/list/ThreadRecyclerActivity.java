@@ -39,7 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-//TODO: DELETE THREAD OPTION. ALSO DELETE PLAYLIST OPTION.
+//TODO: WORK ON DELETE OPTIONS: THREAD, PLAYLIST, USER, ETC...
 
 public class ThreadRecyclerActivity extends AppCompatActivity {
 

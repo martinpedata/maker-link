@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.makerlink.R;
 
-//TODO: TEST IF THIS WORKS
 public class ThreadDocumentActivity extends AppCompatActivity {
     private WebView webView;
     private String threadDocument;
