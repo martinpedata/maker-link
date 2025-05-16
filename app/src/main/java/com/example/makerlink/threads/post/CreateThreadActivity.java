@@ -1,7 +1,7 @@
 package com.example.makerlink.threads.post;
 
 
-//TODO: ADD COMMENTS. Add points to orders as well. THEN, ADD LEADERBOARD.
+//TODO: ADD COMMENTS. Add points to orders as well.
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;

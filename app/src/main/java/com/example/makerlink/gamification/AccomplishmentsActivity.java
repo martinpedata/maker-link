@@ -52,7 +52,7 @@ public class AccomplishmentsActivity extends AppCompatActivity {
         actualPoints = sharedPreferences.getInt("points", -1);
 
         /// Allows for growing numbers animation
-        animatePoints(0, actualPoints, 1500); // animate from 0 to 1000 in 2000 ms
+        animatePoints(0, actualPoints, 2000); // animate from 0 to 1000 in 2000 ms
 
         if (actualPoints < 3000) {
             level4image.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);

@@ -38,6 +38,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//TODO: HASH THE PASSWORD.
+
 public class LoginActivity extends AppCompatActivity {
     private TextView signUpText;
     private String nameOfUser;

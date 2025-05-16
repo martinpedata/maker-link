@@ -156,7 +156,7 @@ public class DiscoveryFragment extends Fragment {
                             JSONObject o = response.getJSONObject(0);
                             int numPoints = o.getInt("points");
                             editor.putInt("points",numPoints).apply();
-                            animateNumbers(pointsAmount, 0, numPoints, 1000);
+                            animateNumbers(pointsAmount, 0, numPoints, 2000);
                         }
                         catch (JSONException e) {
                             e.printStackTrace();
