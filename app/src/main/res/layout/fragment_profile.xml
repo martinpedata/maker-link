@@ -9,64 +9,192 @@
     android:background="@color/cream">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/lightBrown"/>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@drawable/layoutforcommunity"
+        android:backgroundTint="@color/lightBrown"
+        android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/outline_settings_24"
+            app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundColor="@color/darkCream">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name_profile_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableLeft="@drawable/profile"
-                android:drawablePadding="13dp"
-                android:text="User"
-                android:fontFamily="@font/montserrat_medium"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+            android:text="Settings"
+            android:textSize="26sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/montserrat_medium"/>
+    </LinearLayout>
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundColor="@color/darkCream">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address_profile_fragment"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginVertical="6dp"
+            android:background="@drawable/layoutforcommunity"
+            android:backgroundTint="@color/darkCream">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableLeft="@drawable/map"
-                android:drawablePadding="13dp"
-                android:text="Andrea Vesaliustraat"
-                android:fontFamily="@font/montserrat_medium"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userinfoimage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/sharp_account_circle_24"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
 
-        <com.google.android.material.textfield.TextInputLayout
+                <TextView
+                    android:id="@+id/userinfotext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change User Info"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/montserrat_medium"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Lender"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundColor="@color/darkCream">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lender_profile_fragment"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginVertical="6dp"
+            android:background="@drawable/layoutforcommunity"
+            android:backgroundTint="@color/darkCream">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableLeft="@drawable/profile"
-                android:drawablePadding="13dp"
-                android:text="Yes"
-                android:fontFamily="@font/montserrat_medium"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/lenderimage"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/outline_attach_money_24"
+                    android:background="@color/brown"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+                <TextView
+                    android:id="@+id/lendertext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Lender Info"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/montserrat_medium"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginVertical="6dp"
+            android:background="@drawable/layoutforcommunity"
+            android:backgroundTint="@color/darkCream">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/languageimage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/sharp_language_24"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+                <TextView
+                    android:id="@+id/languagetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Language"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/montserrat_medium"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginVertical="6dp"
+            android:background="@drawable/layoutforcommunity"
+            android:backgroundTint="@color/darkCream">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/addtoolimage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/sharp_tools_power_drill_24"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+                <TextView
+                    android:id="@+id/addtooltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add tool"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/montserrat_medium"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="200dp"
+            android:backgroundTint="#D32F2F"
+            android:text="LogOut"
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"/>
+
 
     </LinearLayout>
-
-
-        
-
 </LinearLayout>

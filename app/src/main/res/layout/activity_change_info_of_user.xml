@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".navigation_pages.profile.ProfileFragment"
+    android:background="@color/cream">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/profile"
+                android:drawablePadding="13dp"
+                android:text="User"
+                android:fontFamily="@font/montserrat_medium"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/map"
+                android:drawablePadding="13dp"
+                android:text="Andrea Vesaliustraat"
+                android:fontFamily="@font/montserrat_medium"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lender"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/darkCream">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lender_profile_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/profile"
+                android:drawablePadding="13dp"
+                android:text="Yes"
+                android:fontFamily="@font/montserrat_medium"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -28,6 +28,9 @@
             android:name=".gamification.LeaderBoardActivity"
             android:exported="false" />
         <activity
+            android:name=".navigation_pages.profile.Change_info_of_user"
+            android:exported="false" />
+        <activity
             android:name=".gamification.AccomplishmentsActivity"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
         <activity
             android:name=".threads.post.CreateThreadActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".playlists.PlaylistRecyclerActivity"
             android:exported="false" />

@@ -160,19 +160,20 @@ public class InfoPage extends AppCompatActivity {
                     NumberPicker minutePicker = customView.findViewById(R.id.numberPickerMinute);
                     Button btnSetTime = customView.findViewById(R.id.btnSetTime);
 
-                    // Set hourPicker to available hours only
-                    int minHour = Integer.parseInt(availableHours[0]);
-                    int maxHour = Integer.parseInt(availableHours[availableHours.length - 1]);
 
                     hourPicker.setMinValue(0);
                     hourPicker.setMaxValue(availableHours.length - 1);
                     hourPicker.setDisplayedValues(availableHours);
                     hourPicker.setValue(0);
 
-                    // For simplicity, minutePicker only allows 0 minutes
                     minutePicker.setMinValue(0);
                     minutePicker.setMaxValue(0);
-
+                    minutePicker.setFormatter(new NumberPicker.Formatter() {
+                        @Override
+                        public String format(int value) {
+                            return String.format("%02d", value);
+                        }
+                    });
                     AlertDialog dialog = new AlertDialog.Builder(this)
                             .setView(customView)
                             .create();

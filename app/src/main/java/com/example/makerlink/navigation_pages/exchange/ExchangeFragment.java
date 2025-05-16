@@ -87,7 +87,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private RequestQueue requestQueue;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
-
+    private int own_id;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Initialize the ViewModel
@@ -105,6 +105,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
         sharedPref = requireContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        own_id = sharedPref.getInt("user_ID", -1);
         editor = sharedPref.edit();
         setUpLenders("https://studev.groept.be/api/a24pt215/RetrieveLenderInfo");
     }
@@ -320,9 +321,10 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                                 int startofday = communityObject.getInt("start_time");
                                 int endofday = communityObject.getInt("end_time");
 
-                                // Add the community to the chatList
-                                userList.add(new User(name, address,rent,tool, description, startofday, endofday));
-                                items.add(tool);
+                                if (id != own_id){// Add the community to the chatList
+                                    userList.add(new User(name, address,rent,tool, description, startofday, endofday));
+                                    items.add(tool);
+                                }
                             }
                             HashSet<String> hset = new HashSet<String>(items);
                             items = new ArrayList<>(hset);

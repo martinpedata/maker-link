@@ -59,7 +59,7 @@
                     android:fontFamily="@font/montserrat_medium"/>
 
                 <EditText
-                    android:id="@+id/starttime"
+                    android:id="@+id/tool"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="30dp"
@@ -71,7 +71,7 @@
                     android:textColorHighlight="@color/teal_500"
                     android:fontFamily="@font/montserrat_medium"/>
                 <EditText
-                    android:id="@+id/endtime"
+                    android:id="@+id/starttime"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="30dp"
@@ -83,7 +83,7 @@
                     android:textColorHighlight="@color/teal_500"
                     android:fontFamily="@font/montserrat_medium"/>
                 <EditText
-                    android:id="@+id/tool"
+                    android:id="@+id/endtime"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="30dp"
