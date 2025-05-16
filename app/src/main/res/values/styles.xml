@@ -13,4 +13,10 @@
     <style name="TextAppearance.MakerLink.Body" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/lightBrown</item>
+    </style>
 </resources>

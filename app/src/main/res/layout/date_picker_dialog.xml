@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/datePickerLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@drawable/background_for_time_picker">
+
+    <DatePicker
+        android:id="@+id/customDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="true"
+        android:spinnersShown="false"
+        android:background="@color/darkCream"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/btnSetDate"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/brown"
+        android:textColor="@color/white"/>
+</LinearLayout>

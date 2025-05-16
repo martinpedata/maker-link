@@ -3,6 +3,7 @@ package com.example.makerlink.navigation_pages.exchange;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -84,6 +85,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
 
     private String selectedSearchItem = "";
     private RequestQueue requestQueue;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,6 +104,8 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume() {
         super.onResume();
+        sharedPref = requireContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
         setUpLenders("https://studev.groept.be/api/a24pt215/RetrieveLenderInfo");
     }
     private void initMapFragment() {
@@ -305,14 +310,18 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                                 JSONObject communityObject = response.getJSONObject(i);
 
                                 // Get the community name and community_id from the response
+                                int id = communityObject.getInt("user_id");
+                                editor.putInt("lender_id", id).apply();
                                 String name = communityObject.getString("name");
                                 String address = communityObject.getString("address");
                                 String tool = communityObject.getString("tooltype");
                                 int rent = communityObject.getInt("rent");
                                 String description = communityObject.getString("description");
+                                int startofday = communityObject.getInt("start_time");
+                                int endofday = communityObject.getInt("end_time");
 
                                 // Add the community to the chatList
-                                userList.add(new User(name, address,rent,tool, description));
+                                userList.add(new User(name, address,rent,tool, description, startofday, endofday));
                                 items.add(tool);
                             }
                             HashSet<String> hset = new HashSet<String>(items);
