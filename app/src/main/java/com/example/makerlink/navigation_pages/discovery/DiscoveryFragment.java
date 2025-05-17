@@ -66,7 +66,7 @@ public class DiscoveryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentDiscoveryBinding.inflate(inflater, container, false);
-        return binding.getRoot(); // Return root view
+        return binding.getRoot();
     }
 
     @Override
