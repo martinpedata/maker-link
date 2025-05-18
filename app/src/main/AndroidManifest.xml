@@ -25,6 +25,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".navigation_pages.profile.ChangeLanguage"
+            android:exported="false" />
+        <activity
+            android:name=".navigation_pages.profile.AddTool"
+            android:exported="false" />
+        <activity
             android:name=".gamification.LeaderBoardActivity"
             android:exported="false" />
         <activity

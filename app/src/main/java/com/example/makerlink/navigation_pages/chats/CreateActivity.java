@@ -1,5 +1,6 @@
 package com.example.makerlink.navigation_pages.chats;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+import com.example.makerlink.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,10 @@ public class CreateActivity extends AppCompatActivity{
     private int USER_ID;
     private Button createbutton;
     private int communityid;
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

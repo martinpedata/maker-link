@@ -38,12 +38,12 @@
                     android:id="@+id/createText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lender Info"
+                    android:text="@string/lender_info_title"
                     android:textAlignment="center"
                     android:textColor="@color/brown"
                     android:textSize="36sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
 
                 <EditText
                     android:id="@+id/rent"
@@ -52,11 +52,11 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
-                    android:hint="Rent"
+                    android:hint="@string/rent_hint"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
 
                 <EditText
                     android:id="@+id/tool"
@@ -65,11 +65,12 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
-                    android:hint="Tooltype"
+                    android:hint="@string/tooltype_hint"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
+
                 <EditText
                     android:id="@+id/starttime"
                     android:layout_width="match_parent"
@@ -77,11 +78,12 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
-                    android:hint="Start time of day"
+                    android:hint="@string/start_time_hint"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
+
                 <EditText
                     android:id="@+id/endtime"
                     android:layout_width="match_parent"
@@ -89,11 +91,12 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
-                    android:hint="End time of day"
+                    android:hint="@string/end_time_hint"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
+
                 <EditText
                     android:id="@+id/description_of_tools"
                     android:layout_width="match_parent"
@@ -101,11 +104,11 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
-                    android:hint="Description"
+                    android:hint="@string/description_hint"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
 
                 <Button
                     android:id="@+id/homeButton"
@@ -113,10 +116,10 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/brown"
-                    android:text="To home"
+                    android:text="@string/to_home_button"
                     android:textSize="18sp"
                     app:cornerRadius="20dp"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium" />
 
             </LinearLayout>
             </ScrollView>

@@ -44,15 +44,25 @@
                 android:text="Address"
                 android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_light"/>
-
-            <TextView
-                android:id="@+id/textRent"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rent"
-                android:textColor="@color/black"
-                android:fontFamily="@font/montserrat_medium"/>
-
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rent1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_medium"/>
+                <TextView
+                    android:id="@+id/textRent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginStart="5dp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <Button
@@ -61,7 +71,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:backgroundTint="@color/brown"
-            android:text="Order"
+            android:text="@string/order"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/montserrat_semibold"/>
 

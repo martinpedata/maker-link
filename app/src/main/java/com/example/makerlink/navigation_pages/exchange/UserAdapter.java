@@ -50,7 +50,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User user = userList.get(position);
         holder.textName.setText(user.getName());
         holder.textAddress.setText(user.getAddress());
-        holder.textRent.setText("Rent: " + user.getRent() + "€/hour");
+        holder.textRent.setText(user.getRent() + "€/hour");
         holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
         holder.goButton.setOnClickListener(new View.OnClickListener(){
 

@@ -87,7 +87,7 @@ public class Lender extends AppCompatActivity {
     public void gotohome(String requestURL) {
         requestQueue = Volley.newRequestQueue(this);
 
-        // Make the GET request to retrieve community names the user is part of
+
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -95,7 +95,7 @@ public class Lender extends AppCompatActivity {
                         try {
                             JSONObject communityObject = response.getJSONObject(0);
 
-                            // Get the community name and community_id from the response
+
                             UserID = communityObject.getInt("user_id");
 
                         } catch (JSONException e) {
@@ -140,7 +140,7 @@ public class Lender extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("addressval", address_val);  // must match backend expected name
+                params.put("addressval", address_val);
                 params.put("toolval", tooltype);
                 params.put("userval", String.valueOf(user_id));
                 params.put("rentval",rent);
