@@ -40,7 +40,7 @@
         android:id="@+id/btnSetTime"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text="Set Time"
+        android:text="@string/settime"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/brown"
         android:textColor="@color/white" />

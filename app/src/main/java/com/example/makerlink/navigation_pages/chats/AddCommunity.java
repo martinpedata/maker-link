@@ -2,6 +2,7 @@ package com.example.makerlink.navigation_pages.chats;
 
 import static com.example.makerlink.R.*;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,12 +15,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.makerlink.R;
+import com.example.makerlink.utils.LocaleHelper;
 
 public class AddCommunity extends AppCompatActivity {
 
     private ImageButton backbutton1;
     private Button join1;
     private Button create1;
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

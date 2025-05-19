@@ -31,7 +31,7 @@
                 android:id="@+id/nameLender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@string/name"
                 android:textStyle="bold"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
@@ -44,7 +44,7 @@
                 android:id="@+id/addressLender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/address"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
@@ -55,17 +55,18 @@
                 android:id="@+id/rentlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rent"
+                android:text="@string/rent"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/black"/>
+
             <EditText
                 android:id="@+id/startlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Start of Renting"
+                android:text="@string/start_of_renting"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
@@ -74,11 +75,12 @@
                 android:textSize="14dp"
                 android:focusable="false"
                 android:clickable="true"/>
+
             <EditText
                 android:id="@+id/endlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="End of Renting"
+                android:text="@string/end_of_renting"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
@@ -92,7 +94,7 @@
                 android:id="@+id/descriptionlender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/description"
                 android:background="@drawable/bubble_background"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
@@ -105,7 +107,7 @@
         android:id="@+id/orderButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Order"
+        android:text="@string/order"
         android:backgroundTint="@color/brown"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,5 +115,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
         android:fontFamily="@font/montserrat_medium"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

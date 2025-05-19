@@ -53,7 +53,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Posted by"
+                    android:text="@string/posted_by"
                     android:layout_marginLeft="50dp"
                     android:textColor="#757575"
                     android:textSize="16dp"
@@ -65,14 +65,13 @@
                     android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loading..."
+                    android:text="@string/loading"
                     android:layout_marginLeft="10dp"
                     android:textColor="#757575"
                     android:textSize="16dp"
                     android:textStyle="italic"
                     android:fontFamily="@font/montserrat_medium"/>
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_centerVertical="true"
-                            android:text="Posted: "
+                            android:text="@string/posted"
                             android:textSize="10sp"
                             android:padding="2dp"
                             app:tint="#757575"
@@ -111,7 +110,7 @@
                             android:layout_marginLeft="31dp"
                             android:layout_toRightOf="@+id/postText"
                             android:includeFontPadding="false"
-                            android:text="Loading..."
+                            android:text="@string/loading"
                             android:textColor="#757575"
                             android:textSize="10sp"
                             android:fontFamily="@font/montserrat_medium"/>
@@ -138,7 +137,7 @@
                             android:layout_marginLeft="10dp"
                             android:includeFontPadding="false"
                             android:layout_centerVertical="true"
-                            android:text="Domain: "
+                            android:text="@string/domain1"
                             android:padding="2dp"
                             android:textColor="#757575"
                             android:textSize="10sp"
@@ -152,7 +151,7 @@
                             android:layout_toRightOf="@+id/nameDomain"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="30dp"
-                            android:text="Loading..."
+                            android:text="@string/loading"
                             android:textColor="#757575"
                             android:textSize="10sp"
                             android:layout_centerInParent="true"
@@ -176,7 +175,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Document"
+                android:text="@string/document"
                 android:textSize="24sp"
                 android:textColor="@color/brown"
                 android:textStyle="bold"
@@ -196,7 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="60dp"
-                android:text="Open Document"
+                android:text="@string/open_document"
                 android:textColor="@color/cream"
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/brown"
@@ -213,7 +212,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comment Section"
+                android:text="@string/comment_section"
                 android:textSize="24sp"
                 android:textColor="@color/brown"
                 android:textStyle="bold"
@@ -221,7 +220,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Implement if you have time ! "
+                android:text="@string/implement_if_time"
                 android:fontFamily="@font/montserrat_medium"/>
         </LinearLayout>
     </LinearLayout>

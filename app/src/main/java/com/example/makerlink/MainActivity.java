@@ -1,8 +1,10 @@
 package com.example.makerlink;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.makerlink.utils.LocaleHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private String userName;
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

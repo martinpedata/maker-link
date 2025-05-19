@@ -10,11 +10,6 @@
     android:id="@+id/main"
     android:background="@drawable/backgroundsignup">
 
-
-    <!-- ConstraintLayout (child of LinearLayout) -->
-
-    <!-- Other views in LinearLayout (e.g., buttons, text) -->
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +30,7 @@
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:fontFamily="@font/montserrat_bold"
                 android:textAlignment="center"
                 android:textColor="@color/brown"
@@ -49,7 +44,7 @@
                 android:background="@drawable/custom_background_login"
                 android:drawableLeft="@drawable/sharp_account_circle_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="@string/hint_username"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
@@ -63,7 +58,7 @@
                 android:background="@drawable/custom_background_login"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -77,7 +72,7 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/brown"
                 android:onClick="goToHome"
-                android:text="Login"
+                android:text="@string/login"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -89,7 +84,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="7dp"
                 android:padding="8dp"
-                android:text="Don't have an account? Sign Up"
+                android:text="@string/dont_have_account"
                 android:textAlignment="center"
                 android:textColor="@color/link_color_selector"
                 android:textSize="14sp"
@@ -97,6 +92,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 
 </LinearLayout>
