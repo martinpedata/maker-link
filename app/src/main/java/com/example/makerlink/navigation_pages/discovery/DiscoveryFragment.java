@@ -44,7 +44,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: CHANGE NAME TO PROFILE FRAGMENT AND CHANGE THE PREVIOUS PROFILE TO SETTINGS.
 public class DiscoveryFragment extends Fragment {
 
     private FragmentDiscoveryBinding binding;
