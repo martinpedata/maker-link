@@ -32,6 +32,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+import com.example.makerlink.threads.CommentModel;
 import com.example.makerlink.threads.CommentsActivity;
 
 import org.json.JSONArray;
@@ -44,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+//TODO: IMPLEMENT " ADD COMMENT "
 public class ThreadActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private String domainName;
@@ -69,6 +71,7 @@ public class ThreadActivity extends AppCompatActivity {
     private WebView embeddedLink;
     private String threadDocument;
     private CardView commentsCard;
+    private TextView authorComment, contentComment, likesComment;
     private boolean isFavorite = false;
 
     @Override
@@ -87,9 +90,13 @@ public class ThreadActivity extends AppCompatActivity {
         authorText = findViewById(R.id.authorItem);
         heart = findViewById(R.id.addToPlaylist);
         commentsCard = findViewById(R.id.commentsCardView);
+        authorComment = findViewById(R.id.commentAuthorTextThread);
+        contentComment = findViewById(R.id.commentContentTextThread);
+        likesComment = findViewById(R.id.commentLikesThread);
         embeddedLink = findViewById(R.id.threadDocumentPlaceHolder);
 
         /// Retrieve info from RecyclerThreadAdapter class (from the extra info on intent)
+
         threadName = getIntent().getStringExtra("threadName");
         threadID = getIntent().getIntExtra("threadID", -1);
         authorID = getIntent().getIntExtra("threadAuthor", -1); //THe person who created the thread
@@ -100,6 +107,7 @@ public class ThreadActivity extends AppCompatActivity {
         threadDocument = getIntent().getStringExtra("threadDocument");
 
         /// Retrive playlist and user info from PlaylistRecyclerActivity class (from shared pref)
+
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         userID = sharedPref.getInt("user_ID", -1); // The person currently using the app
 
@@ -163,7 +171,7 @@ public class ThreadActivity extends AppCompatActivity {
             }
         });
 
-
+        retrieveComments("https://studev.groept.be/api/a24pt215/RetrieveCommentsOfThread/" + threadID);
 
         /// Display document in embedded placeholder
 
@@ -352,9 +360,34 @@ public class ThreadActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public Bitmap base64ToBitMap(String b64String){
-        byte[] imageBytes = Base64.decode( b64String, Base64.DEFAULT );
-        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
-        return bitmap;
+    public void retrieveComments(String requestURL) {
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+                            JSONObject o = response.getJSONObject(0);
+                            String content = o.getString("content");
+                            int likes = o.getInt("likes");
+                            String username = o.getString("username");
+                            authorComment.setText(username);
+                            contentComment.setText(content);
+                            likesComment.setText(String.valueOf(likes));
+                        }
+                        catch (JSONException e) {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
     }
+
 }
