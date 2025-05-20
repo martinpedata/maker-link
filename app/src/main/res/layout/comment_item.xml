@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginBottom="0.1dp"
+    android:background="@drawable/baseline_chat_bubble_24">
+
+    <LinearLayout
+        android:id="@+id/commentTextContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical"
+        android:layout_toStartOf="@+id/upvoteContainer"
+        android:layout_alignParentLeft="true">
+
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/commentAuthorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium_italic"
+            android:text="Author"
+            android:textSize="12sp"
+            android:textColor="#666" />
+
+        <TextView
+            android:id="@+id/commentContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment "
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="3dp" />
+    </LinearLayout>
+
+    <!-- CardView container for upvote button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/upvoteContainer"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="10dp"
+        android:foreground="?android:selectableItemBackgroundBorderless"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#F5F5F5"
+        android:backgroundTint="@color/cream">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <ImageButton
+                android:id="@+id/upvoteButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_upvote"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="Upvote"
+                app:tint="@color/teal_500" />
+
+            <TextView
+                android:id="@+id/commentLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/upvoteButton"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/teal_500"
+                android:text="10"
+                android:textSize="17sp"
+                android:fontFamily="@font/montserrat_semibold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

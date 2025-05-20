@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
+import com.example.makerlink.threads.CommentsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,6 +68,7 @@ public class ThreadActivity extends AppCompatActivity {
     private String date;
     private WebView embeddedLink;
     private String threadDocument;
+    private CardView commentsCard;
     private boolean isFavorite = false;
 
     @Override
@@ -83,6 +86,7 @@ public class ThreadActivity extends AppCompatActivity {
         dateText = findViewById(R.id.date);
         authorText = findViewById(R.id.authorItem);
         heart = findViewById(R.id.addToPlaylist);
+        commentsCard = findViewById(R.id.commentsCardView);
         embeddedLink = findViewById(R.id.threadDocumentPlaceHolder);
 
         /// Retrieve info from RecyclerThreadAdapter class (from the extra info on intent)
@@ -149,6 +153,17 @@ public class ThreadActivity extends AppCompatActivity {
                 populatePlaylistMenu("https://studev.groept.be/api/a24pt215/RetrievePlaylists/" + userID);
             }
         });
+
+        commentsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ThreadActivity.this, CommentsActivity.class);
+                i.putExtra("threadID", threadID);
+                startActivity(i);
+            }
+        });
+
+
 
         /// Display document in embedded placeholder
 

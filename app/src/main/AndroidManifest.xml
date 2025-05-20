@@ -31,6 +31,9 @@
             android:name=".navigation_pages.profile.AddTool"
             android:exported="false" />
         <activity
+            android:name=".threads.CommentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".gamification.LeaderBoardActivity"
             android:exported="false" />
         <activity
