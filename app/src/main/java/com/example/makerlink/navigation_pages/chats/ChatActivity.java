@@ -225,7 +225,7 @@ public class ChatActivity extends AppCompatActivity {
                     Log.d("MessagePost", "Response: " + response);
                     Toast.makeText(ChatActivity.this, "Message sent!", Toast.LENGTH_SHORT).show();
                     setUpMessages("https://studev.groept.be/api/a24pt215/getMessage/" + chatId);
-                    getAbsentUserTokensAndNotify(chatId, user, message_txt);
+                    getAbsentUserTokensAndNotify(chatId, user, message_txt, chatName);
                 },
                 error -> {
                     if (error.networkResponse != null && error.networkResponse.data != null) {
@@ -357,7 +357,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         }).start(); // Run in background thread to avoid NetworkOnMainThreadException
     }
-    public void getAbsentUserTokensAndNotify(int chatId, String sender, String message) {
+    public void getAbsentUserTokensAndNotify(int chatId, String sender, String message, String chatName) {
         String url = "https://studev.groept.be/api/a24pt215/getAbsentUserTokens/" + chatId;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -376,7 +376,7 @@ public class ChatActivity extends AppCompatActivity {
                     // 🔄 Now run the notification sending in a background thread
                     new Thread(() -> {
                         try {
-                            sendFCMNotification(tokens, sender + " sent a message", message);
+                            sendFCMNotification(tokens, sender + " sent a message at chat"+chatName, message);
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.e("FCM_SEND", "Failed to send notification: " + e.getMessage());
