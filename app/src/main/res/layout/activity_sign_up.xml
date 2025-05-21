@@ -49,7 +49,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_first_name"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -61,7 +61,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_birth_date"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -73,7 +73,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_username"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -86,7 +86,7 @@
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -98,7 +98,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_lender"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -110,7 +110,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_background_login"
                 android:hint="@string/hint_address"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -122,6 +122,7 @@
                 android:backgroundTint="@color/brown"
                 android:onClick="goToHome"
                 android:text="@string/sign_up_button"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 android:fontFamily="@font/montserrat_medium"/>

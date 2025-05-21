@@ -73,6 +73,7 @@
                 android:backgroundTint="@color/brown"
                 android:onClick="goToHome"
                 android:text="@string/login"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 android:fontFamily="@font/montserrat_medium"/>
