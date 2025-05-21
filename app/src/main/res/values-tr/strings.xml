@@ -67,7 +67,7 @@
     <string name="hint_birth_date">Doğum Tarihi: GG-AA-YYYY</string>
     <string name="hint_username">Kullanıcı Adı</string>
     <string name="hint_password">Şifre</string>
-    <string name="hint_lender">Kredi Veren? E / H</string>
+    <string name="hint_lender">Kredi Veren? Y / N</string>
     <string name="hint_address">Adres</string>
     <string name="sign_up_button">Kayıt Ol</string>
     <string name="login">Giriş</string>
@@ -100,4 +100,6 @@
     <string name="to_home_button">Ana Sayfaya</string>
     <string name="leaderboard">Liderlik Tablosu</string>
     <string name="settime">Zamanı Ayarla</string>
+    <string name="change">Değiştirmek</string>
+    <string name="upload_image_lender">Resim Yükle</string>
 </resources>

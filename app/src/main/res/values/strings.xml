@@ -99,4 +99,6 @@
     <string name="to_home_button">To home</string>
     <string name="leaderboard">Leader Board</string>
     <string name="settime">Set Time</string>
+    <string name="change">Modify</string>
+    <string name="upload_image_lender">Upload Image</string>
 </resources>

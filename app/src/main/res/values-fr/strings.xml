@@ -100,4 +100,6 @@
     <string name="to_home_button">Accueil</string>
     <string name="leaderboard">Tableau de classement</string>
     <string name="settime">Fixer Une Heure</string>
+    <string name="change">Modifier</string>
+    <string name="upload_image_lender">Télécharger Image</string>
 </resources>
