@@ -99,7 +99,7 @@ public class ChatActivity extends AppCompatActivity {
         chatId = getIntent().getIntExtra("chat_id", -1);
         String image64 = getIntent().getStringExtra("imagePath");
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
-        User = sharedPref.getString("Name", null);
+        User = sharedPref.getString("UserName", null);
 
         imageButton = findViewById(R.id.backButton);
         recyclerView = findViewById(R.id.recyclerViewMessages);
