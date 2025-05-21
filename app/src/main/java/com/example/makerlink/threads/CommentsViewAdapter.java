@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +70,7 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
         holder.contentText.setText(comment.getCommentContent());
         holder.authorText.setText(comment.getNameuser());
 
-        holder.upvoteButton.setTag(comment.getID()); ///THE TAG IS NEEDED WHEN MAKING ASYNCHRONOUS CALLS IN ON BIND VIEW HOLDER BECAUSE THE HOLDER MIGHT BIND TO A NEW COMMENT BEFORE ASYNCHRONOUS CALL IS FINISHED.
+        //holder.upvoteButton.setTag(comment.getID()); ///THE TAG IS NEEDED WHEN MAKING ASYNCHRONOUS CALLS IN ON BIND VIEW HOLDER BECAUSE THE HOLDER MIGHT BIND TO A NEW COMMENT BEFORE ASYNCHRONOUS CALL IS FINISHED.
 
         isUpVoted("https://studev.groept.be/api/a24pt215/IsUpvoted/"+ userID + "/" + comment.getID(), comment, holder, position);
     }
@@ -79,25 +81,36 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
                     @Override
                     public void onResponse(JSONArray response) {
                         System.out.println("success");
+                        holder.upvoteButton.setOnClickListener(null); // prevent duplicate listeners
                         if (response.length() == 1) {
-                            if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
+                            //if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
                             holder.upvoteButton.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                             holder.upvoteButton.setOnClickListener(e -> {
+                                holder.upvoteButton.setClickable(false);
                                 updateLikesComment("https://studev.groept.be/api/a24pt215/DecreaseLikesOfComment/" + comment.getID());
-                                updateLikesMapping("https://studev.groept.be/api/a24pt215/DeleteCommentUpvote/" + userID + "/" + comment.getID());
+                                updateLikesMapping("https://studev.groept.be/api/a24pt215/DeleteCommentUpvote/" + userID + "/" + comment.getID(), holder);
                                 holder.upvoteButton.setColorFilter(ContextCompat.getColor(context, R.color.teal_500), PorterDuff.Mode.SRC_IN);
                                 comment.removeLike();
+                                // Re-enable after 1 second (1000 milliseconds)
+                                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                    holder.upvoteButton.setClickable(true);
+                                }, 1000);
                                 notifyItemChanged(position);
                             });
                         }
                         else {
-                            if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
+                            //if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
                             holder.upvoteButton.setColorFilter(ContextCompat.getColor(context, R.color.teal_500), PorterDuff.Mode.SRC_IN);
                             holder.upvoteButton.setOnClickListener(e -> {
+                                holder.upvoteButton.setClickable(false);
                                 updateLikesComment("https://studev.groept.be/api/a24pt215/UpdateLikesOfComment/" + comment.getID());
-                                updateLikesMapping("https://studev.groept.be/api/a24pt215/InsertIntoCommentUpvotes/" + userID + "/" + comment.getID());
+                                updateLikesMapping("https://studev.groept.be/api/a24pt215/InsertIntoCommentUpvotes/" + userID + "/" + comment.getID(), holder);
                                 holder.upvoteButton.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                                 comment.addLike();
+                                // Re-enable after 1 second (1000 milliseconds)
+                                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                    holder.upvoteButton.setClickable(true);
+                                }, 1000);
                                 notifyItemChanged(position);
                             });
                         }
@@ -131,7 +144,7 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
             requestQueue.add(submitRequest);
     }
 
-    private void updateLikesMapping(String requestURL) {
+    private void updateLikesMapping(String requestURL, MyViewHolder holder) {
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
