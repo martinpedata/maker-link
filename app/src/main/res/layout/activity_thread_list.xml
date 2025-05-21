@@ -13,13 +13,14 @@
     <TextView
         android:layout_marginTop="60dp"
         android:id="@+id/headingRecycler"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loading"
         android:textColor="@color/brown"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textAlignment="center"
         android:fontFamily="@font/montserrat_medium"/>
 
     <androidx.recyclerview.widget.RecyclerView

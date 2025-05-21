@@ -80,6 +80,11 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 applyTextGradient(holder.username, "#CD7F32", "#B87333", "#8B4513");
                 holder.points.setTextColor(ContextCompat.getColor(context, R.color.bronze));
                 break;
+            default: //White
+                holder.points.setTextColor(ContextCompat.getColor(context, R.color.white));
+                holder.placementText.setTextColor(ContextCompat.getColor(context, R.color.white));
+                holder.username.setTextColor(ContextCompat.getColor(context, R.color.white));
+                holder.badge.setVisibility(View.GONE);
         }
     }
 
