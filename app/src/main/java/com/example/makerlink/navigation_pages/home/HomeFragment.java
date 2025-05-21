@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.makerlink.databinding.FragmentHomeBinding;
 import com.example.makerlink.gamification.LeaderBoardActivity;
+import com.example.makerlink.navigation_pages.discovery.OrderList;
 import com.example.makerlink.playlists.PlaylistRecyclerActivity;
 import com.example.makerlink.threads.list.FilteredThreadRecyclerActivity;
 import com.example.makerlink.threads.list.ThreadRecyclerActivity;
@@ -51,6 +52,25 @@ public class HomeFragment extends Fragment {
         ImageView carpentryImage = binding.carpentryPic;
         CardView playlistFolder = binding.playlistFolder;
         CardView rankingFolder = binding.leaderboardButton;
+        CardView orders = binding.orderview;
+
+        orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("isFiltered", 5).apply();
+                editor.putString("nameDomain", "Your Playlists");
+                ProgressDialog progressDialog = new ProgressDialog(getActivity()); // or requireActivity()
+                progressDialog.setMessage("Opening page, please wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    Intent intent = new Intent(getActivity(), OrderList.class);
+                    startActivity(intent);
+                    progressDialog.dismiss();
+                }, 300);
+            }
+        });
 
         playlistFolder.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -95,6 +95,13 @@ public class DiscoveryFragment extends Fragment {
                 startActivity(i);
             }
         });
+        ordersCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), OrderList.class);
+                startActivity(i);
+            }
+        });
         //TODO:implement orders card.
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
