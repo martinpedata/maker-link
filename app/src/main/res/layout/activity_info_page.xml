@@ -24,9 +24,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop" /> <!-- Replace with actual image -->
+                android:scaleType="centerCrop"
+                android:id="@+id/image_of_user"/>
 
-            <!-- Bubble TextViews -->
             <TextView
                 android:id="@+id/nameLender"
                 android:layout_width="match_parent"

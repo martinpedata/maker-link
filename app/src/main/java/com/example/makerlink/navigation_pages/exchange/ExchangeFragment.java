@@ -310,7 +310,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject communityObject = response.getJSONObject(i);
 
-                                // Get the community name and community_id from the response
+                                String image = communityObject.getString("image_res");
                                 int id = communityObject.getInt("user_id");
                                 editor.putInt("lender_id", id).apply();
                                 String name = communityObject.getString("name");
@@ -322,7 +322,7 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
                                 int endofday = communityObject.getInt("end_time");
 
                                 if (id != own_id){// Add the community to the chatList
-                                    userList.add(new User(name, address,rent,tool, description, startofday, endofday));
+                                    userList.add(new User(name, address,rent,tool, description, startofday, endofday, image));
                                     items.add(tool);
                                 }
                             }

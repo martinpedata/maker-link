@@ -1,8 +1,10 @@
 package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,12 +66,15 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
     public void onBindViewHolder(@NonNull CommunityViewHolder holder, int position) {
         Chat chat = chatList.get(position);
         holder.textName.setText(chat.getName());
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);  // Or set an actual image
+        holder.imageView.setImageBitmap(chat.getImagebitmap());  // Or set an actual image
         holder.itemView.setOnClickListener(v -> {
             ispresent(chat.getId());
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("chatName", chat.getName());
             intent.putExtra("chat_id", chat.getId());
+            Bitmap bitmap = chat.getImagebitmap();
+            String imagePath = saveImageToInternalStorage(v.getContext(), bitmap);
+            intent.putExtra("imagePath", imagePath);
             context.startActivity(intent);
         });
     }
@@ -169,5 +176,20 @@ public class Community_Adapter extends RecyclerView.Adapter<Community_Adapter.Co
         };
 
         Volley.newRequestQueue(context).add(stringRequest);
+    }
+    private String saveImageToInternalStorage(Context context, Bitmap bitmap) {
+        ContextWrapper cw = new ContextWrapper(context);
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File imagePath = new File(directory, "profileImage_" + System.currentTimeMillis() + ".jpg"); // unique filename
+
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imagePath.getAbsolutePath();
     }
 }

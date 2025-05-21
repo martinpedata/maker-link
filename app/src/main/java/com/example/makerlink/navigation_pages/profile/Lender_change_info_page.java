@@ -70,15 +70,15 @@ public class Lender_change_info_page extends AppCompatActivity {
         String description1 = getIntent().getStringExtra("description_of_tool");
         int startday = getIntent().getIntExtra("start_of_user", -1);
         int endday = getIntent().getIntExtra("end_of_user", -1);
-        image64 = getIntent().getStringExtra("image");
+        image64 = getIntent().getStringExtra("imagePath");
         location_id = getIntent().getIntExtra("location_id", -1);
-        bitmap = base64ToBitMap(image64);
         address.setText(address1);
         tool.setText(tool1);
         rent.setText(String.valueOf(rent1));
         description.setText(description1);
         starthour.setText(String.valueOf(startday));
         endhour.setText(String.valueOf(endday));
+        bitmap = BitmapFactory.decodeFile(image64);
         imagetool.setImageBitmap(bitmap);
         placeholderThumbnail.setVisibility(View.INVISIBLE);
         requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(this);

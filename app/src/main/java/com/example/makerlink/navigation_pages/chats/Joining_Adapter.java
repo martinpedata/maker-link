@@ -65,7 +65,7 @@ public class Joining_Adapter extends RecyclerView.Adapter<Joining_Adapter.Commun
     public void onBindViewHolder(@NonNull CommunityViewHolder holder, int position) {
         Chat chat = chatList.get(position);
         holder.textName.setText(chat.getName());
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.imageView.setImageBitmap(chat.getImagebitmap());
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

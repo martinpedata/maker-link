@@ -203,7 +203,8 @@ public class JoinActivity extends AppCompatActivity {
                                 JSONObject o = response.getJSONObject(i);
                                 String namechat = o.getString("name");
                                 int chat_id = o.getInt("id");
-                                chatList.add(new Chat(namechat, chat_id));
+                                String image = o.getString("image_res");
+                                chatList.add(new Chat(namechat, chat_id, image));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
