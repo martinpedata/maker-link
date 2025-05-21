@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
-        startPollingForMessages();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -97,6 +97,9 @@ public class ChatActivity extends AppCompatActivity {
         }
         chatName = getIntent().getStringExtra("chatName");
         chatId = getIntent().getIntExtra("chat_id", -1);
+        if (chatId != -1) {
+            startPollingForMessages();
+        }
         String image64 = getIntent().getStringExtra("imagePath");
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         User = sharedPref.getString("UserName", null);
@@ -376,7 +379,7 @@ public class ChatActivity extends AppCompatActivity {
                     // 🔄 Now run the notification sending in a background thread
                     new Thread(() -> {
                         try {
-                            sendFCMNotification(tokens, sender + " sent a message at chat"+chatName, message);
+                            sendFCMNotification(tokens, sender + " sent a message at chat: "+chatName, message);
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.e("FCM_SEND", "Failed to send notification: " + e.getMessage());
