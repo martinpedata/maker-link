@@ -1,7 +1,10 @@
 package com.example.makerlink.threads;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.Log;
@@ -39,10 +42,14 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
     public Context context;
     ArrayList<CommentModel> comments;
     private RequestQueue requestQueue;
+    private int userID;
 
     public CommentsViewAdapter(Context context, ArrayList<CommentModel> comments) {
         this.context = context;
         this.comments = comments;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE);
+        this.userID = sharedPreferences.getInt("user_ID", -1);
+        requestQueue = Volley.newRequestQueue(context);
     }
 
     @NonNull
@@ -60,32 +67,58 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
         holder.likes.setText(String.valueOf(comment.getLikes())); ///CONVERT INTEGER INTO STRING !!!
         holder.contentText.setText(comment.getCommentContent());
         holder.authorText.setText(comment.getNameuser());
-        if (comment.isUpvoted()) {
-            holder.upvoteButton.setOnClickListener(e->{
-                comment.removeLike();
-                comment.setDownVoted();
-                updateLikes("https://studev.groept.be/api/a24pt215/DecreaseLikesOfComment/" + comment.getID());
-                holder.upvoteButton.setColorFilter(ContextCompat.getColor(context, R.color.teal_500), PorterDuff.Mode.SRC_IN);
-            });
-        }
-        else {
-            holder.upvoteButton.setOnClickListener(e->{
-                comment.addLike();
-                comment.setUpVoted();
-                updateLikes("https://studev.groept.be/api/a24pt215/UpdateLikesOfComment/" + comment.getID());
-                holder.upvoteButton.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-            });
-        }
+
+        holder.upvoteButton.setTag(comment.getID()); ///THE TAG IS NEEDED WHEN MAKING ASYNCHRONOUS CALLS IN ON BIND VIEW HOLDER BECAUSE THE HOLDER MIGHT BIND TO A NEW COMMENT BEFORE ASYNCHRONOUS CALL IS FINISHED.
+
+        isUpVoted("https://studev.groept.be/api/a24pt215/IsUpvoted/"+ userID + "/" + comment.getID(), comment, holder, position);
     }
 
-    private void updateLikes(String requestURL) {
-        requestQueue = Volley.newRequestQueue(context);
+    public void isUpVoted(String requestURL, CommentModel comment, MyViewHolder holder, int position) {
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("success");
+                        if (response.length() == 1) {
+                            if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
+                            holder.upvoteButton.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            holder.upvoteButton.setOnClickListener(e -> {
+                                updateLikesComment("https://studev.groept.be/api/a24pt215/DecreaseLikesOfComment/" + comment.getID());
+                                updateLikesMapping("https://studev.groept.be/api/a24pt215/DeleteCommentUpvote/" + userID + "/" + comment.getID());
+                                holder.upvoteButton.setColorFilter(ContextCompat.getColor(context, R.color.teal_500), PorterDuff.Mode.SRC_IN);
+                                comment.removeLike();
+                                notifyItemChanged(position);
+                            });
+                        }
+                        else {
+                            if (!holder.upvoteButton.getTag().equals(comment.getID())) return; // ensure holder still matches
+                            holder.upvoteButton.setColorFilter(ContextCompat.getColor(context, R.color.teal_500), PorterDuff.Mode.SRC_IN);
+                            holder.upvoteButton.setOnClickListener(e -> {
+                                updateLikesComment("https://studev.groept.be/api/a24pt215/UpdateLikesOfComment/" + comment.getID());
+                                updateLikesMapping("https://studev.groept.be/api/a24pt215/InsertIntoCommentUpvotes/" + userID + "/" + comment.getID());
+                                holder.upvoteButton.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                                comment.addLike();
+                                notifyItemChanged(position);
+                            });
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
+    }
+
+    private void updateLikesComment(String requestURL) {
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
                             System.out.println("success");
-                            notifyDataSetChanged();
                         }
                     },
                     new Response.ErrorListener() {
@@ -96,6 +129,24 @@ public class CommentsViewAdapter extends RecyclerView.Adapter<CommentsViewAdapte
                     }
             );
             requestQueue.add(submitRequest);
+    }
+
+    private void updateLikesMapping(String requestURL) {
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("success");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorThreadCreazione", error.getLocalizedMessage());
+                    }
+                }
+        );
+        requestQueue.add(submitRequest);
     }
 
     @Override

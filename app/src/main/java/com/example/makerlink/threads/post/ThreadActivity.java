@@ -171,13 +171,18 @@ public class ThreadActivity extends AppCompatActivity {
             }
         });
 
-        retrieveComments("https://studev.groept.be/api/a24pt215/RetrieveCommentsOfThread/" + threadID);
-
         /// Display document in embedded placeholder
 
         embeddedLink.getSettings().setJavaScriptEnabled(true);
         embeddedLink.setWebViewClient(new WebViewClient());
         embeddedLink.loadUrl(threadDocument);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveComment("https://studev.groept.be/api/a24pt215/RetrieveCommentsOfThread/" + threadID);
 
     }
 
@@ -360,7 +365,7 @@ public class ThreadActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void retrieveComments(String requestURL) {
+    public void retrieveComment(String requestURL) {
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override

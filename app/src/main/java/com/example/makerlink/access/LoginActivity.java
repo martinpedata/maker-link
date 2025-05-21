@@ -73,8 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        //sharedPref.edit().clear().apply();
-
         String savedName = sharedPref.getString("Name", null);//this
 
         /// If name already exists => user already logged in => skip welcome page

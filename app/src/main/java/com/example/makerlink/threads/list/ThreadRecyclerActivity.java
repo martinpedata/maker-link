@@ -105,7 +105,7 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 break;
             }
         if (counter == 0) {
-            heading = sharedPref.getString("nameDomain", null);
+            heading = sharedPref.getString("nameDomain", "null");
             }
 
     }
