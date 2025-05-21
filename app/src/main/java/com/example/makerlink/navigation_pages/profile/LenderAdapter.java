@@ -1,6 +1,9 @@
 package com.example.makerlink.navigation_pages.profile;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,8 @@ import com.example.makerlink.navigation_pages.exchange.InfoPage;
 import com.example.makerlink.navigation_pages.exchange.User;
 import com.example.makerlink.navigation_pages.exchange.UserAdapter;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 public class LenderAdapter extends RecyclerView.Adapter<LenderAdapter.LenderViewHolder>{
@@ -66,7 +71,9 @@ public class LenderAdapter extends RecyclerView.Adapter<LenderAdapter.LenderView
                 intent.putExtra("description_of_tool", user.getLenderDescription());
                 intent.putExtra("start_of_user", user.getLenderStartday());
                 intent.putExtra("end_of_user", user.getLenderEndday());
-                intent.putExtra("image", user.getbase64());
+                Bitmap bitmap = user.getLenderImage();
+                String imagePath = saveImageToInternalStorage(v.getContext(), bitmap);
+                intent.putExtra("imagePath", imagePath);
                 intent.putExtra("location_id", user.getLocationID());
                 v.getContext().startActivity(intent);
             }
@@ -81,6 +88,21 @@ public class LenderAdapter extends RecyclerView.Adapter<LenderAdapter.LenderView
     public void updateList(List<Lender_info> newList) {
         lenderList = newList;
         notifyDataSetChanged();
+    }
+    private String saveImageToInternalStorage(Context context, Bitmap bitmap) {
+        ContextWrapper cw = new ContextWrapper(context);
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File imagePath = new File(directory, "profileImage_" + System.currentTimeMillis() + ".jpg"); // unique filename
+
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imagePath.getAbsolutePath();
     }
 
 

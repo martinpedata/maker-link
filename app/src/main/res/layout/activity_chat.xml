@@ -30,7 +30,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground"
             app:shapeAppearanceOverlay="@style/CircleImageView"
             android:layout_toRightOf="@id/backButton"/>
         <TextView

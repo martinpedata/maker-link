@@ -21,7 +21,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textName, textAddress, textRent;
+        TextView textName, textAddress, textRent, texttooltype;
         Button goButton;
 
         public UserViewHolder(View itemView) {
@@ -31,6 +31,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             textAddress = itemView.findViewById(R.id.textAddress);
             textRent = itemView.findViewById(R.id.textRent);
             goButton = itemView.findViewById(R.id.button);
+            texttooltype = itemView.findViewById(R.id.texttooltype);
         }
     }
 
@@ -51,7 +52,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.textName.setText(user.getName());
         holder.textAddress.setText(user.getAddress());
         holder.textRent.setText(user.getRent() + "€/hour");
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.imageView.setImageBitmap(user.getUserImage());
+        holder.texttooltype.setText(user.getTool());
         holder.goButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -64,6 +66,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 intent.putExtra("description_of_tool", user.getDescription());
                 intent.putExtra("start_of_user", user.getStartday());
                 intent.putExtra("end_of_user", user.getEndday());
+                intent.putExtra("image_user", user.get64());
                 v.getContext().startActivity(intent);
             }
         });

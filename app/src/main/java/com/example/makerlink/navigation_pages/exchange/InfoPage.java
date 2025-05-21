@@ -6,9 +6,12 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -78,6 +82,7 @@ public class InfoPage extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private int start_of_day;
     private int end_of_day;
+    private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +100,7 @@ public class InfoPage extends AppCompatActivity {
         order = findViewById(R.id.orderButton);
         startEditText = findViewById(R.id.startlender);
         endEditText = findViewById(R.id.endlender);
+        image = findViewById(R.id.image_of_user);
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         lender_id = sharedPref.getInt("lender_id", -1);
         lendee_id = sharedPref.getInt("user_ID", -1);
@@ -103,9 +109,12 @@ public class InfoPage extends AppCompatActivity {
 
         setUpReservations("https://studev.groept.be/api/a24pt215/getOrders/"+lender_id);
         String name = getIntent().getStringExtra("name_of_user");
+        String image64 = getIntent().getStringExtra("image_user");
         String address = getIntent().getStringExtra("address_of_user");
         int rentofuser = getIntent().getIntExtra("rent_of_user", -1);
         String descriptionoflender = getIntent().getStringExtra("description_of_tool");
+        Bitmap image1 = base64ToBitMap(image64);
+        image.setImageBitmap(image1);
         tool = getIntent().getStringExtra("tool_of_user");
         start_of_day = getIntent().getIntExtra("start_of_user", -1);
         end_of_day = getIntent().getIntExtra("end_of_user", -1);
@@ -373,5 +382,10 @@ public class InfoPage extends AppCompatActivity {
         };
 
         Volley.newRequestQueue(InfoPage.this).add(stringRequest);
+    }
+    public Bitmap base64ToBitMap(String b64String){
+        byte[] imageBytes = Base64.decode( b64String, Base64.NO_WRAP );
+        Bitmap bitmap = BitmapFactory.decodeByteArray( imageBytes, 0, imageBytes.length );
+        return bitmap;
     }
 }

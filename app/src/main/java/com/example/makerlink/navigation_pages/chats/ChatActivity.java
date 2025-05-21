@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +66,8 @@ public class ChatActivity extends AppCompatActivity {
     private String User; // Replace with actual user if needed
     private int chatId;
     private RequestQueue requestQueue;
+    private ImageView image;
+    private Bitmap bitmap;
     private static final long POLL_INTERVAL = 5000;
 
     // Handler for periodic updates
@@ -92,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         }
         chatName = getIntent().getStringExtra("chatName");
         chatId = getIntent().getIntExtra("chat_id", -1);
+        String image64 = getIntent().getStringExtra("imagePath");
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         User = sharedPref.getString("Name", null);
 
@@ -100,6 +106,9 @@ public class ChatActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextMessage);
         sendButton = findViewById(R.id.buttonSend);
         nameofcommunity = findViewById(R.id.textView);
+        image = findViewById(R.id.imageView);
+        bitmap = BitmapFactory.decodeFile(image64);
+        image.setImageBitmap(bitmap);
 
         if (nameofcommunity != null && chatName != null) {
             nameofcommunity.setText(chatName);

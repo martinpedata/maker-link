@@ -12,8 +12,8 @@
       android:id="@+id/backButton"
       android:layout_width="48dp"
       android:layout_height="48dp"
-      android:layout_marginTop="30dp"
-      android:layout_marginLeft="15dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="10dp"
       android:layout_gravity="center_vertical"
       android:background="?attr/selectableItemBackgroundBorderless"
       android:src="@drawable/baseline_arrow_back_24_new"
@@ -23,8 +23,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:gravity="center"
-      android:layout_marginTop="90dp">
+      android:gravity="center">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,12 +33,14 @@
         android:background="@drawable/custom_background_login"
         android:backgroundTint="@color/darkCream">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="380dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:padding="24dp">
+
 
             <TextView
                 android:id="@+id/createText"
@@ -51,6 +52,49 @@
                 android:textSize="36sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_medium"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/threadThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="onBtnPickClicked"
+                android:background="@drawable/mechanics_pic">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/thumbnailImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/placeholderThumbnail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/photo"
+                        android:layout_centerInParent="true"
+                        app:tint="@color/lightBrown" />
+
+                    <TextView
+                        android:id="@+id/clickMeThumbnail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/placeholderThumbnail"
+                        android:text="@string/click_me"
+                        android:fontFamily="@font/montserrat_medium_italic"
+                        android:textColor="#BFA088"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
             <EditText
                 android:id="@+id/communityname"
@@ -62,6 +106,7 @@
                 android:hint="@string/community_name"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
+                android:textColorHint="@color/gray"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
 
@@ -74,6 +119,7 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/domain"
                 android:paddingLeft="20dp"
+                android:textColorHint="@color/gray"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_500"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -87,6 +133,7 @@
                 android:text="@string/create"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_medium"/>
 
         </LinearLayout>

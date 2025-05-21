@@ -1,13 +1,17 @@
 package com.example.makerlink.navigation_pages.chats;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -153,9 +159,10 @@ public class ChatsFragment extends Fragment {
                                 // Get the community name and community_id from the response
                                 String name = communityObject.getString("name");
                                 int communityId = communityObject.getInt("community");
+                                String image = communityObject.getString("image_res");
 
                                 // Add the community to the chatList
-                                chatList.add(new Chat(name, communityId));
+                                chatList.add(new Chat(name, communityId, image));
                             }
 
                             // Now, set the adapter with the list of communities
@@ -165,7 +172,10 @@ public class ChatsFragment extends Fragment {
                                     // Pass the community name and ID to the next screen
                                     Intent intent = new Intent(getContext(), ChatActivity.class);
                                     intent.putExtra("chat_name", chat.getName());
-                                    intent.putExtra("community_id", chat.getId()); // Pass the community ID as well
+                                    intent.putExtra("community_id", chat.getId());
+                                    Bitmap bitmap = chat.getImagebitmap();
+                                    String imagePath = saveImageToInternalStorage(getContext(), bitmap);
+                                    intent.putExtra("imagePath", imagePath);
                                     startActivity(intent);
                                 });
 
@@ -238,6 +248,21 @@ public class ChatsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    private String saveImageToInternalStorage(Context context, Bitmap bitmap) {
+        ContextWrapper cw = new ContextWrapper(context);
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File imagePath = new File(directory, "profileImage_" + System.currentTimeMillis() + ".jpg"); // unique filename
+
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imagePath.getAbsolutePath();
     }
 
 }

@@ -21,10 +21,10 @@
         android:padding="8dp"/>
     <Button
         android:id="@+id/joinButton"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginLeft="145dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/lightBrown"
         android:text="@string/join"
         android:textSize="25sp"
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="130dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="145dp"
+        android:layout_gravity="center_horizontal"
         android:text="@string/or"
         android:textSize="20sp"
         android:gravity="center"
@@ -42,10 +42,10 @@
         android:textColor="@color/black"
         android:fontFamily="@font/montserrat_medium_italic"/>
     <Button
-        android:layout_width="160dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_marginLeft="130dp"
+        android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/lightBrown"
         android:text="@string/create"
         android:textSize="25sp"
