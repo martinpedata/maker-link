@@ -18,8 +18,8 @@ public class CommentModel {
         return id;
     }
 
-    public void setUpVoted(){
-        upvoted = true;
+    public void setUpVoted(boolean vote){
+        upvoted = vote;
     }
     public void setDownVoted() {
         upvoted = false;
