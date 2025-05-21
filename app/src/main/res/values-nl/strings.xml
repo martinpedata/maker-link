@@ -67,7 +67,7 @@
     <string name="hint_birth_date">Geboortedatum: DD-MM-JJJJ</string>
     <string name="hint_username">Gebruikersnaam</string>
     <string name="hint_password">Wachtwoord</string>
-    <string name="hint_lender">Kredietgever? J / N</string>
+    <string name="hint_lender">Kredietgever? Y / N</string>
     <string name="hint_address">Adres</string>
     <string name="sign_up_button">Registreren</string>
     <string name="login">Inloggen</string>
@@ -100,4 +100,6 @@
     <string name="to_home_button">Naar home</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="settime">Stel tijd in</string>
+    <string name="change">Bewerken</string>
+    <string name="upload_image_lender">Afbeelding uploaden</string>
 </resources>

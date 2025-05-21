@@ -67,7 +67,7 @@
     <string name="hint_birth_date">Data di nascita: GG-MM-AAAA</string>
     <string name="hint_username">Nome utente</string>
     <string name="hint_password">Password</string>
-    <string name="hint_lender">Prestatore? S / N</string>
+    <string name="hint_lender">Prestatore? Y / N</string>
     <string name="hint_address">Indirizzo</string>
     <string name="sign_up_button">Registrati</string>
     <string name="login">Accedi</string>
@@ -100,4 +100,6 @@
     <string name="to_home_button">Vai alla home</string>
     <string name="leaderboard">Classifica</string>
     <string name="settime">Imposta ora</string>
+    <string name="change">Modificare</string>
+    <string name="upload_image_lender">Carica Immagine</string>
 </resources>

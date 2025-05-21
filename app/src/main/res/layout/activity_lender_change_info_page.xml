@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/cream"
+    tools:context=".navigation_pages.profile.ProfileFragment">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_lender_info"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/brown"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_image_lender"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center_horizontal"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/threadThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="onBtnPickClicked"
+            android:background="@drawable/mechanics_pic">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/thumbnailImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/placeholderThumbnail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/photo"
+                    android:layout_centerInParent="true"
+                    app:tint="@color/lightBrown" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_lender_info"
+            android:textColor="@color/teal_500"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center_horizontal"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_address"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address_profile_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/map"
+                    android:drawablePadding="13dp"
+                    android:text="Andrea Vesaliustraat"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tooltype_hint"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tooltype_change_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/sharp_tools_power_drill_24_1"
+                    android:drawablePadding="13dp"
+                    android:text="User"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/rent"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rent_change_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/outline_attach_money_24_1"
+                    android:drawablePadding="13dp"
+                    android:text="Username"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description_hint"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lender_description_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/outline_description_24"
+                    android:drawablePadding="13dp"
+                    android:text="hi"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/start_time_hint"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/start_time_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
+                    android:drawablePadding="13dp"
+                    android:text="3"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/end_time_hint"
+                android:textColorHint="@color/gray"
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/darkCream">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/end_time_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
+                    android:drawablePadding="13dp"
+                    android:text="19"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/savebutton"
+            app:cornerRadius="15dp"
+            android:backgroundTint="@color/lightBrown"
+            android:textColor="@color/white"
+            android:text="@string/change"
+            android:textSize="23sp"/>
+    </LinearLayout>
+</ScrollView>

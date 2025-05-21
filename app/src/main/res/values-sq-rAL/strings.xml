@@ -67,7 +67,7 @@
     <string name="hint_birth_date">Data e Lindjes: DD-MM-VVVV</string>
     <string name="hint_username">Emër Përdoruesi</string>
     <string name="hint_password">Fjalëkalimi</string>
-    <string name="hint_lender">Huadhënës? P / J</string>
+    <string name="hint_lender">Huadhënës? Y / N</string>
     <string name="hint_address">Adresa</string>
     <string name="sign_up_button">Regjistrohu</string>
     <string name="login">Hyr</string>
@@ -100,4 +100,6 @@
     <string name="to_home_button">Te shtëpia</string>
     <string name="leaderboard">Tabela e Renditjes</string>
     <string name="settime">Cakto Kohën</string>
+    <string name="change">Modifiko</string>
+    <string name="upload_image_lender">Ngarko imazhin</string>
 </resources>
