@@ -84,7 +84,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="Send"
         app:srcCompat="@android:drawable/ic_menu_send"
-        app:backgroundTint="@color/better_blue"
+        app:backgroundTint="#654321"
         app:tint="@android:color/white"/>
 
 </RelativeLayout>

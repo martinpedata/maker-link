@@ -108,7 +108,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/order"
-        android:backgroundTint="@color/brown"
+        android:backgroundTint="@color/better_blue"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

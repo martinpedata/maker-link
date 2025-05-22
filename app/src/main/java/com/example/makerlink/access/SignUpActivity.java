@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordInput = HashCredentials.hashPassWord(pw.getText().toString(), salt);  //Produce a salted hashed pw
 
         un = findViewById(R.id.username);
-        usernameInput = un.getText().toString();
+        usernameInput = un.getText().toString().trim();
 
         ld = findViewById(R.id.lender);
         lenderInput = ld.getText().toString();

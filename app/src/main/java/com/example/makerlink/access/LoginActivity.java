@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         pw = findViewById(R.id.password);
 
         un = findViewById(R.id.username);
-        usernameInput = un.getText().toString();
+        usernameInput = un.getText().toString().trim();
 
         checkValidityOfLogin("https://studev.groept.be/api/a24pt215/AllUserInfo/" + usernameInput);
     }

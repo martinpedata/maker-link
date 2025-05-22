@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
-        android:backgroundTint="@color/better_blue">
+        android:backgroundTint="#DEB887">
 
         <TextView
             android:id="@+id/textViewDateHeader"
@@ -20,7 +20,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
             android:text="Date Header"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textAlignment="center"
             android:gravity="center"
