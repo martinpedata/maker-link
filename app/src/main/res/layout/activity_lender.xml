@@ -57,7 +57,7 @@
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="onBtnPickClicked"
-                    android:background="@drawable/mechanics_pic">
+                    android:background="@color/white">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -99,6 +99,7 @@
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
                     android:hint="@string/rent_hint"
+                    android:textColorHint="@color/lightBrown"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
@@ -112,6 +113,7 @@
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
                     android:hint="@string/tooltype_hint"
+                    android:textColorHint="@color/lightBrown"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
@@ -125,6 +127,7 @@
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
                     android:hint="@string/start_time_hint"
+                    android:textColorHint="@color/lightBrown"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
@@ -138,6 +141,7 @@
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
                     android:hint="@string/end_time_hint"
+                    android:textColorHint="@color/lightBrown"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"
@@ -151,6 +155,7 @@
                     android:background="@drawable/custom_background_login"
                     android:drawablePadding="8dp"
                     android:hint="@string/description_hint"
+                    android:textColorHint="@color/lightBrown"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/teal_500"

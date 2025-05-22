@@ -79,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         un = findViewById(R.id.username);
         usernameInput = un.getText().toString().trim();
+        editor.putString("UserName", usernameInput).apply();
 
         ld = findViewById(R.id.lender);
         lenderInput = ld.getText().toString();

@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+//TODO: Fix golden of last places.
 public class LeaderBoardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

@@ -130,7 +130,7 @@ public class FilteredThreadRecyclerActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        heading.setText("Discover Maker Link \uD83D\uDE80");
+                        heading.setText("Discover ... \uD83D\uDE80");
                         System.out.println("inside onResponse of setUpThread");
                         for (int i = 0; i < response.length(); i++) {
                             try {

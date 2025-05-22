@@ -48,6 +48,8 @@ import java.util.List;
 public class DiscoveryFragment extends Fragment {
 
     private FragmentDiscoveryBinding binding;
+
+    private TextView username;
     private int userID;
     private CardView threadsCard;
     private CardView pointsCard;
@@ -72,6 +74,9 @@ public class DiscoveryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        username = binding.usernameProfile;
+
         threadsCard = binding.threadsCard;
         pointsCard = binding.pointsCard;
         ordersCard = binding.orderCard;
@@ -79,6 +84,7 @@ public class DiscoveryFragment extends Fragment {
         threadsAmount = binding.threadsAmount;
         pointsAmount = binding.pointsScored;
         ordersAmount = binding.orderAmount;
+
 
         threadsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,10 +108,11 @@ public class DiscoveryFragment extends Fragment {
                 startActivity(i);
             }
         });
-        //TODO:implement orders card.
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         userID = sharedPreferences.getInt("user_ID", -1);
+        username.setText(sharedPreferences.getString("UserName", "null"));
     }
 
     @Override

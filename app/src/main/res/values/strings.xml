@@ -92,7 +92,7 @@
     <string name="points_text">500 points</string>
     <string name="lender_info_title">Lender Info</string>
     <string name="rent_hint">Rent</string>
-    <string name="tooltype_hint">Tooltype</string>
+    <string name="tooltype_hint">Tool Type</string>
     <string name="start_time_hint">Start time of day</string>
     <string name="end_time_hint">End time of day</string>
     <string name="description_hint">Description</string>
