@@ -29,12 +29,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//TODO: Fix golden of last places.
+
 public class LeaderBoardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private LeaderBoardAdapter leaderboardAdapter;
-    private int badgeImage;
+    private Integer badgeImage;
     private ArrayList<String> userNames;
     private ArrayList<Integer> pointsUsers;
     private ArrayList<LeaderBoardModel> users;
@@ -106,7 +106,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                                 badgeImage = R.drawable.level1;
                             }
                             else {
-                                badgeImage = R.drawable.noun_hashtag_7722547;
+                                badgeImage = null;
                             }
                             users.add(new LeaderBoardModel(pointsUsers.get(i), badgeImage, i+1, user));
                         }

@@ -415,6 +415,18 @@ public class ChatActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(request);
     }
+    private boolean checkNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                        1001);
+                return false;
+            }
+        }
+        return true;
+    }
     private void vibratePhone() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {

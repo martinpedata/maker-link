@@ -48,21 +48,39 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         LeaderBoardModel currentUser = users.get(position);
+        int placement = currentUser.getPlacement();
+
+        String placementStr = "";
+        if (placement == 1) {
+            placementStr = placement + "st";
+        }
+        else if (placement == 2) {
+            placementStr = placement + "nd";
+        }
+        else if (placement == 3) {
+            placementStr = placement + "rd";
+        }
+        else {
+            placementStr = placement + "th";
+        }
 
         // Set basic info
-        holder.placementText.setText(String.valueOf(currentUser.getPlacement()));
+        holder.placementText.setText(placementStr);
         holder.username.setText(currentUser.getUsername());
         holder.points.setText(String.valueOf(currentUser.getPoints()));
-        holder.badge.setImageResource(currentUser.getBadge());
+        if (currentUser.getBadge() != null) {
+            holder.badge.setImageResource(currentUser.getBadge());
+            holder.badge.setVisibility(View.VISIBLE); // optional: ensure it's shown
+        } else {
+            holder.badge.setImageDrawable(null); // clear the image
+            holder.badge.setVisibility(View.GONE); // optional: hide if there's no badge
+        }
 
-        int placement = Integer.parseInt(String.valueOf(currentUser.getPlacement().charAt(0)));
-
-        // Remove any existing shader (important when reusing views)
         holder.username.getPaint().setShader(null);
 
-        // Reset to default to prevent view reuse issues
+
         holder.placementText.setBackground(null);
-        holder.points.setTextColor(ContextCompat.getColor(context, android.R.color.black)); // default color
+        holder.points.setTextColor(ContextCompat.getColor(context, android.R.color.white)); // default color
 
         switch (placement) {
             case 1: // Gold
@@ -80,11 +98,6 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 applyTextGradient(holder.username, "#CD7F32", "#B87333", "#8B4513");
                 holder.points.setTextColor(ContextCompat.getColor(context, R.color.bronze));
                 break;
-            default: //White
-                holder.points.setTextColor(ContextCompat.getColor(context, R.color.white));
-                holder.placementText.setTextColor(ContextCompat.getColor(context, R.color.white));
-                holder.username.setTextColor(ContextCompat.getColor(context, R.color.white));
-                holder.badge.setVisibility(View.GONE);
         }
     }
 
