@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.makerlink.databinding.FragmentHomeBinding;
 import com.example.makerlink.gamification.LeaderBoardActivity;
-import com.example.makerlink.navigation_pages.discovery.OrderList;
+import com.example.makerlink.navigation_pages.profile.OrderList;
 import com.example.makerlink.playlists.PlaylistRecyclerActivity;
 import com.example.makerlink.threads.list.FilteredThreadRecyclerActivity;
 import com.example.makerlink.threads.list.ThreadRecyclerActivity;

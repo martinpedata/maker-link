@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.profile;
+package com.example.makerlink.navigation_pages.settings;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,17 +21,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
-import com.example.makerlink.navigation_pages.chats.Chat;
-import com.example.makerlink.navigation_pages.chats.ChatActivity;
-import com.example.makerlink.navigation_pages.chats.Community_Adapter;
-import com.example.makerlink.navigation_pages.chats.JoinActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

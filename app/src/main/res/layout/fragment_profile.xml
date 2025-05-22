@@ -7,202 +7,198 @@
     android:orientation="vertical"
     tools:context=".navigation_pages.profile.ProfileFragment"
     android:background="@color/cream">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/better_blue"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="@drawable/layoutforcommunity"
-        android:backgroundTint="@color/better_blue"
-        android:layout_marginBottom="10dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/outline_settings_24"
-            app:shapeAppearanceOverlay="@style/CircleImageView"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:padding="20dp"
+    android:background="@color/better_blue">
 
+    <ImageView
+
+        android:id="@+id/profile_image"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/makerlink_logo" />
+
+    <TextView
+        android:textColor="@color/cream"
+        android:id="@+id/usernameProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_image"
+        android:padding="10dp"
+        android:text="username"
+        android:includeFontPadding="false"
+        android:layout_centerVertical="true"
+        android:textSize="35sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <TextView
+        android:id="@+id/profile_text"
+        android:textColor="@color/darkCream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_marginLeft="10dp"
+        android:text="@string/profile_Section"
+        android:layout_below="@+id/usernameProfile"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat_medium"/>
+
+</RelativeLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:padding="20dp"
+android:layout_marginTop="-100dp">
+
+
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/orderCard"
+    android:layout_width="10dp"
+    android:layout_height="125dp"
+    android:layout_weight="1"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/better_blue"
+    app:cardElevation="15dp"
+    android:layout_gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/orders_profile_fragment"
+            android:layout_centerHorizontal="true"
+            app:tint="@color/cream" />
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/order_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
-            android:textSize="26sp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@android:color/white"
+            android:includeFontPadding="false"
+            android:text="0"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_semibold"/>
+        <TextView
+            android:id="@+id/order_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orders"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/cream"
+            android:layout_below="@+id/order_amount"
+            android:includeFontPadding="false"
+            android:textSize="14sp"
+            android:layout_centerInParent="true"
             android:fontFamily="@font/montserrat_medium"/>
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
+
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/pointsCard"
+    android:layout_width="0dp"
+    android:layout_height="125dp"
+    android:layout_weight="1"
+    android:layout_margin="15dp"
+    app:cardBackgroundColor="@color/better_blue"
+    app:cardElevation="10dp"
+    android:layout_gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/points_logo"
+            app:tint="@color/cream" />
+        <TextView
+            android:id="@+id/points_scored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="0"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_semibold"/>
+        <TextView
+            android:id="@+id/points_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/points"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/cream"
+            android:textSize="14sp"
+            android:includeFontPadding="false"
+            android:layout_below="@+id/points_scored"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_medium"/>
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="0dp">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/threadsCard"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="30dp"
+            app:cardBackgroundColor="@color/better_blue"
+            app:cardElevation="10dp"
+            android:layout_gravity="center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/postIcon"
+                    android:layout_width="69dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/post_icon"
+                    app:tint="@color/cream" />
+                <TextView
+                    android:id="@+id/threadsAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="0"
+                    android:layout_below="@+id/postIcon"
+                    android:textColor="@color/cream"
+                    android:textSize="25sp"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_semibold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/threads_posted"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/cream"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:layout_below="@+id/threadsAmount"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_medium" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginVertical="6dp"
-            android:id="@+id/changeinfouser"
-            android:background="@drawable/layoutforcommunity"
-            android:backgroundTint="@color/darkCream"
-            android:elevation="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/userinfoimage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/sharp_account_circle_24"
-                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
 
-                <TextView
-                    android:id="@+id/userinfotext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_user_info"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/montserrat_medium"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/changeinfolender"
-            android:layout_marginVertical="6dp"
-            android:background="@drawable/layoutforcommunity"
-            android:backgroundTint="@color/darkCream"
-            android:elevation="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/lenderimage"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="3dp"
-                    android:src="@drawable/outline_attach_money_24"
-                    android:background="@color/brown"
-                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
-
-                <TextView
-                    android:id="@+id/lendertext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_lender_info"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/montserrat_medium"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/chooselanguage"
-            android:layout_marginVertical="6dp"
-            android:background="@drawable/layoutforcommunity"
-            android:backgroundTint="@color/darkCream"
-            android:elevation="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/languageimage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/sharp_language_24"
-                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
-
-                <TextView
-                    android:id="@+id/languagetext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/choose_language"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/montserrat_medium"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/addtool"
-            android:layout_marginVertical="6dp"
-            android:background="@drawable/layoutforcommunity"
-            android:backgroundTint="@color/darkCream"
-            android:elevation="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/addtoolimage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/sharp_tools_power_drill_24"
-                    app:shapeAppearanceOverlay="@style/CircleImageView"/>
-
-                <TextView
-                    android:id="@+id/addtooltext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_tool"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/montserrat_medium"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="200dp"
-            android:backgroundTint="#D32F2F"
-            android:text="@string/logout"
-            android:textSize="18sp"
-            app:cornerRadius="20dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"/>
-
-
-    </LinearLayout>
 </LinearLayout>

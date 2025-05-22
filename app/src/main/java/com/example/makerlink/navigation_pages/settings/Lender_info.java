@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.profile;
+package com.example.makerlink.navigation_pages.settings;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

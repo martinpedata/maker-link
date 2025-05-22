@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.profile;
+package com.example.makerlink.navigation_pages.settings;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +23,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
 import com.google.android.material.textfield.TextInputEditText;
 

@@ -7,9 +7,9 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_discovery"
-        android:icon="@drawable/discovery_icon"
-        android:title="@string/title_discovery" />
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile"
+        android:title="Profile" />
 
     <item
         android:id="@+id/navigation_exchange"
@@ -21,9 +21,9 @@
         android:icon="@drawable/chat"
         android:title="@string/title_chats" />
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/profile"
-        android:title="@string/title_profile" />
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/settings" />
 
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.profile;
+package com.example.makerlink.navigation_pages.settings;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -15,9 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.R;
-import com.example.makerlink.navigation_pages.exchange.InfoPage;
-import com.example.makerlink.navigation_pages.exchange.User;
-import com.example.makerlink.navigation_pages.exchange.UserAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;

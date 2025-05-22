@@ -26,19 +26,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".navigation_pages.discovery.OrderList"
+            android:name=".navigation_pages.profile.OrderList"
             android:exported="false" />
         <activity
-            android:name=".navigation_pages.profile.Lender_change_info_page"
+            android:name=".navigation_pages.settings.Lender_change_info_page"
             android:exported="false" />
         <activity
-            android:name=".navigation_pages.profile.Change_info_lender"
+            android:name=".navigation_pages.settings.Change_info_lender"
             android:exported="false" />
         <activity
-            android:name=".navigation_pages.profile.ChangeLanguage"
+            android:name=".navigation_pages.settings.ChangeLanguage"
             android:exported="false" />
         <activity
-            android:name=".navigation_pages.profile.AddTool"
+            android:name=".navigation_pages.settings.AddTool"
             android:exported="false" />
         <activity
             android:name=".threads.CommentsActivity"
@@ -47,7 +47,7 @@
             android:name=".gamification.LeaderBoardActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation_pages.profile.Change_info_of_user"
+            android:name=".navigation_pages.settings.Change_info_of_user"
             android:exported="false" />
         <activity
             android:name=".gamification.AccomplishmentsActivity"

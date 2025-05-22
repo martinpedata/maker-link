@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.profile;
+package com.example.makerlink.navigation_pages.settings;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
-import com.example.makerlink.access.Lender;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;

@@ -2,7 +2,6 @@ package com.example.makerlink.navigation_pages.exchange;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -40,10 +39,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.makerlink.databinding.FragmentExchangeBinding;
-import com.example.makerlink.navigation_pages.chats.Chat;
-import com.example.makerlink.navigation_pages.chats.ChatActivity;
-import com.example.makerlink.navigation_pages.chats.Community_Adapter;
-import com.example.makerlink.navigation_pages.discovery.DiscoveryViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -80,7 +75,6 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     private List<String> items;
     private List<String> filteredItems;
 
-    private DiscoveryViewModel mViewModel;
     private FusedLocationProviderClient fusedLocationClient;
 
     private String selectedSearchItem = "";
@@ -144,7 +138,6 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
             closeIcon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
         }
         listView = binding.searchList;
-        mViewModel = new ViewModelProvider(this).get(DiscoveryViewModel.class);
         filteredItems = new ArrayList<>();
 //        To refer to a Fragment's Activity, use requireActivity() or getContext()
         adapterlist = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, filteredItems){

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/cream"
-    tools:context=".navigation_pages.profile.ProfileFragment">
+    tools:context=".navigation_pages.settings.SettingsFragment">
 
     <LinearLayout
         android:id="@+id/main"

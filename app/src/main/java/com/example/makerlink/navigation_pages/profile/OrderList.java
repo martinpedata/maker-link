@@ -1,11 +1,7 @@
-package com.example.makerlink.navigation_pages.discovery;
-
-import static androidx.core.content.ContentProviderCompat.requireContext;
+package com.example.makerlink.navigation_pages.profile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -25,9 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makerlink.R;
-import com.example.makerlink.navigation_pages.chats.Chat;
-import com.example.makerlink.navigation_pages.chats.ChatActivity;
-import com.example.makerlink.navigation_pages.chats.Community_Adapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

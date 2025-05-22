@@ -1,4 +1,4 @@
-package com.example.makerlink.navigation_pages.discovery;
+package com.example.makerlink.navigation_pages.profile;
 
 import java.util.Calendar;
 
