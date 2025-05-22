@@ -105,4 +105,5 @@
     <string name="your_lendings">Ödünç Verdikleriniz</string>
     <string name="your_orders">Siparişleriniz</string>
     <string name="type_message">Mesaj yaz</string>
+    <string name="set_date">Tarihi ayarla</string>
 </resources>

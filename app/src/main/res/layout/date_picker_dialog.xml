@@ -16,13 +16,14 @@
         android:calendarViewShown="true"
         android:spinnersShown="false"
         android:background="@color/darkCream"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:theme="@style/CustomDatePickerTheme"/>
 
     <Button
         android:id="@+id/btnSetDate"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text="Set Date"
+        android:text="@string/set_date"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/brown"
         android:textColor="@color/white"/>

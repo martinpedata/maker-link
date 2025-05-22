@@ -105,4 +105,5 @@
     <string name="your_lendings">Vos prêts</string>
     <string name="your_orders">Vos commandes</string>
     <string name="type_message">Tapez le message</string>
+    <string name="set_date">Définir la date</string>
 </resources>
