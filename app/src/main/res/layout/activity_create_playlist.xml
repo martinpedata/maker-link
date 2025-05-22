@@ -48,6 +48,7 @@ android:background="@color/better_blue">
             android:hint="@string/playlist_hint"
             android:padding="12dp"
             android:textColorHint="#039BE5"
+            android:textColor="@color/teal_500"
             android:fontFamily="@font/montserrat_medium"/>
     </androidx.cardview.widget.CardView>
 
