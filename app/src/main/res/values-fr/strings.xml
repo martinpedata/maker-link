@@ -102,4 +102,7 @@
     <string name="settime">Fixer Une Heure</string>
     <string name="change">Modifier</string>
     <string name="upload_image_lender">Télécharger Image</string>
+    <string name="your_lendings">Vos prêts</string>
+    <string name="your_orders">Vos commandes</string>
+    <string name="type_message">Tapez le message</string>
 </resources>

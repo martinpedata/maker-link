@@ -102,4 +102,7 @@
     <string name="settime">Cakto Kohën</string>
     <string name="change">Modifiko</string>
     <string name="upload_image_lender">Ngarko imazhin</string>
+    <string name="your_lendings">Huazimet tuaja</string>
+    <string name="your_orders">Porositë tuaja</string>
+    <string name="type_message">Shkruaj mesazhin</string>
 </resources>

@@ -102,4 +102,7 @@
     <string name="settime">Zamanı Ayarla</string>
     <string name="change">Değiştirmek</string>
     <string name="upload_image_lender">Resim Yükle</string>
+    <string name="your_lendings">Ödünç Verdikleriniz</string>
+    <string name="your_orders">Siparişleriniz</string>
+    <string name="type_message">Mesaj yaz</string>
 </resources>

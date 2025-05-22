@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class OrderList extends AppCompatActivity {
     private RequestQueue requestQueue;
     private OrderAdapter orderAdapter;
     private OrderAdapter lenderAdapter;
+    private ImageButton backbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,10 @@ public class OrderList extends AppCompatActivity {
         int UserID = sharedPref.getInt("user_ID", -1);
         recyclerView1 = findViewById(R.id.recyclerView1);
         recyclerView2 = findViewById(R.id.recyclerView2);
+        backbutton = findViewById(R.id.backButton);
         setUpOrders("https://studev.groept.be/api/a24pt215/SelectOrdersLender/"+UserID);
         setUpOrders2("https://studev.groept.be/api/a24pt215/SelectLenderorders/"+UserID);
+        backbutton.setOnClickListener(v -> finish());
     }
     public void setUpOrders(String requestURL) {
         if (orderlist == null) {

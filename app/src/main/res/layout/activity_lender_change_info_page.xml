@@ -13,17 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/better_blue"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_lender_info"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
-            android:textColor="@color/brown"
+            android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold"
-            android:fontFamily="@font/montserrat_bold"/>
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@color/better_blue"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,130 +93,189 @@
             android:orientation="vertical"
             android:layout_marginTop="20dp">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- Address -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_address"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/address_profile_fragment"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/map"
-                    android:drawablePadding="13dp"
-                    android:text="Andrea Vesaliustraat"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_address"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_profile_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/map"
+                        android:drawablePadding="13dp"
+                        android:text="Andrea Vesaliustraat"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Tool Type -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/tooltype_hint"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tooltype_change_fragment"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/sharp_tools_power_drill_24_1"
-                    android:drawablePadding="13dp"
-                    android:text="User"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tooltype_hint"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tooltype_change_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/sharp_tools_power_drill_24_1"
+                        android:drawablePadding="13dp"
+                        android:text="User"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Rent -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/rent"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rent_change_profile"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/outline_attach_money_24_1"
-                    android:drawablePadding="13dp"
-                    android:text="Username"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/rent"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rent_change_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/outline_attach_money_24_1"
+                        android:drawablePadding="13dp"
+                        android:text="Username"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Description -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/description_hint"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lender_description_fragment"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/outline_description_24"
-                    android:drawablePadding="13dp"
-                    android:text="hi"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description_hint"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lender_description_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/outline_description_24"
+                        android:drawablePadding="13dp"
+                        android:text="hi"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Start Time -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/start_time_hint"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/start_time_fragment"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
-                    android:drawablePadding="13dp"
-                    android:text="3"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/start_time_hint"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/start_time_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
+                        android:drawablePadding="13dp"
+                        android:text="3"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- End Time -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/end_time_hint"
-                android:textColorHint="@color/gray"
-                android:layout_marginBottom="10dp"
-                app:boxBackgroundColor="@color/darkCream">
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/end_time_fragment"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
-                    android:drawablePadding="13dp"
-                    android:text="19"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/black"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/end_time_hint"
+                    android:padding="12dp"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@color/darkCream">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/end_time_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/outline_nest_clock_farsight_analog_24"
+                        android:drawablePadding="13dp"
+                        android:text="19"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <Button
-            android:layout_width="200dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:id="@+id/savebutton"
             app:cornerRadius="15dp"
-            android:backgroundTint="@color/lightBrown"
+            android:backgroundTint="@color/better_blue"
             android:textColor="@color/white"
             android:text="@string/change"
             android:textSize="23sp"/>

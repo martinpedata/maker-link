@@ -67,7 +67,7 @@
         android:layout_marginBottom="21dp"
         android:layout_toStartOf="@id/buttonSend"
         android:layout_toLeftOf="@id/buttonSend"
-        android:hint="Type message"
+        android:hint="@string/type_message"
         android:textColorHint="#808080"
         android:padding="8dp"
         android:textColor="@color/black"
@@ -84,7 +84,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="Send"
         app:srcCompat="@android:drawable/ic_menu_send"
-        app:backgroundTint="@color/lightBrown"
+        app:backgroundTint="@color/better_blue"
         app:tint="@android:color/white"/>
 
 </RelativeLayout>

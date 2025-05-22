@@ -37,17 +37,7 @@
             android:textSize="24sp"
             android:layout_marginTop="5dp"
             android:textStyle="bold" />
-        <ImageButton
-            android:id="@+id/addorder"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="240dp"
-            android:layout_marginTop="5dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/outline_add_shopping_cart_24"
-            android:contentDescription="Add Order"
-            android:padding="8dp"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +49,7 @@
             android:id="@+id/sectionTitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Lendings"
+            android:text="@string/your_lendings"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_medium"
             android:textColor="#000000"
@@ -83,7 +73,7 @@
             android:id="@+id/sectionTitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Orders"
+            android:text="@string/your_orders"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_medium"
             android:textColor="#000000"

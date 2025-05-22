@@ -1,76 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="6dp"
-    android:background="@drawable/card_view_map_border">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="10dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:background="@drawable/card_view_map_border">
 
-        <TextView
-            android:id="@+id/order_number"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Order#: 999012"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/order_datetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20-Dec-2019, 3:00 PM"
-            android:textColor="#808080"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/order_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order#: 999012"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/estimated_delivery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Estimated Delivery on 21 Dec"
-            android:textColor="#4CAF50"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            <TextView
+                android:id="@+id/order_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20-Dec-2019, 3:00 PM"
+                android:textColor="#808080"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/estimated_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estimated Delivery on 21 Dec"
+                android:textColor="#4CAF50"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rent1"
-                android:textColor="#808080"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rent1"
+                    android:textColor="#808080"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 100"
+                    android:textColor="#808080"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/tool"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 100"
+                android:text="Basic Tool"
                 android:textColor="#808080"
                 android:textSize="14sp" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/tool"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Basic Tool"
-            android:textColor="#808080"
-            android:textSize="14sp" />
     </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -102,4 +102,7 @@
     <string name="settime">Imposta ora</string>
     <string name="change">Modificare</string>
     <string name="upload_image_lender">Carica Immagine</string>
+    <string name="your_lendings">I tuoi prestiti</string>
+    <string name="your_orders">I tuoi ordini</string>
+    <string name="type_message">Scrivi il messaggio</string>
 </resources>

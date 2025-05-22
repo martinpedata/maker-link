@@ -173,10 +173,11 @@
 
                     <Button
                         android:id="@+id/homeButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:backgroundTint="@color/brown"
+                        android:backgroundTint="@color/better_blue"
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/add_tool"
                         android:textColor="@color/white"
                         android:textSize="18sp"

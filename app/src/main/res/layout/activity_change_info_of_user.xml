@@ -10,15 +10,58 @@
     android:background="@color/cream">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/better_blue"/>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/layoutforcommunity"
+            android:backgroundTint="@color/better_blue"
+            android:layout_marginBottom="10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/outline_settings_24"
+                app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_user_info"
+                android:textSize="26sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/montserrat_medium"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- First Name -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@color/white">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_first_name"
-            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/gray"
+            android:padding="12dp"
             app:boxBackgroundColor="@color/darkCream">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -28,13 +71,27 @@
                 android:drawableLeft="@drawable/profile"
                 android:drawablePadding="13dp"
                 android:text="User"
+                android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Username -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@color/white">
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_username"
-            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/gray"
+            android:padding="12dp"
             app:boxBackgroundColor="@color/darkCream">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -43,15 +100,28 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/profile"
                 android:drawablePadding="13dp"
+                android:textColor="@color/black"
                 android:text="Username"
                 android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Address -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@color/white">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_address"
-            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/gray"
+            android:padding="12dp"
             app:boxBackgroundColor="@color/darkCream">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -60,15 +130,28 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/map"
                 android:drawablePadding="13dp"
+                android:textColor="@color/black"
                 android:text="Andrea Vesaliustraat"
                 android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Lender -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@color/white">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_lender"
-            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/gray"
+            android:padding="12dp"
             app:boxBackgroundColor="@color/darkCream">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -77,24 +160,23 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/profile"
                 android:drawablePadding="13dp"
+                android:textColor="@color/black"
                 android:text="Yes"
                 android:fontFamily="@font/montserrat_medium"/>
         </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+    <!-- Save Button -->
     <Button
-        android:layout_width="150dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/savebutton"
         app:cornerRadius="15dp"
-        android:backgroundTint="@color/lightBrown"
+        android:backgroundTint="@color/better_blue"
         android:textColor="@color/white"
         android:text="@string/change"
         android:textSize="23sp"/>
-
-
-
 
 </LinearLayout>
