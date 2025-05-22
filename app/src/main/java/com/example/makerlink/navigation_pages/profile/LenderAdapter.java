@@ -85,10 +85,6 @@ public class LenderAdapter extends RecyclerView.Adapter<LenderAdapter.LenderView
         return lenderList.size();
     }
 
-    public void updateList(List<Lender_info> newList) {
-        lenderList = newList;
-        notifyDataSetChanged();
-    }
     private String saveImageToInternalStorage(Context context, Bitmap bitmap) {
         ContextWrapper cw = new ContextWrapper(context);
         File directory = cw.getDir("images", Context.MODE_PRIVATE);
