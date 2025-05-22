@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navigation_pages.chats.ChatsFragment">
+    tools:context=".navigation_pages.chats.ChatsFragment"
+    android:backgroundTint="@color/cream">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBar"
@@ -14,6 +15,7 @@
         app:searchIcon="@drawable/icon_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
         android:id="@+id/recyclerView"
         android:layout_below="@id/searchBar"
         android:layout_width="match_parent"

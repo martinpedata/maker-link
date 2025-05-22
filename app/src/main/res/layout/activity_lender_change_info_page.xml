@@ -13,18 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/better_blue"/>
         <TextView
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_lender_info"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="36sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:fontFamily="@font/montserrat_bold"
             android:background="@color/better_blue"/>
@@ -46,12 +43,13 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="6dp"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
             android:onClick="onBtnPickClicked"
-            android:background="@drawable/mechanics_pic">
+            android:background="@color/white">
 
             <RelativeLayout
                 android:layout_width="match_parent"

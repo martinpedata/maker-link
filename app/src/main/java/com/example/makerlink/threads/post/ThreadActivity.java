@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-//TODO: IMPLEMENT " ADD COMMENT "
 public class ThreadActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private String domainName;
@@ -71,6 +70,7 @@ public class ThreadActivity extends AppCompatActivity {
     private WebView embeddedLink;
     private String threadDocument;
     private CardView commentsCard;
+    private CardView upvotesContainer;
     private TextView authorComment, contentComment, likesComment;
     private boolean isFavorite = false;
 
@@ -93,6 +93,7 @@ public class ThreadActivity extends AppCompatActivity {
         authorComment = findViewById(R.id.commentAuthorTextThread);
         contentComment = findViewById(R.id.commentContentTextThread);
         likesComment = findViewById(R.id.commentLikesThread);
+        upvotesContainer = findViewById(R.id.upvoteContainerThread);
         embeddedLink = findViewById(R.id.threadDocumentPlaceHolder);
 
         /// Retrieve info from RecyclerThreadAdapter class (from the extra info on intent)
@@ -381,7 +382,10 @@ public class ThreadActivity extends AppCompatActivity {
                             likesComment.setText(String.valueOf(likes));
                         }
                         catch (JSONException e) {
-
+                            authorComment.setVisibility(View.INVISIBLE);
+                            contentComment.setText("Be the first to comment !");
+                            likesComment.setVisibility(View.INVISIBLE);
+                            upvotesContainer.setVisibility(View.INVISIBLE);
                         }
                     }
                 },

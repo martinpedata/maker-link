@@ -168,6 +168,7 @@
 
     <!-- Save Button -->
     <Button
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -177,6 +178,7 @@
         android:backgroundTint="@color/better_blue"
         android:textColor="@color/white"
         android:text="@string/change"
+        android:fontFamily="@font/montserrat_semibold"
         android:textSize="23sp"/>
 
 </LinearLayout>

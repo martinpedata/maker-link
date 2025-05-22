@@ -62,7 +62,7 @@
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="onBtnPickClicked"
-                android:background="@drawable/mechanics_pic">
+                android:background="@color/white">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

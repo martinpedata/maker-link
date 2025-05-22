@@ -75,9 +75,6 @@
             android:name=".playlists.PlaylistRecyclerActivity"
             android:exported="false" />
         <activity
-            android:name=".ImageHandling"
-            android:exported="false" />
-        <activity
             android:name=".navigation_pages.chats.ChatActivity"
             android:exported="false" />
         <activity
