@@ -104,4 +104,5 @@
     <string name="your_lendings">Your Lendings</string>
     <string name="your_orders">Your Orders</string>
     <string name="type_message">Type message</string>
+    <string name="set_date">Set date</string>
 </resources>

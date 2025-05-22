@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -145,86 +146,80 @@ public class InfoPage extends AppCompatActivity {
     }
     private void showDateTimePicker(EditText targetEditText, List<Reservation> reservations) {
         final Calendar threshold = Calendar.getInstance();
-
         final Calendar tempCalendar = Calendar.getInstance();
 
-        // 1. Show DatePickerDialog first
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, month, dayOfMonth) -> {
-                    tempCalendar.set(Calendar.YEAR, year);
-                    tempCalendar.set(Calendar.MONTH, month);
-                    tempCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        // Create and show a custom date picker dialog (instead of default DatePickerDialog)
+        View customDateView = getLayoutInflater().inflate(R.layout.date_picker_dialog, null);
+        DatePicker customDatePicker = customDateView.findViewById(R.id.customDatePicker);
+        Button confirmDate = customDateView.findViewById(R.id.btnSetDate);
 
-                    // Get available hours for selected date from reservations
-                    String[] availableHours = getAvailableHoursForDate(tempCalendar, reservations);
+        // Set min date
+        customDatePicker.setMinDate(threshold.getTimeInMillis());
 
-                    if (availableHours.length == 0) {
-                        Toast.makeText(this, "No available hours on this date", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+        AlertDialog dateDialog = new AlertDialog.Builder(this)
+                .setView(customDateView)
+                .create();
 
-                    // Inflate your custom time picker
-                    View customView = getLayoutInflater().inflate(R.layout.time_picker_dialog, null);
-                    NumberPicker hourPicker = customView.findViewById(R.id.numberPickerHour);
-                    NumberPicker minutePicker = customView.findViewById(R.id.numberPickerMinute);
-                    Button btnSetTime = customView.findViewById(R.id.btnSetTime);
+        confirmDate.setOnClickListener(v -> {
+            int year = customDatePicker.getYear();
+            int month = customDatePicker.getMonth();
+            int day = customDatePicker.getDayOfMonth();
 
+            tempCalendar.set(Calendar.YEAR, year);
+            tempCalendar.set(Calendar.MONTH, month);
+            tempCalendar.set(Calendar.DAY_OF_MONTH, day);
 
-                    hourPicker.setMinValue(0);
-                    hourPicker.setMaxValue(availableHours.length - 1);
-                    hourPicker.setDisplayedValues(availableHours);
-                    hourPicker.setValue(0);
+            String[] availableHours = getAvailableHoursForDate(tempCalendar, reservations);
 
-                    minutePicker.setMinValue(0);
-                    minutePicker.setMaxValue(0);
-                    minutePicker.setFormatter(new NumberPicker.Formatter() {
-                        @Override
-                        public String format(int value) {
-                            return String.format("%02d", value);
-                        }
-                    });
-                    AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setView(customView)
-                            .create();
+            if (availableHours.length == 0) {
+                Toast.makeText(this, "No available hours on this date", Toast.LENGTH_SHORT).show();
+                dateDialog.dismiss();
+                return;
+            }
 
-                    dialog.show();
+            dateDialog.dismiss(); // Close the date dialog before showing the time dialog
 
-                    btnSetTime.setOnClickListener(v -> {
-                        // Get selected hour from displayed values
-                        int hourIndex = hourPicker.getValue();
-                        int hour = Integer.parseInt(availableHours[hourIndex]);
-                        int minute = minutePicker.getValue();
+            // Now show custom time picker
+            View customTimeView = getLayoutInflater().inflate(R.layout.time_picker_dialog, null);
+            NumberPicker hourPicker = customTimeView.findViewById(R.id.numberPickerHour);
+            NumberPicker minutePicker = customTimeView.findViewById(R.id.numberPickerMinute);
+            Button btnSetTime = customTimeView.findViewById(R.id.btnSetTime);
 
-                        tempCalendar.set(Calendar.HOUR_OF_DAY, hour);
-                        tempCalendar.set(Calendar.MINUTE, minute);
+            hourPicker.setMinValue(0);
+            hourPicker.setMaxValue(availableHours.length - 1);
+            hourPicker.setDisplayedValues(availableHours);
+            hourPicker.setValue(0);
 
-                        // Check if selected date/time is after threshold
-                        if (tempCalendar.compareTo(threshold) <= 0) {
-                            targetEditText.setError("Please select a time after the threshold");
-                            return;
-                        }
+            minutePicker.setMinValue(0);
+            minutePicker.setMaxValue(0); // Only show 0 minute (hour-precision)
+            minutePicker.setFormatter(value -> String.format("%02d", value));
 
-                        // Optionally, double-check if selected hour is really available (redundant but safe)
-                        if (!Arrays.asList(availableHours).contains(String.valueOf(hour))) {
-                            targetEditText.setError("Selected hour is not available");
-                            return;
-                        }
+            AlertDialog timeDialog = new AlertDialog.Builder(this)
+                    .setView(customTimeView)
+                    .create();
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                        targetEditText.setText(sdf.format(tempCalendar.getTime()));
-                        dialog.dismiss();
-                    });
+            btnSetTime.setOnClickListener(v2 -> {
+                int hourIndex = hourPicker.getValue();
+                int hour = Integer.parseInt(availableHours[hourIndex]);
+                int minute = minutePicker.getValue();
 
-                },
-                tempCalendar.get(Calendar.YEAR),
-                tempCalendar.get(Calendar.MONTH),
-                tempCalendar.get(Calendar.DAY_OF_MONTH)
-        );
+                tempCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                tempCalendar.set(Calendar.MINUTE, minute);
 
-        // Set minimum date on date picker dialog based on threshold
-        datePickerDialog.getDatePicker().setMinDate(threshold.getTimeInMillis());
+                if (tempCalendar.compareTo(threshold) <= 0) {
+                    targetEditText.setError("Please select a time after the current time");
+                    return;
+                }
 
-        datePickerDialog.show();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                targetEditText.setText(sdf.format(tempCalendar.getTime()));
+                timeDialog.dismiss();
+            });
+
+            timeDialog.show();
+        });
+
+        dateDialog.show(); // Only show this once after setup
     }
 
 

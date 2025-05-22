@@ -19,4 +19,11 @@
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/lightBrown</item>
     </style>
+
+    <style name="CustomDatePickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/brown</item>
+        <item name="colorPrimaryVariant">@color/brown</item>
+        <item name="android:headerBackground">@color/brown</item>
+        <item name="android:textColorPrimary">@color/brown</item>
+    </style>
 </resources>
