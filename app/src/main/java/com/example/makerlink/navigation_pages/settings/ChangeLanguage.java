@@ -2,10 +2,15 @@ package com.example.makerlink.navigation_pages.settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.makerlink.MainActivity;
@@ -14,8 +19,9 @@ import com.example.makerlink.utils.LocaleHelper;
 
 public class ChangeLanguage extends AppCompatActivity {
 
-    String[] languages = {"English", "Français", "Shqip", "Türkçe","Italiano","Dutch"};
-    String[] languageCodes = {"en", "fr", "sq", "tr","it","nl"};
+    String[] languages = {"English", "Français", "Shqip", "Türkçe", "Italian", "Dutch", "German", "Russian", "Greek", "Arabic"};
+    String[] languageCodes = {"en", "fr", "sq", "tr", "it", "nl", "de", "ru", "el", "ar"};
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
@@ -26,24 +32,32 @@ public class ChangeLanguage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
 
-        Button btnChangeLanguage = findViewById(R.id.btn_change_language); // Make sure you have this button in XML
+        ListView listView = findViewById(R.id.language_list);
 
-        btnChangeLanguage.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Choose Language")
-                    .setItems(languages, (dialog, which) -> {
-                        // Save selection
-                        getSharedPreferences("settings", MODE_PRIVATE)
-                                .edit()
-                                .putString("language", languageCodes[which])
-                                .apply();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages) {
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView textView = view.findViewById(android.R.id.text1);
+                textView.setTextColor(Color.parseColor("#000000")); // Or use getResources().getColor(R.color.my_color)
+                return view;
+            }
+        };
 
-                        // Restart the app to apply locale change
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    })
-                    .show();
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            // Save the selected language code
+            getSharedPreferences("settings", MODE_PRIVATE)
+                    .edit()
+                    .putString("language", languageCodes[position])
+                    .apply();
+
+            // Restart the app to apply locale change
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
     }
 }
