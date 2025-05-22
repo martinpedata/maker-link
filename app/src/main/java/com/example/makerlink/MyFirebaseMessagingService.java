@@ -2,6 +2,8 @@ package com.example.makerlink;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import android.app.NotificationChannel;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import android.app.NotificationManager;
@@ -23,7 +25,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setContentTitle(title)
                         .setContentText(message)
                         .setSmallIcon(R.drawable.makerlink_logo)
-                        .setAutoCancel(true);
+                        .setAutoCancel(true)
+                        .setVibrate(new long[]{0, 500, 100, 500});
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

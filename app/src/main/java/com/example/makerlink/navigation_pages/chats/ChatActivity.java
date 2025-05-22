@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,9 +51,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
@@ -69,6 +75,8 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView image;
     private Bitmap bitmap;
     private static final long POLL_INTERVAL = 5000;
+    private boolean firstLoad = true;
+    private int lastMessageCount = 0;
 
     // Handler for periodic updates
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -85,15 +93,14 @@ public class ChatActivity extends AppCompatActivity {
             return insets;
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationChannel channel = new NotificationChannel(
-                    "chat_channel", // must match builder channelId
-                    "General Notifications",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            if (manager != null) {
-                manager.createNotificationChannel(channel);
-            }
+                    "chat_channel",
+                    "Chat Notifications",
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{0, 500, 100, 500});
+            notificationManager.createNotificationChannel(channel);
         }
         chatName = getIntent().getStringExtra("chatName");
         chatId = getIntent().getIntExtra("chat_id", -1);
@@ -126,15 +133,18 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new MessageAdapter(messages, User);
         recyclerView.setAdapter(adapter);
 
+
         // Fetch messages when the activity starts
         String url = "https://studev.groept.be/api/a24pt215/getMessage/" + chatId;
         setUpMessages(url);
+
 
         sendButton.setOnClickListener(v -> {
             String msgText = editText.getText().toString().trim();
             if (!msgText.isEmpty()) {
                 postMessage("https://studev.groept.be/api/a24pt215/InsertMessage", User, msgText);
                 editText.setText("");
+                recyclerView.scrollToPosition(messages.size() - 1);
             }
         });
     }
@@ -171,33 +181,44 @@ public class ChatActivity extends AppCompatActivity {
                         // Log for debugging
                         System.out.println("Inside onResponse of setUpMessages");
 
-                        // Clear the existing messages
+                        SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                        SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        String lastDate = "";
+
                         messages.clear();
 
-                        // Iterate through the JSON array of messages
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                // Get each message JSON object
                                 JSONObject o = response.getJSONObject(i);
-
-                                // Extract message data from the JSON object
                                 String sender = o.getString("author_of_message");
-                                String messageContent = o.getString("message_content");
+                                String content = o.getString("message_content");
+                                String timestamp = o.getString("date_of_message");
 
-                                // Create a Message object and add it to the list
-                                messages.add(new Message(sender, messageContent));
-                            } catch (JSONException e) {
-                                // Handle the JSON parsing error
-                                System.out.println("Error iterating JSON array: " + e.getMessage());
+                                Date date = sdfInput.parse(timestamp);
+                                String msgDate = sdfOutput.format(date);
+
+                                if (!msgDate.equals(lastDate)) {
+                                    messages.add(new Message(msgDate)); // Add date header
+                                    lastDate = msgDate;
+                                }
+
+                                messages.add(new Message(sender, content, timestamp));
+                            } catch (JSONException | ParseException e) {
+                                e.printStackTrace();
                             }
                         }
 
-                        // Update the RecyclerView with the list of messages
                         adapter.notifyDataSetChanged();
-                        recyclerView.scrollToPosition(messages.size() - 1);
+                        if (!firstLoad && messages.size() > lastMessageCount) {
+                            Log.d("ChatActivity", "Vibrate triggered: new messages detected.");
+                            vibratePhone();
+                        }
+                        lastMessageCount = messages.size();
 
-                        // Scroll to the latest message
-                        recyclerView.scrollToPosition(messages.size() - 1);
+                        if (firstLoad) {
+                            recyclerView.scrollToPosition(messages.size() - 1);
+                            firstLoad = false;
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -310,7 +331,7 @@ public class ChatActivity extends AppCompatActivity {
                     conn.setRequestProperty("Authorization", "Bearer " + accessToken);
                     conn.setRequestProperty("Content-Type", "application/json; UTF-8");
 
-                    // Build the JSON body
+
                     JSONObject json = new JSONObject();
                     JSONObject notificationContent = new JSONObject();
                     notificationContent.put("title", title);
@@ -320,7 +341,7 @@ public class ChatActivity extends AppCompatActivity {
                     messageContent.put("token", token);
                     messageContent.put("notification", notificationContent);
 
-// Add channel_id to ensure it works on Android 8+
+
                     JSONObject androidConfig = new JSONObject();
                     androidConfig.put("priority", "high");
 
@@ -332,7 +353,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     json.put("message", messageContent);
 
-                    // Write request body
+
                     try (OutputStream os = conn.getOutputStream()) {
                         byte[] input = json.toString().getBytes("utf-8");
                         os.write(input, 0, input.length);
@@ -376,7 +397,7 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     }
 
-                    // 🔄 Now run the notification sending in a background thread
+                    // Now run the notification sending in a background thread
                     new Thread(() -> {
                         try {
                             sendFCMNotification(tokens, sender + " sent a message at chat: "+chatName, message);
@@ -406,4 +427,15 @@ public class ChatActivity extends AppCompatActivity {
         }
         return true;
     }
+    private void vibratePhone() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(500);
+            }
+        }
+    }
+
 }
