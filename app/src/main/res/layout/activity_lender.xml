@@ -169,6 +169,7 @@
                     android:backgroundTint="@color/brown"
                     android:text="@string/to_home_button"
                     android:textSize="18sp"
+                    android:textColor="@color/white"
                     app:cornerRadius="20dp"
                     android:fontFamily="@font/montserrat_medium" />
 
