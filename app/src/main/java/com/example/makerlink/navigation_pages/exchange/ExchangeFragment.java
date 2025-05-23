@@ -105,10 +105,16 @@ public class ExchangeFragment extends Fragment implements OnMapReadyCallback {
     }
     private void initMapFragment() {
 
-        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mapFragment, "MAP_FRAGMENT")
-                .commit();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag("MAP_FRAGMENT");
+
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mapFragment, "MAP_FRAGMENT")
+                    .commit();
+        }
+
 
         // Set the callback to notify when the map is ready
         mapFragment.getMapAsync(this);
