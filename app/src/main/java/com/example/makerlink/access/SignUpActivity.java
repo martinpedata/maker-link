@@ -74,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         ///MAKE SURE THE PASSWORD IS HASHED.
         pw = findViewById(R.id.password);
+
         salt = HashCredentials.generateSalt(); //Random string to put in front of hashed pw (used to keep common passwords safe from rainbow tables).
         passwordInput = HashCredentials.hashPassWord(pw.getText().toString(), salt);  //Produce a salted hashed pw
 

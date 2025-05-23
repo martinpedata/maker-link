@@ -70,10 +70,10 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         holder.points.setText(String.valueOf(currentUser.getPoints()));
         if (currentUser.getBadge() != null) {
             holder.badge.setImageResource(currentUser.getBadge());
-            holder.badge.setVisibility(View.VISIBLE); // optional: ensure it's shown
+            holder.badge.setVisibility(View.VISIBLE);
         } else {
-            holder.badge.setImageDrawable(null); // clear the image
-            holder.badge.setVisibility(View.GONE); // optional: hide if there's no badge
+            holder.badge.setImageDrawable(null);
+            holder.badge.setVisibility(View.GONE);
         }
 
         holder.username.getPaint().setShader(null);

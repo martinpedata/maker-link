@@ -168,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
                             if (passwordInput.equals(passwordDB)) {
                                 nameOfUser = o.getString("name");
                                 user_ID = o.getInt("user_id");
-                                System.out.println("user id before playlist: " + user_ID);
                                 editor.putString("UserName", usernameInput).apply();
                                 editor.putString("Name", nameOfUser).apply();
                                 editor.putInt("user_ID", user_ID).apply();

@@ -80,7 +80,7 @@ public class AccomplishmentsActivity extends AppCompatActivity {
 
     private void animatePoints(int start, int end, long duration) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
-        animator.setDuration(duration); // Duration in milliseconds
+        animator.setDuration(duration);
         animator.addUpdateListener(animation -> {
             int animatedValue = (int) animation.getAnimatedValue();
             pointsTextView.setText(String.valueOf(animatedValue));

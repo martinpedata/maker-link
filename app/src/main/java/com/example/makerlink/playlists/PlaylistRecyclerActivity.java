@@ -129,22 +129,21 @@ public class PlaylistRecyclerActivity extends AppCompatActivity {
                 paint.setColor(Color.RED);
                 paint.setAntiAlias(true);
 
-                // Calculate position of red circle
+
                 float circleRadius = 60f;
                 float circleCenterY = itemView.getTop() + (itemView.getHeight() / 2f);
                 float circleCenterX;
 
-                if (dX > 0) { // Swiping right
+                if (dX > 0) {
                     circleCenterX = itemView.getLeft() + 100;
-                } else { // Swiping left
+                } else {
                     circleCenterX = itemView.getRight() - 100;
                 }
 
-                // Draw red circle
                 c.drawCircle(circleCenterX, circleCenterY, circleRadius, paint);
 
-                // Draw white bin icon
-                Drawable icon = ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.bin_icon); // use your icon name here
+                Drawable icon = ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.bin_icon);
+
                 if (icon != null) {
                     int iconSize = 60;
                     int left = (int) (circleCenterX - iconSize / 2);

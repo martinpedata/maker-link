@@ -117,7 +117,7 @@ public class FilteredThreadRecyclerActivity extends AppCompatActivity {
 
     public void setUpThread(String requestURL) {
         System.out.println("inside setUpThread");
-        threadItems.clear();  // <-- THIS IS ESSENTIAL!
+        threadItems.clear();
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET,requestURL, null,
                 new Response.Listener<JSONArray>() {
@@ -154,7 +154,7 @@ public class FilteredThreadRecyclerActivity extends AppCompatActivity {
                         }
                         recyclerView.scrollToPosition(0);
                         threadAdapter.updateFullList();
-                        threadAdapter.notifyDataSetChanged(); // Update the RecyclerView
+                        threadAdapter.notifyDataSetChanged();
                     }
                 },
 
