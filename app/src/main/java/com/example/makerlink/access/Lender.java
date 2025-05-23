@@ -144,8 +144,6 @@ public class Lender extends AppCompatActivity {
                 url,
                 response -> {
                     Log.d("MessagePost", "Response: " + response);
-                    Toast.makeText(Lender.this, "Message sent!", Toast.LENGTH_SHORT).show();
-
 
                 },
                 error -> {
