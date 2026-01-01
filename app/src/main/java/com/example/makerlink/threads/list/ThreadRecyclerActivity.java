@@ -79,16 +79,16 @@ public class ThreadRecyclerActivity extends AppCompatActivity {
                 counter = 1;
                 break;
             case 4:
-                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 5); //INSERT DOMAIN ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 15); //INSERT DOMAIN ID
                 break;
             case 3:
-                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 7); //INSERT DOMAIN ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 16); //INSERT DOMAIN ID
                 break;
             case 2:
-                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 1); //INSERT DOMAIN ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 13); //INSERT DOMAIN ID
                 break;
             case 1:
-                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 6); //INSERT DOMAIN ID
+                setUpThread("https://studev.groept.be/api/a24pt215/RetrieveSomeThreads/" + 14); //INSERT DOMAIN ID
                 break;
             }
         if (counter == 0) {

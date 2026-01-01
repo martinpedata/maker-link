@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ///Creating the sharedPref to store the Name of the user.
 
-        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
+        sharedPref = LoginActivity.this.getSharedPreferences("myPref", MODE_PRIVATE);
         editor = sharedPref.edit();
 
         String savedName = sharedPref.getString("Name", null);//this

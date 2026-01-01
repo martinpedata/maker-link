@@ -110,12 +110,12 @@ public class InfoPage extends AppCompatActivity {
 
         setUpReservations("https://studev.groept.be/api/a24pt215/getOrders/"+lender_id);
         String name = getIntent().getStringExtra("name_of_user");
-        String image64 = getIntent().getStringExtra("image_user");
+        String image64 = getIntent().getStringExtra("imagePath");
         String address = getIntent().getStringExtra("address_of_user");
         int rentofuser = getIntent().getIntExtra("rent_of_user", -1);
         String descriptionoflender = getIntent().getStringExtra("description_of_tool");
-        Bitmap image1 = base64ToBitMap(image64);
-        image.setImageBitmap(image1);
+        Bitmap bitmap = BitmapFactory.decodeFile(image64);
+        image.setImageBitmap(bitmap);
         tool = getIntent().getStringExtra("tool_of_user");
         start_of_day = getIntent().getIntExtra("start_of_user", -1);
         end_of_day = getIntent().getIntExtra("end_of_user", -1);

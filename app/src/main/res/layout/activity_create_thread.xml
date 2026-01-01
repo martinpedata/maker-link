@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             app:cardElevation="6dp"
             app:cardCornerRadius="15dp">
             <EditText
@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/thread_domain_hint"
+                android:textColor="@color/brown"
                 android:padding="12dp"
                 android:textColorHint="#BFA088"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -70,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="15dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             app:cardElevation="6dp">
             <EditText
                 android:id="@+id/editTextThreadName"
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/thread_name_hint"
                 android:layout_marginHorizontal="10dp"
+                android:textColor="@color/brown"
                 android:padding="12dp"
                 android:textColorHint="#BFA088"
                 android:fontFamily="@font/montserrat_medium"/>
@@ -182,6 +184,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="0dp"
                     android:hint="@string/url_hint"
+                    android:textColor="@color/brown"
                     android:textColorHint="#BFA088"
                     android:fontFamily="@font/montserrat_medium"/>
 
